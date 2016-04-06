@@ -103,44 +103,33 @@ Eletrodoméstico/Micro-ondas
 
 O projeto a ser desenvolvido precisa implementar as seguintes funcionalidades:
 
-- Os dados deverão ser armazenados em um banco de dados relacional (ex. MySQL /
-  PostgreSQL / SQLite).
+- Utilizar Python >= 3.5 e Django >= 1.9.
+- Os dados deverão ser armazenados em um banco de dados relacional.
 - Criação de um *Django Management Command* para importar as categorias dos
   canais a partir de um CSV.
-- O comando de importação deve operar em 2 modos: `full` e `update`.
-  - Modo `full`: a importação deve sobrescrever todas as categorias de um canal
-    específico.
-  - Modo `update`: as categorias novas do CSV serão criadas e o restante será
-    mantido intacto.
-- O comando deve receber 3 parâmetros: modo de operação (`full` ou `update`),
-  nome do canal (cria o canal caso não exista) e o nome do arquivo `.csv`:
+  - O comando de importação deve operar em em modo "*full update*", ou seja, deve
+    sobrescrever todas as categorias de um canal pelas categorias do CSV.
+  - O comando deve receber 2 parâmetros: nome do canal (cria o canal caso não
+    exista) e o nome do arquivo `.csv`:
 
 ```
-$ python manage.py importcategories update walmart categorias.csv
+$ python manage.py importcategories walmart categorias.csv
 ```
 
 - Cada canal tem um conjunto próprio de categorias.
-- Cada canal precisa ter um identificador único.
-- Cada categoria precisa ter um identificador único.
+- Cada canal precisa ter um identificador único e um campo com o nome do canal.
+- Cada categoria precisa ter um identificador único e um campo com o nome da categoria.
 - Criação de uma API HTTP REST que permita:
-  - Cadastrar novos canais.
   - Listar canais existentes.
-  - Cadastrar novas categorias e sub-categorias.
-  - Listar uma categoria com suas respectivas categorias-pai e sub-categorias.
+  - Listar as categorias e subcategorias de um canal.
+  - Retornar uma categoria única com suas categorias-pai e suas subcategorias.
 
 > Dica #1:
 > As operações de atualização dessa árvore acontecem com uma frequência semanal
-> e as consultas às categorias-pai e sub-categorias acontecem às milhares por
-> minuto.
+> e as consultas às categorias-pai e sub-categorias acontecem na escala de 
+> milhares por minuto.
 
-- O acesso à API precisa ser autorizado através de um token associado à um
-  usuário Django fornecido no Header HTTP apropriado (`Authorization`):
-
-```
-Authorization: token deadbeefdeadbeef...deadbeef
-```
-
-- Utilizar Python 3.5 ou mais recente e Django 1.9 ou mais recente.
+- A API precisa de documentação em inglês.
 - Variáveis, código e strings devem estar todas em inglês.
 
 > Dica #2:
@@ -150,10 +139,9 @@ Authorization: token deadbeefdeadbeef...deadbeef
 
 ## Recomendações
 
+- Escreva testes.
 - Evite expor detalhes de implementação do banco de dados na API (ex. ID
   auto_increment dos models).
 - Pratique os conceitos [12-Factor-App](http://12factor.net)
-- Escreva testes.
-- Documente a API.
 - Faça commits pequenos, atômicos, com mensagens claras e em inglês no Github.
 - Utilize boas práticas de programação.
