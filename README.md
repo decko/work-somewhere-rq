@@ -105,7 +105,7 @@ Computers / Desktop
 
 The project must implement the following features:
 
-- Python> = 3.5 and Django> = 1.9.
+- Python >= 3.5 and Django >= 1.9.
 - The data should be stored in a relational database.
 - A *Django Management Command* to import the channels' categories from a CSV.
   - Import command should operate in "full update" mode, ie it must overwrite
