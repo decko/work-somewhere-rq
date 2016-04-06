@@ -10,7 +10,7 @@ produtos.
 1. Faça um fork desse repositório no Github
 2. Siga as instruções desse `README.md`.
 3. Faça o deploy do projeto no Heroku
-4. Envie o um [e-mail](olist-lst0966@applications.recruiterbox.com) contendo:
+4. Envie um [e-mail](olist-lst0966@applications.recruiterbox.com) contendo:
   - Link para o fork no Github.
   - Link para o projeto no Heroku.
   - Breve descrição do ambiente de trabalho usado para executar esse projeto
