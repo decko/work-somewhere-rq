@@ -20,16 +20,17 @@ produtos.
 
 ## Especificação do problema
 
+Olist é uma empresa que disponibiliza uma plataforma para integração entre
+lojistas (*Sellers*) e canais (*Channels*) de vendas conhecidos como
+marketplaces.
 
-### Categoria de produtos
+Um dos nossos serviços permite que os lojistas publiquem seus produtos nos
+canais. Para que esses produtos sejam publicados é necessário informar a sua
+categoria para o canal.
 
-A Olist é uma empresa que disponibiliza uma plataforma de integração entre
-lojistas (*Sellers*) e canais de vendas conhecidos como marketplaces
-(*Channels*).
-
-Um dos serviços disponibilizados permite que os Sellers publiquem seus produtos
-nos canais. Todos os canais agrupam esses produtos em categorias que são
-organizados como uma árvore de categorias com profundidades variáveis:
+Todos os canais agrupam os produtos publicados em categorias que são
+organizados como uma árvore de profundidades variáveis. Veja a versão
+resumida da arvore de um dos canais:
 
 - Livros
   - Direito
@@ -60,9 +61,6 @@ organizados como uma árvore de categorias com profundidades variáveis:
   - Fornos
   - Micro-ondas
 - :
-
-
-### Categorias do canal
 
 Cada canal envia um arquivo CSV onde uma das colunas (`Categoria`) tem o nome
 completo de cada categoria usada:
@@ -107,18 +105,28 @@ O projeto a ser desenvolvido precisa implementar as seguintes funcionalidades:
 
 - Os dados deverão ser armazenados em um banco de dados relacional (ex. MySQL /
   PostgreSQL / SQLite).
-- Criação de um *Django Management Command* que recebe 2 parâmetros: o nome do
-  canal e o nome do arquivo `.csv` com as categorias do canal e cria/atualiza
-  essas categorias no banco de dados:
+- Criação de um *Django Management Command* para importar as categorias dos
+  canais a partir de um CSV.
+- O comando de importação deve operar em 2 modos: `full` e `update`.
+  - Modo `full`: a importação deve sobrescrever todas as categorias de um canal
+    específico.
+  - Modo `update`: as categorias novas do CSV serão criadas e o restante será
+    mantido intacto.
+- O comando deve receber 3 parâmetros: modo de operação (`full` ou `update`),
+  nome do canal (cria o canal caso não exista) e o nome do arquivo `.csv`:
 
 ```
-$ python manage.py importcategories walmart categorias.csv
+$ python manage.py importcategories update walmart categorias.csv
 ```
 
+- Cada canal tem um conjunto próprio de categorias.
+- Cada canal precisa ter um identificador único.
 - Cada categoria precisa ter um identificador único.
 - Criação de uma API HTTP REST que permita:
+  - Cadastrar novos canais.
+  - Listar canais existentes.
   - Cadastrar novas categorias e sub-categorias.
-  - Listar uma categoria, categorias-pai e sub-categorias.
+  - Listar uma categoria com suas respectivas categorias-pai e sub-categorias.
 
 > Dica #1:
 > As operações de atualização dessa árvore acontecem com uma frequência semanal
@@ -139,6 +147,7 @@ Authorization: token deadbeefdeadbeef...deadbeef
 > O projeto Django deste repositório tem vários pontos para melhoria.
 > Encontre-os e implemente essas melhorias.
 
+
 ## Recomendações
 
 - Evite expor detalhes de implementação do banco de dados na API (ex. ID
@@ -146,5 +155,5 @@ Authorization: token deadbeefdeadbeef...deadbeef
 - Pratique os conceitos [12-Factor-App](http://12factor.net)
 - Escreva testes.
 - Documente a API.
-- Faça commits pequenos, atômicos e com mensagens claras no Github.
+- Faça commits pequenos, atômicos, com mensagens claras e em inglês no Github.
 - Utilize boas práticas de programação.
