@@ -42,7 +42,8 @@ published products need to be categorized in one of channels' categories.
 
 
 All channels group the products published in categories that are arranged as a
-tree of varying depths. See version an small example below:
+tree of *varying depths* (from 1 to infinite levels of hierarchy). See version
+an small example below:
 
 - Books
   - National Literature
@@ -67,9 +68,9 @@ tree of varying depths. See version an small example below:
   - Notebooks
   - Tablets
   - Desktop
--:
+- :
 
-Each channel sends us a CSV file where one of the columns ( `Categoria`) is
+Each channel sends us a CSV file where one of the columns (`Category`) is
 contains the full category's path:
 
 ```
