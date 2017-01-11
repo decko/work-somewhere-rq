@@ -24,7 +24,7 @@ tree of products' categories.
 1. Make a fork of this repository on Github
 2. Follow the instructions of `README.md`.
 3. Deploy you project on Heroku
-4. Apply for the position at our [career page](https://olist.recruiterbox.com/) and send:
+4. Apply for the position at our [career page](http://bit.ly/olist-webdev) and send:
   - Link to the fork on Github.
   - Link to the project in Heroku.
   - Brief description of the work environment used to run this project
