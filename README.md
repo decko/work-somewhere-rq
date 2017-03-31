@@ -26,13 +26,12 @@ tree of products' categories.
    [bitbucket.org](https://bitbucket.org) (for free) and add read permission
    for user [@osantana](https://bitbucket.org/osantana) on project.
 2. Follow the instructions of `README.md`.
-3. Deploy you project on Heroku
+3. Deploy you project on [Heroku](https://heroku.com).
 4. Apply for the position at our [career page](http://bit.ly/olist-webdev) and send:
-  - Link to the fork on Github.
-  - Link to the project in Heroku.
+  - Link to the fork on Github (or [bitbucket.org](https://bitbucket.org)) .
+  - Link to the project in [Heroku](https://heroku.com).
   - Brief description of the work environment used to run this project
     (Computer/operating system, text editor/IDE, libraries, etc.).
-  - Curriculum Vitae attached to the email (avoid .doc files) or link to Linkedin profile.
 
 
 ## Specification
@@ -42,7 +41,6 @@ Sellers and Channels (eg. marketplaces).
 
 One of our services allows Sellers to publish their products in channels. All
 published products need to be categorized in one of channels' categories.
-
 
 All channels group the products published in categories that are arranged as a
 tree of *varying depths* (from 1 to infinite levels of hierarchy). See version
@@ -109,7 +107,7 @@ Computers / Desktop
 
 The project must implement the following features:
 
-- Python >= 3.5 and Django >= 1.9.
+- Python >= 3.5 and Django >= 1.10.
 - Use PEP-8 for code style.
 - The data should be stored in a relational database.
 - A *Django Management Command* to import the channels' categories from a CSV.
@@ -147,6 +145,6 @@ $ python manage.py importcategories walmart categories.csv
 
 - Write tests.
 - Avoid exposing database implementation details in the API (eg. do not expose model ID at URLs)
-- Practice the [12 Factor-App] (http://12factor.net) concepts.
+- Practice the [12 Factor-App](http://12factor.net) concepts.
 - Make small and atomic commits, with clear messages (written in English).
 - Use good programming practices.
