@@ -24,7 +24,7 @@ tree of products' categories.
 1. Make a fork of this repository on Github. If you can't create a public
    fork of this project at Github, make a private repository in 
    [bitbucket.org](https://bitbucket.org) (for free) and add read permission
-   for user [@osantana](https://bitbucket.org/osantana) on project.
+   for users [@osantana](https://bitbucket.org/osantana) and [@dvainsencher](https://bitbucket.org/dvainsencher) on project.
 2. Follow the instructions of `README.md`.
 3. Deploy you project on [Heroku](https://heroku.com).
 4. Apply for the position at our [career page](http://bit.ly/olist-webdev) and send:
