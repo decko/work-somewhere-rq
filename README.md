@@ -26,7 +26,7 @@ tree of products' categories.
    [bitbucket.org](https://bitbucket.org) (for free) and add read permission
    for users [@osantana](https://bitbucket.org/osantana) and [@dvainsencher](https://bitbucket.org/dvainsencher) on project.
 2. Follow the instructions of `README.md`.
-3. Deploy you project on [Heroku](https://heroku.com).
+3. Deploy your project on [Heroku](https://heroku.com).
 4. Apply for the position at our [career page](http://bit.ly/olist-webdev) and send:
   - Link to the fork on Github (or [bitbucket.org](https://bitbucket.org)) .
   - Link to the project in [Heroku](https://heroku.com).
