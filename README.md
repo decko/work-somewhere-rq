@@ -71,11 +71,9 @@ an small example below:
   - Desktop
 - :
 
-Each channel sends us a CSV file where one of the columns (`Category`) is
-contains the full category's path:
+Each channel sends us a file with the full category's path:
 
 ```
-Category
 Books
 Books / National Literature
 Books / National Literature / Science Fiction
