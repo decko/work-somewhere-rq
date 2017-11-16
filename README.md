@@ -108,14 +108,14 @@ The project must implement the following features:
 - Python >= 3.5 and Django >= 1.10.
 - Use PEP-8 for code style.
 - The data should be stored in a relational database.
-- A *Django Management Command* to import the channels' categories from a CSV.
+- A *Django Management Command* to import the channels' categories from a text file.
   - Import command should operate in "full update" mode, ie it must overwrite
-    all categories of a channel with the categories in CSV.
+    all categories of a channel with the categories in text file.
   - The command should receive 2 arguments: channel name (create the channel if
-    it doesn't exists in database) and the name of `.csv` file:
+    it doesn't exists in database) and the name of `.txt` file:
 
 ```
-$ python manage.py importcategories walmart categories.csv
+$ python manage.py importcategories walmart categories.txt
 ```
 
 - Each channel has its own set of categories.
