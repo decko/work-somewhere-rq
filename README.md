@@ -117,7 +117,7 @@ reference period is not informed the system will consider the last closed
 period. In other words it will get the previous month. It's only
 possible to get a telephone bill after the reference period has ended.
 
-The telephone bill itself is composed by subscriber name and period
+The telephone bill itself is composed by subscriber and period
 attributes and a list of all call records of the period. A call record
 belongs to the period in which the call has ended (eg. A call that
 started on January 31st and finished in February 1st belongs to February
