@@ -157,7 +157,7 @@ time, but an already calculated call price can not change.
 
    * Standing charge: R$ 0,36
    * Call charge: 
-     * minutes between 21:57:13 and 22:00 = 2 (
+     * minutes between 21:57:13 and 22:00 = 2
      * price: 2 * R$ 0,09 = R$ 0,18
    * Total: R$ 0,18 + R$ 0,36 = R$ 0,54
 
