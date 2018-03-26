@@ -17,7 +17,7 @@ This repository contains a problem used to evaluate the candidate skills.
 It's important to notice that satisfactorily solving the problem is just a
 part of what will be evaluated. We also consider other programming disciplines
 like documentation, testing, commit timeline, design and coding best
-practices. 
+practices.
 
 Hints:
 
@@ -31,7 +31,7 @@ Hints:
 
 1. Make a fork of this repository on Github. If you can't create a
    public fork of this project, make a private repository
-   (bitbucket offers free private repos) and add read permission for the 
+   (bitbucket offers free private repos) and add read permission for the
    users [@osantana](https://bitbucket.org/osantana) and
    [@dvainsencher](https://bitbucket.org/dvainsencher) on project;
 2. Follow the instructions of README.md (this file);
@@ -62,7 +62,7 @@ avoid record loss.
 
 There are two call detailed record types: **Call Start Record** and **Call
 End Record**. To get all information of a telephone call   you should use the
-records pair. 
+records pair.
 
 Call Start Record information:
 
@@ -73,7 +73,7 @@ Call Start Record information:
 * **origin phone number**: The subscriber phone number that originated the
   call;
 * **destination phone number**: The phone number receiving the call.
-   
+
 The Call End Record has the same information excepting **origin** and
 **destination** fields.
 
@@ -109,7 +109,7 @@ digits.
 ```
 
 
-### 2. Get telephone bill 
+### 2. Get telephone bill
 
 To get a telephone bill we need two information: the subscriber telephone
 number (required); the reference period (month/year) (optional). If the
@@ -142,7 +142,7 @@ the day that the call was made. There are two tariff times:
      cost of the connection);
    * Call charge/minute: R$ 0,09 (there is no fractioned charge. The
      charge applies to each completed 60 seconds cycle).
-  
+
 2. Reduced tariff time call - between 22h00 and 6h00 (excluding):
    * Standing charge: R$ 0,36
    * Call charge/minute: R$ 0,00 (hooray!)
@@ -156,10 +156,22 @@ time, but an already calculated call price can not change.
 1. For a call started at 21:57:13 and finished at 22:10:56 we have:
 
    * Standing charge: R$ 0,36
-   * Call charge: 
+   * Call charge:
      * minutes between 21:57:13 and 22:00 = 2
      * price: 2 * R$ 0,09 = R$ 0,18
    * Total: R$ 0,18 + R$ 0,36 = R$ 0,54
+
+
+### 4. Sample data
+Insert the following calls to your app after it is deployed to a working environment (eg. Heroku). This sample data will be used in your evaluation, so do this as the last step before submitting the project.
+
+These calls are between the numbers 99988526423 (source) and 9993468278 (destination).
+* call_id: 71, started at 2017-12-12T15:07:13Z and ended at 2017-12-12T15:14:56Z.
+* call_id: 72, started at 2017-12-12T22:47:56Z and ended at 2017-12-12T22:50:56Z.
+* call_id: 73, started at 2017-12-12T21:57:13Z and ended at 2017-12-12T22:10:56Z.
+* call_id: 74, started at 2017-12-12T04:57:13Z and ended at 2017-12-12T06:10:56Z.
+* call_id: 75, started at 2017-12-12T21:57:13Z and ended at 2017-12-13T22:10:56Z.
+* call_id: 76, started at 2017-12-12T15:07:58Z and ended at 2017-12-12T15:12:56Z.
 
 
 ## Project Requirements:
