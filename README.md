@@ -166,6 +166,7 @@ time, but an already calculated call price can not change.
 Insert the following calls to your app after it is deployed to a working environment (eg. Heroku). This sample data will be used in your evaluation, so do this as the last step before submitting the project.
 
 These calls are between the numbers 99988526423 (source) and 9993468278 (destination).
+* call_id: 70, started at 2016-02-29T12:00:00Z and ended at 2016-02-29T14:00:00Z.
 * call_id: 71, started at 2017-12-12T15:07:13Z and ended at 2017-12-12T15:14:56Z.
 * call_id: 72, started at 2017-12-12T22:47:56Z and ended at 2017-12-12T22:50:56Z.
 * call_id: 73, started at 2017-12-12T21:57:13Z and ended at 2017-12-12T22:10:56Z.
