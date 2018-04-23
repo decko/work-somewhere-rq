@@ -32,8 +32,7 @@ Hints:
 1. Make a fork of this repository on Github. If you can't create a
    public fork of this project, make a private repository
    (bitbucket offers free private repos) and add read permission for the
-   users [@osantana](https://bitbucket.org/osantana) and
-   [@dvainsencher](https://bitbucket.org/dvainsencher) on project;
+   user [@tech-hiring](https://bitbucket.org/tech-hiring) on project;
 2. Follow the instructions of README.md (this file);
 3. Deploy your project on a host service (we recommend
    [Heroku](https://heroku.com));
