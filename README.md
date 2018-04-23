@@ -55,7 +55,7 @@ requirements.
 ### 1. Receive telephone call detail records
 
 There are many telecommunications platform technologies that can potentially
-be clients of this system. Each one has its own communication flow. It's not
+be **clients** of this system. Each one has its own communication flow. It's not
 safe to believe that when an already sent record can be resent or retrieved
 later. This context requires system flexibility in receiving information to
 avoid record loss.
@@ -66,7 +66,7 @@ records pair.
 
 Call Start Record information:
 
-* **record identifier**: Record unique identificator;
+* **client record identifier**: **Client** record unique identifier;
 * **record type**: Indicate if it's a call start or end record;
 * **record timestamp**: The timestamp of when the event occured;
 * **call identifier**: Unique for each call record pair;
