@@ -60,12 +60,11 @@ later. This context requires system flexibility in receiving information to
 avoid record loss.
 
 There are two call detailed record types: **Call Start Record** and **Call
-End Record**. To get all information of a telephone call   you should use the
+End Record**. To get all information of a telephone call you should use the
 records pair.
 
 Call Start Record information:
 
-* **record identifier**: Record unique identificator;
 * **record type**: Indicate if it's a call start or end record;
 * **record timestamp**: The timestamp of when the event occured;
 * **call identifier**: Unique for each call record pair;
