@@ -55,18 +55,17 @@ requirements.
 ### 1. Receive telephone call detail records
 
 There are many telecommunications platform technologies that can potentially
-be **clients** of this system. Each one has its own communication flow. It's not
+be clients of this system. Each one has its own communication flow. It's not
 safe to believe that when an already sent record can be resent or retrieved
 later. This context requires system flexibility in receiving information to
 avoid record loss.
 
 There are two call detailed record types: **Call Start Record** and **Call
-End Record**. To get all information of a telephone call   you should use the
+End Record**. To get all information of a telephone call you should use the
 records pair.
 
 Call Start Record information:
 
-* **client record identifier**: **Client** record unique identifier;
 * **record type**: Indicate if it's a call start or end record;
 * **record timestamp**: The timestamp of when the event occured;
 * **call identifier**: Unique for each call record pair;
