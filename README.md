@@ -47,17 +47,17 @@ Hints:
 You should implement a Python application that receives call detail records
 and calculates monthly bills for a given telephone number.
 
+There are a plenty of telecommunications platform technologies that will 
+consume this application. Some of them have weird behaviours when something 
+goes wrong. That said it's not safe to believe in received data correctness, 
+consistency nor expect some order in their requests. The application should 
+have flexibility in receiving information to avoid record loss or inconsistency.
+
 This Python application must provide a HTTP REST API to attend the
 requirements.
 
 
 ### 1. Receive telephone call detail records
-
-There are many telecommunications platform technologies that can potentially
-be clients of this system. Each one has its own communication flow. It's not
-safe to believe that when an already sent record can be resent or retrieved
-later. This context requires system flexibility in receiving information to
-avoid record loss.
 
 There are two call detailed record types: **Call Start Record** and **Call
 End Record**. To get all information of a telephone call you should use the
