@@ -35,7 +35,7 @@ Hints:
    user [@tech-hiring](https://bitbucket.org/tech-hiring) on project;
 2. Follow the instructions of README.md (this file);
 3. Deploy your project on a host service (we recommend
-   [Heroku](https://heroku.com));
+   [Heroku](https://heroku.com) or [gigalixir](https://www.gigalixir.com));
 4. Apply for the position at our [career page](https://www.99jobs.com/olist)
    with:
    * Link to the fork on Github (or bitbucket.org);
@@ -161,7 +161,7 @@ time, but an already calculated call price can not change.
 
 
 ### 4. Sample data
-Insert the following calls to your app after it is deployed to a working environment (eg. Heroku). This sample data will be used in your evaluation, so do this as the last step before submitting the project.
+Insert the following calls to your app after it is deployed to a working environment (eg. Heroku, gigalixir). This sample data will be used in your evaluation, so do this as the last step before submitting the project.
 
 These calls are between the numbers 99988526423 (source) and 9993468278 (destination).
 * call_id: 70, started at 2016-02-29T12:00:00Z and ended at 2016-02-29T14:00:00Z.
@@ -176,11 +176,19 @@ These calls are between the numbers 99988526423 (source) and 9993468278 (destina
 
 ## Project Requirements:
 
-* Provide a working environment with your project (eg. Heroku)
-* Use Python >= 3.5
-* Choose any Python web framework you want to solve the problem
+* Provide a working environment with your project (eg. Heroku, )
+* Python
+  * Use Python >= 3.5
+  * Choose any Python web framework you want to solve the problem
+  * Use PEP-8 for code style
+* Elixir
+  * Elixir >= 1.6.5
+  * Phoenix >= 1.3.0
+  * [Elixir Style Guide](http://elixir.community/styleguide)
+* Go
+  * Go >= 1.10
+  * [Effective Go](https://golang.org/doc/effective_go.html)
 * Every text or code must be in English
-* Use PEP-8 for code style
 * Write the project documentation containing:
   * Description;
   * Installing and testing instructions;
