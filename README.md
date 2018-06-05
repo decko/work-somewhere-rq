@@ -44,7 +44,7 @@ Hints:
 
 ## Specification
 
-You should implement a Python application that receives call detail records
+You should implement an application that receives call detail records
 and calculates monthly bills for a given telephone number.
 
 There are a plenty of telecommunications platform technologies that will 
@@ -53,7 +53,7 @@ goes wrong. That said it's not safe to believe in received data correctness,
 consistency nor expect some order in their requests. The application should 
 have flexibility in receiving information to avoid record loss or inconsistency.
 
-This Python application must provide a HTTP REST API to attend the
+This application must provide a HTTP REST API to attend the
 requirements.
 
 
@@ -177,10 +177,12 @@ These calls are between the numbers 99988526423 (source) and 9993468278 (destina
 ## Project Requirements:
 
 * Provide a working environment with your project (eg. Heroku, )
+* Application must be written in Python, Elixir or Go.
 * Python
   * Use Python >= 3.5
   * Choose any Python web framework you want to solve the problem
   * Use PEP-8 for code style
+  * [Python Coding Style](http://docs.python-guide.org/en/latest/writing/style/)
 * Elixir
   * Elixir >= 1.6.5
   * Phoenix >= 1.3.0
@@ -205,8 +207,6 @@ These calls are between the numbers 99988526423 (source) and 9993468278 (destina
 * Use [SOLID](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
   design principles;
 * Use programming good practices;
-* Use a good [Python Coding
-  Style](http://docs.python-guide.org/en/latest/writing/style/);
 * Use git best practices (https://www.git-tower.com/learn/git/ebook/en/command-line/appendix/best-practices),
   with clear messages (written in English);
 * Be aware when modeling the database;
