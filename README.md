@@ -151,7 +151,7 @@ time, but an already calculated call price can not change.
 
 #### Examples
 
-1. For a call started at 21:57:13 and finished at 22:10:56 we have:
+1. For a call started at 21:57:13 and finished at 22:00:00 we have:
 
    * Standing charge: R$ 0,36
    * Call charge:
