@@ -47,10 +47,10 @@ Hints:
 You should implement an application that receives call detail records
 and calculates monthly bills for a given telephone number.
 
-There are a plenty of telecommunications platform technologies that will 
-consume this application. Some of them have weird behaviours when something 
-goes wrong. That said it's not safe to believe in received data correctness, 
-consistency nor expect some order in their requests. The application should 
+There are a plenty of telecommunications platform technologies that will
+consume this application. Some of them have weird behaviours when something
+goes wrong. That said it's not safe to believe in received data correctness,
+consistency nor expect some order in their requests. The application should
 have flexibility in receiving information to avoid record loss or inconsistency.
 
 This application must provide a HTTP REST API to attend the
@@ -151,7 +151,7 @@ time, but an already calculated call price can not change.
 
 #### Examples
 
-1. For a call started at 21:57:13 and finished at 22:00:00 we have:
+1. For a call started at 21:57:13 and finished at 22:17:53 we have:
 
    * Standing charge: R$ 0,36
    * Call charge:
