@@ -76,8 +76,8 @@ The Call End Record has the same information excepting **origin** and
 **destination** fields.
 
 The phone number format is *AAXXXXXXXXX*, where *AA* is the area code and
-*XXXXXXXXX* is the phone number. The phone number is composed of 8 or 9
-digits.
+*XXXXXXXXX* is the phone number. The area code is always composed of two digits
+while the phone number can be composed of 8 or 9 digits.
 
 
 #### Examples
@@ -163,7 +163,7 @@ time, but an already calculated call price can not change.
 ### 4. Sample data
 Insert the following calls to your app after it is deployed to a working environment (eg. Heroku, gigalixir). This sample data will be used in your evaluation, so do this as the last step before submitting the project.
 
-These calls are between the numbers 99988526423 (source) and 9933468278 (destination).
+The following phone calls have been made from the number 99 98852 6423 to 99 3346 8278 (whitespaces are used here only for readability purposes, the phone numbers formats have been specified on a previous section).
 * call_id: 70, started at 2016-02-29T12:00:00Z and ended at 2016-02-29T14:00:00Z.
 * call_id: 71, started at 2017-12-12T15:07:13Z and ended at 2017-12-12T15:14:56Z.
 * call_id: 72, started at 2017-12-12T22:47:56Z and ended at 2017-12-12T22:50:56Z.
