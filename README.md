@@ -165,11 +165,11 @@ Insert the following calls to your app after it is deployed to a working environ
 
 The following phone calls have been made from the number 99 98852 6423 to 99 3346 8278 (whitespaces are used here only for readability purposes, the phone numbers formats have been specified on a previous section).
 * call_id: 70, started at 2016-02-29T12:00:00Z and ended at 2016-02-29T14:00:00Z.
-* call_id: 71, started at 2017-12-12T15:07:13Z and ended at 2017-12-12T15:14:56Z.
+* call_id: 71, started at 2017-12-11T15:07:13Z and ended at 2017-12-11T15:14:56Z.
 * call_id: 72, started at 2017-12-12T22:47:56Z and ended at 2017-12-12T22:50:56Z.
 * call_id: 73, started at 2017-12-12T21:57:13Z and ended at 2017-12-12T22:10:56Z.
 * call_id: 74, started at 2017-12-12T04:57:13Z and ended at 2017-12-12T06:10:56Z.
-* call_id: 75, started at 2017-12-12T21:57:13Z and ended at 2017-12-13T22:10:56Z.
+* call_id: 75, started at 2017-11-12T21:57:13Z and ended at 2017-11-13T22:10:56Z.
 * call_id: 76, started at 2017-12-12T15:07:58Z and ended at 2017-12-12T15:12:56Z.
 * call_id: 77, started at 2018-02-28T21:57:13Z and ended at 2018-03-01T22:10:56Z.
 
