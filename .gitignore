@@ -7,3 +7,5 @@
 *.log
 .env
 tmp
+
+staticfiles
