@@ -69,3 +69,30 @@ def test_task_API_endpoint_and_namespace_definition(client):
 
     assert resolved.namespace == 'core'\
         and resolved.url_name == 'task-list'
+
+
+def test_expect_200Ok_response_GETting_a_job_id_URL(client):
+    """
+    Test the job_id URL of a start call registry POST
+    """
+
+    url = reverse_lazy('calls:registry-list')
+
+    timestamp = datetime(2019, 4, 26, 20, 32, 10)
+
+    start_call = {
+            'type': 'start',
+            'timestamp': timestamp.isoformat(),
+            'call_id': 1,
+            'source': '11111111111',
+            'destination': '22222222222',
+    }
+
+    response = client.post(url, start_call, content_type='application/json')
+    response_data = response.json()
+
+    task_url = response_data.get('job_id', None)
+
+    task_response = client.get(task_url)
+
+    assert task_response.status_code == status.HTTP_200_OK
