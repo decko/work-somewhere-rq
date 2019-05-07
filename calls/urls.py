@@ -1,12 +1,12 @@
 from django.urls import path
 
-from .views import return200Ok
+from .views import registry_saver
 
 
 app_name = 'calls'
 
 urlpatterns = [
-    path('registry/', return200Ok, name='registry-list'),
+    path('registry/', registry_saver, name='registry-list'),
 ]
 
 

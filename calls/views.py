@@ -3,7 +3,6 @@ from rest_framework.response import Response
 
 
 @api_view(['GET', 'POST'])
-def return200Ok(request, **kwargs):
+def registry_saver(request, **kwargs):
 
     return Response(status=200)
-
