@@ -56,3 +56,16 @@ def test_POST_a_call_and_expect_job_id_and_data_posted(client):
 
     for item in start_call.items():
         assert item in response_data['data'].items()
+
+
+def test_task_API_endpoint_and_namespace_definition(client):
+    """
+    Test if there is a Task API endpoint and if is defined as "core"
+    namespace and "task-list" as his name
+    """
+
+    url = '/api/v1/task/'
+    resolved = resolve(url)
+
+    assert resolved.namespace == 'core'\
+        and resolved.url_name == 'task-list'
