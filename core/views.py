@@ -3,6 +3,6 @@ from rest_framework.response import Response
 
 
 @api_view(['GET'])
-def return200Ok(request):
+def task_view(request):
 
     return Response(status=200)

@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .views import return200Ok
+from .views import task_view
 
 
 app_name = 'core'
 
 urlpatterns = [
-    path('task/', return200Ok, name='task-list'),
+    path('task/', task_view, name='task-list'),
 ]
