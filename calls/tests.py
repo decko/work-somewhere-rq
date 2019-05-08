@@ -1,8 +1,12 @@
+import pytest
 from datetime import datetime
 
 from django.urls import resolve, reverse_lazy
 
 from rest_framework import status
+
+
+pytestmark = pytest.mark.django_db
 
 
 def test_registry_API_endpoint_and_namespace_definition(client):
