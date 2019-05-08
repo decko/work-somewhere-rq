@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_rq',
+    'core',
+    'calls',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +85,6 @@ DATABASES = {
     'default': dj_database_url.config(
         default='postgres://olist_telephone:olist_telephone@localhost/telephonedb',
         conn_max_age=500,
-        ssl_require=True
     )
 }
 
@@ -109,7 +110,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -147,6 +148,11 @@ RQ_QUEUES = {
 if DEBUG:
     for queue, queueConfig in RQ_QUEUES.items():
         queueConfig['ASYNC'] = False
+
+    MIGRATION_MODULES = {
+        'core': None,
+        'calls': None,
+    }
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
