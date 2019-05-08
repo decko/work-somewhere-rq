@@ -83,28 +83,19 @@ def test_expect_200Ok_response_GETting_a_job_id_URL(client, start_call_fx):
     assert task_response.status_code == status.HTTP_200_OK
 
 
-def test_expect_200Ok_response_GETting_a_job_id_URL(client):
+def test_expect_job_information_about_registry_process(client, start_call_fx):
     """
-    Test the job_id URL of a start call registry POST
+    Test retrieve job information about a call registry process.
     """
 
     url = reverse_lazy('calls:registry-list')
 
-    timestamp = datetime(2019, 4, 26, 20, 32, 10)
+    response = client.post(url, start_call_fx, content_type='application/json')
 
-    start_call = {
-            'type': 'start',
-            'timestamp': timestamp.isoformat(),
-            'call_id': 1,
-            'source': '11111111111',
-            'destination': '22222222222',
-    }
+    job_id = response.data.get('job_id')
 
-    response = client.post(url, start_call, content_type='application/json')
-    response_data = response.json()
+    job = client.get(job_id)
 
-    task_url = response_data.get('job_id', None)
+    assert job.data.get('status') == 'DONE'
 
-    task_response = client.get(task_url)
 
-    assert task_response.status_code == status.HTTP_200_OK
