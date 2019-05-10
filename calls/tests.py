@@ -83,9 +83,10 @@ def test_expect_200Ok_response_GETting_a_job_id_URL(client, start_call_fx):
     assert task_response.status_code == status.HTTP_200_OK
 
 
-def test_expect_job_information_about_registry_process(client, start_call_fx):
+def test_expect_status_property_about_registry_process(client, start_call_fx):
     """
-    Test retrieve job information about a call registry process.
+    Test if there is a 'status' property in a response about registry process,
+    and if it contains a 'DONE' status about this task.
     """
 
     url = reverse_lazy('calls:registry-list')
@@ -99,3 +100,48 @@ def test_expect_job_information_about_registry_process(client, start_call_fx):
     assert job.data.get('status') == 'DONE'
 
 
+def test_expect_data_posted_return_encapsulated_on_message_property_on_response(client, start_call_fx):
+    """
+    Test if there is a 'result' property containing the result of registry
+    process
+    """
+
+    url = reverse_lazy('calls:registry-list')
+
+    response = client.post(url, start_call_fx, content_type='application/json')
+
+    job_id = response.data.get('job_id')
+
+    job = client.get(job_id)
+
+    assert job.data.get('result')
+
+    assert client.get(job.data.get('result')).status_code == status.HTTP_200_OK
+
+
+
+def test_post_a_start_call_and_recover_it_using_a_GET_request(client, start_call_fx):
+    """
+    Test POST a start call registry to registry API and expect recover it
+    using a GET request.
+    """
+
+    url = reverse_lazy('calls:registry-list')
+
+    post_request = client.post(url,
+                               start_call_fx,
+                               content_type='application/json')
+
+    assert post_request.status_code == status.HTTP_201_CREATED
+
+    job_url = post_request.data.get('job_id')
+
+    job_request = client.get(job_url)
+
+    get_request = client.get(job_request.data.get('result'))
+
+    response = get_request.json()
+
+    assert get_request.status_code == status.HTTP_200_OK
+    for key, value in start_call_fx.items():
+        assert value == response.get(key)
