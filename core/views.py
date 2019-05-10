@@ -1,8 +1,21 @@
+from django.shortcuts import get_object_or_404
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .models import Task
+
 
 @api_view(['GET'])
-def task_view(request, task_id):
+def task_view(request, job_id=None):
 
-    return Response(status=200)
+    task = get_object_or_404(Task, job_id=job_id)
+
+    response = {
+        'job_id': task.get_absolute_url(),
+        'status': task.status,
+        'data': task.data,
+        'result': task.result
+    }
+
+    return Response(data=response, status=200)
