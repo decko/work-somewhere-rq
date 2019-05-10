@@ -10,7 +10,7 @@ from .serializers import RegistrySerializer
 @job('registry-q')
 def registry_saver(data):
     job = get_current_job()
-    
+
     task = Task()
     task.status = 'STARTED'
     task.job_id = job.id

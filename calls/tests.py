@@ -13,11 +13,11 @@ pytestmark = pytest.mark.django_db
 def start_call_fx():
     timestamp = datetime(2019, 4, 26, 12, 32, 10)
     call = {
-            'type': 'start',
-            'timestamp': timestamp.isoformat(),
-            'call_id': 1,
-            'source': '11111111111',
-            'destination': '22222222222',
+        'type': 'start',
+        'timestamp': timestamp.isoformat(),
+        'call_id': 1,
+        'source': '11111111111',
+        'destination': '22222222222',
     }
 
     return call
