@@ -19,7 +19,10 @@ def task_view(request, job_id=None):
         The job_id to retrieve the task
     """
 
-    task = get_object_or_404(Task, job_id=job_id)
+    try:
+        task = Task.objects.get(job_id=job_id)
+    except Task.DoesNotExist:
+        raise NotFound('Task not found')
 
     response = {
         'job_id': task.get_absolute_url(),
