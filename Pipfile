@@ -13,6 +13,11 @@ djangorestframework = "*"
 django-heroku = "*"
 gunicorn = "*"
 django-rq = "*"
+coreapi = "*"
+pyyaml = "*"
+pygments = "*"
+markdown = "*"
+django-rest-swagger = "*"
 
 [dev-packages]
 pytest = "*"

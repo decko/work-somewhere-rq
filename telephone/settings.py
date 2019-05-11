@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     # http://whitenoise.evans.io/en/stable/django.html#using-whitenoise-in-development
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_swagger',
     'django_rq',
     'core',
     'calls',
@@ -153,6 +155,10 @@ if DEBUG:
         'core': None,
         'calls': None,
     }
+
+REST_FRAMEWORK = {
+        'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',)
+        }
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
