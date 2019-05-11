@@ -27,3 +27,14 @@ def test_task_API_endpoint_and_namespace_definition(client):
 
     assert resolved.namespace == 'core'\
         and resolved.url_name == 'task-list'
+
+
+def test_documentation_for_task_view():
+    """
+    Test if there is documentation for the Task API Endpoint
+    """
+
+    url = reverse('core:task-list')
+    view = resolve(url).func
+
+    assert view.__doc__
