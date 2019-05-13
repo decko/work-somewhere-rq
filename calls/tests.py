@@ -159,3 +159,15 @@ def test_post_a_start_call_and_recover_it_using_a_GET_request(client, start_call
     assert get_request.status_code == status.HTTP_200_OK
     for key, value in start_call_fx.items():
         assert value == response.get(key)
+
+
+def test_GET_call_api_and_return_200Ok(client):
+    """
+    Test a GET request on the Call API Endpoint and expect it return 200 Ok
+    """
+
+    url = '/api/v1/calls/'
+
+    response = client.get(url)
+
+    assert response.status_code == status.HTTP_200_OK
