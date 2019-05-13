@@ -195,3 +195,33 @@ def test_documentation_for_call_view():
     view = resolve(url).func
 
     assert view.__doc__
+
+
+def test_post_a_start_and_stop_registry_and_get_a_call(client, start_call_fx):
+    """
+    Test POSTing a start and a stop registry and expect get it
+    at Call API Endpoint
+    """
+
+    post_url = reverse_lazy('calls:registry-list')
+
+    timestamp = datetime(2019, 4, 26, 12, 32, 10)
+    stop_call = {
+        'type': 'stop',
+        'timestamp': timestamp.isoformat(),
+        'call_id': 1,
+    }
+
+    post_data = [start_call_fx, stop_call]
+
+    for data in post_data:
+        response = client.post(post_url, data, content_type='application/json')
+        assert response.status_code == status.HTTP_201_CREATED
+
+    get_url = reverse_lazy('calls:call-list')
+
+    response = client.get(get_url)
+
+    assert len(response.data) == 1
+    assert response.data[0].get('start_timestamp')
+    assert response.data[0].get('stop_timestamp')
