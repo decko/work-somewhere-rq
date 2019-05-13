@@ -171,3 +171,16 @@ def test_GET_call_api_and_return_200Ok(client):
     response = client.get(url)
 
     assert response.status_code == status.HTTP_200_OK
+
+
+def test_namespace_of_call_api_endpoint():
+    """
+    Test if there is a Call API endpoint and if is defined as "calls"
+    namespace and "call-list" as his name
+    """
+
+    url = '/api/v1/calls/'
+    resolved = resolve(url)
+
+    assert resolved.namespace == 'calls'\
+        and resolved.url_name == 'call-list'
