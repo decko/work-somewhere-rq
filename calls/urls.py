@@ -18,5 +18,6 @@ urlpatterns = [
          name='registry-list'),
 
     path('calls/',
-         call_view),
+         call_view,
+         name='call-list'),
 ]
