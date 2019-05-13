@@ -184,3 +184,14 @@ def test_namespace_of_call_api_endpoint():
 
     assert resolved.namespace == 'calls'\
         and resolved.url_name == 'call-list'
+
+
+def test_documentation_for_call_view():
+    """
+    Test for documentation on Call API Endpoint view
+    """
+
+    url = reverse_lazy('calls:call-list')
+    view = resolve(url).func
+
+    assert view.__doc__
