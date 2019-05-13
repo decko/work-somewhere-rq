@@ -12,7 +12,7 @@ pytestmark = pytest.mark.django_db
 @pytest.fixture
 def start_call_fx():
     """
-    Fixture that return a dict with a call registry
+    Fixture that return a dict with a start call registry
     """
 
     timestamp = datetime(2019, 4, 26, 12, 32, 10)
@@ -22,6 +22,22 @@ def start_call_fx():
         'call_id': 1,
         'source': '11111111111',
         'destination': '22222222222',
+    }
+
+    return call
+
+
+@pytest.fixture
+def stop_call_fx():
+    """
+    Fixture that return a dict with a stop call registry
+    """
+
+    timestamp = datetime(2019, 4, 26, 12, 40, 10)
+    call = {
+        'type': 'stop',
+        'timestamp': timestamp.isoformat(),
+        'call_id': 1,
     }
 
     return call
@@ -197,22 +213,19 @@ def test_documentation_for_call_view():
     assert view.__doc__
 
 
-def test_post_a_start_and_stop_registry_and_get_a_call(client, start_call_fx):
+def test_post_a_start_and_stop_registry_and_get_a_call(client, start_call_fx,
+                                                       stop_call_fx):
     """
     Test POSTing a start and a stop registry and expect get it
     at Call API Endpoint
+
+    Test uses start_call_fx fixture
+    Test uses stop_call_fx fixture
     """
 
     post_url = reverse_lazy('calls:registry-list')
 
-    timestamp = datetime(2019, 4, 26, 12, 32, 10)
-    stop_call = {
-        'type': 'stop',
-        'timestamp': timestamp.isoformat(),
-        'call_id': 1,
-    }
-
-    post_data = [start_call_fx, stop_call]
+    post_data = [start_call_fx, stop_call_fx]
 
     for data in post_data:
         response = client.post(post_url, data, content_type='application/json')
