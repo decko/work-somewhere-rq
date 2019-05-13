@@ -3,7 +3,7 @@ from django.urls import path
 from .views import RegistryRetrieveAPIView
 from .views import RegistryListCreateAPIView
 
-from .views import registry_view as call_view
+from .views import CallListAPIView
 
 
 app_name = 'calls'
@@ -18,6 +18,6 @@ urlpatterns = [
          name='registry-list'),
 
     path('calls/',
-         call_view,
+         CallListAPIView.as_view(),
          name='call-list'),
 ]

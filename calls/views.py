@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django_rq import get_queue
 
 from rest_framework.decorators import api_view
-from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, ListCreateAPIView
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 
 from .serializers import RegistrySerializer
@@ -33,6 +34,18 @@ class RegistryListCreateAPIView(ListCreateAPIView):
 class RegistryRetrieveAPIView(RetrieveAPIView):
     queryset = Registry.objects.all()
     serializer_class = RegistrySerializer
+
+
+class CallListAPIView(ListAPIView):
+    """
+    Retrieve all consolidated(with start and stop timestamps) calls.
+    """
+
+    def get(self, request):
+        """
+        Only return a 200 Ok HTTP Status with no data.
+        """
+        return Response(status=200)
 
 
 @api_view(['GET', 'POST'])
