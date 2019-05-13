@@ -11,6 +11,10 @@ pytestmark = pytest.mark.django_db
 
 @pytest.fixture
 def start_call_fx():
+    """
+    Fixture that return a dict with a call registry
+    """
+
     timestamp = datetime(2019, 4, 26, 12, 32, 10)
     call = {
         'type': 'start',
@@ -52,6 +56,8 @@ def test_POST_a_call_and_expect_job_id_and_data_posted(client, start_call_fx):
     """
     Test POST a start call registry and expect a response from API containing
     a job_id and the data posted.
+
+    Test uses start_call_fx fixture
     """
 
     url = reverse_lazy('calls:registry-list')
@@ -69,6 +75,8 @@ def test_POST_a_call_and_expect_job_id_and_data_posted(client, start_call_fx):
 def test_expect_200Ok_response_GETting_a_job_id_URL(client, start_call_fx):
     """
     Test the job_id URL of a start call registry POST.
+
+    Test uses start_call_fx fixture
     """
 
     url = reverse_lazy('calls:registry-list')
@@ -87,6 +95,8 @@ def test_expect_status_property_about_registry_process(client, start_call_fx):
     """
     Test if there is a 'status' property in a response about registry process,
     and if it contains a 'DONE' status about this task.
+
+    Test uses start_call_fx fixture
     """
 
     url = reverse_lazy('calls:registry-list')
@@ -104,6 +114,8 @@ def test_expect_data_posted_return_encapsulated_on_message_property_on_response(
     """
     Test if there is a 'result' property containing the result of registry
     process
+
+    Test uses start_call_fx fixture
     """
 
     url = reverse_lazy('calls:registry-list')
@@ -124,6 +136,8 @@ def test_post_a_start_call_and_recover_it_using_a_GET_request(client, start_call
     """
     Test POST a start call registry to registry API and expect recover it
     using a GET request.
+
+    Test uses start_call_fx fixture
     """
 
     url = reverse_lazy('calls:registry-list')
