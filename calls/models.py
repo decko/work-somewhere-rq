@@ -41,3 +41,30 @@ class Registry(models.Model):
         return f'call type: {self.type},\
                 when: {self.timestamp},\
                 call id: {self.call_id}'
+
+
+class Call(models.Model):
+    call_id = models.IntegerField(
+        _('Unique call identifier'),
+        unique=True
+    )
+    start_timestamp = models.DateTimeField(
+        _('Start time of the call'),
+        blank=True,
+        null=True
+    )
+    stop_timestamp = models.DateTimeField(
+        _('Stop time of the call'),
+        blank=True,
+        null=True
+    )
+    source = models.CharField(
+        _('Call Source'),
+        max_length=11,
+        blank=True, null=True,
+    )
+    destination = models.CharField(
+        _('Call Destination'),
+        max_length=11,
+        blank=True, null=True,
+    )

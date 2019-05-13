@@ -10,7 +10,9 @@ from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 
 from .serializers import RegistrySerializer
+from .serializers import CallSerializer
 from .models import Registry
+from .models import Call
 
 
 class RegistryListCreateAPIView(ListCreateAPIView):
@@ -41,11 +43,8 @@ class CallListAPIView(ListAPIView):
     Retrieve all consolidated(with start and stop timestamps) calls.
     """
 
-    def get(self, request):
-        """
-        Only return a 200 Ok HTTP Status with no data.
-        """
-        return Response(status=200)
+    queryset = Call.objects.all()
+    serializer_class = CallSerializer
 
 
 @api_view(['GET', 'POST'])
