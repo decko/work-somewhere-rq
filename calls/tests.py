@@ -238,3 +238,30 @@ def test_post_a_start_and_stop_registry_and_get_a_call(client, start_call_fx,
     assert len(response.data) == 1
     assert response.data[0].get('start_timestamp')
     assert response.data[0].get('stop_timestamp')
+
+
+def test_post_a_start_and_stop_registry_and_get_a_call_using_url(client,
+                                                                 start_call_fx,
+                                                                 stop_call_fx):
+    """
+    Test POSTing a start and a stop registry and expect get it
+    at Call API Endpoint using a call_id
+
+    Test uses start_call_fx fixture
+    Test uses stop_call_fx fixture
+    """
+
+    post_url = reverse_lazy('calls:registry-list')
+
+    post_data = [start_call_fx, stop_call_fx]
+
+    for data in post_data:
+        response = client.post(post_url, data, content_type='application/json')
+        assert response.status_code == status.HTTP_201_CREATED
+
+    get_url = reverse_lazy('calls:call-detail', kwargs={'call_id': 1})
+
+    response = client.get(get_url)
+
+    assert response.data.get('start_timestamp')
+    assert response.data.get('stop_timestamp')
