@@ -68,3 +68,7 @@ class Call(models.Model):
         max_length=11,
         blank=True, null=True,
     )
+
+    def get_absolute_url(self):
+        return reverse_lazy('calls:call-detail',
+                            kwargs={'call_id': self.call_id})

@@ -47,6 +47,12 @@ class CallListAPIView(ListAPIView):
     serializer_class = CallSerializer
 
 
+class CallRetrieveAPIView(RetrieveAPIView):
+    queryset = Call.objects.all()
+    serializer_class = CallSerializer
+    lookup_field = 'call_id'
+
+
 @api_view(['GET', 'POST'])
 def registry_view(request, registry_id=None):
 
