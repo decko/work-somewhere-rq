@@ -43,12 +43,12 @@ class CallListAPIView(ListAPIView):
     Retrieve all consolidated(with start and stop timestamps) calls.
     """
 
-    queryset = Call.objects.all()
+    queryset = Call.consolidated.all()
     serializer_class = CallSerializer
 
 
 class CallRetrieveAPIView(RetrieveAPIView):
-    queryset = Call.objects.all()
+    queryset = Call.consolidated.all()
     serializer_class = CallSerializer
     lookup_field = 'call_id'
 

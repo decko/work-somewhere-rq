@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
+from .managers import ConsolidatedCallManager
+
 
 class Registry(models.Model):
     type = models.CharField(
@@ -68,6 +70,9 @@ class Call(models.Model):
         max_length=11,
         blank=True, null=True,
     )
+
+    objects = models.Manager()
+    consolidated = ConsolidatedCallManager()
 
     def get_absolute_url(self):
         return reverse_lazy('calls:call-detail',
