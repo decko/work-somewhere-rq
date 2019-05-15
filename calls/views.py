@@ -21,7 +21,7 @@ class RegistryListCreateAPIView(ListCreateAPIView):
 
     def post(self, request):
         queue = get_queue('registry-q')
-        job = queue.enqueue('calls.tasks.registry_saver', data=request.data)
+        job = queue.enqueue('calls.tasks.registry_validation', data=request.data)
 
         task_url = reverse_lazy('core:task-detail', kwargs={'job_id': job.id})
 
