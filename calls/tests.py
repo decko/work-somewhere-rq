@@ -1,3 +1,4 @@
+from copy import copy
 import pytest
 from datetime import datetime
 
@@ -282,3 +283,30 @@ def test_post_a_start_registry_with_invalid_phone_number(client, start_call_fx):
     registry = RegistrySerializer(data=start_call_fx)
 
     assert not registry.is_valid()
+
+
+def test_call_api_return_only_consolidated_calls(client, start_call_fx, stop_call_fx):
+    """
+    Test POSTing two start registries and only one stop registry and expect
+    to GET only on record on Call API Endpoint.
+
+    Test uses start_call_fx fixture
+    Test uses stop_call_fx fixture
+    """
+
+    post_url = reverse_lazy('calls:registry-list')
+
+    start_call_fx_2 = copy(start_call_fx)
+    start_call_fx_2['call_id'] = 2
+
+    post_data = [start_call_fx, start_call_fx_2, stop_call_fx]
+
+    for data in post_data:
+        response = client.post(post_url, data, content_type='application/json')
+        assert response.status_code == status.HTTP_201_CREATED
+
+    get_url = reverse_lazy('calls:call-list')
+
+    response = client.get(get_url)
+
+    assert len(response.data) == 1
