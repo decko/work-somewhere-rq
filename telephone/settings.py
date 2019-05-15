@@ -140,11 +140,11 @@ RQ_QUEUES = {
     'registry-q': {
         'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 500,
-        },
+    },
     'call-q': {
         'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 500,
-        }
+    }
 }
 
 if DEBUG:
@@ -157,8 +157,8 @@ if DEBUG:
     }
 
 REST_FRAMEWORK = {
-        'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',)
-        }
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',)
+}
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
