@@ -10,7 +10,7 @@ from .models import Call
 from .models import Registry
 
 
-@job
+@job('registry-q')
 def registry_validation(data):
     job = get_current_job()
 
@@ -36,7 +36,7 @@ def registry_validation(data):
     return True
 
 
-@job
+@job('registry-q')
 def registry_saver(data, job_id):
     """
     Receives validated data and save it to a new Registry instance.
