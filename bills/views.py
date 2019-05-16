@@ -22,10 +22,18 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
 
     period = f"{month_period}/{year_period}"
 
+    call = {
+        'destination': '',
+        'call_start_date': '',
+        'call_start_time': '',
+        'call_duration': '',
+        'call_price': '',
+    }
+
     data = {
         'subscriber': subscriber,
         'period': period,
-        'calls': [],
+        'calls': [call],
     }
 
     return Response(data=data, status=200)
