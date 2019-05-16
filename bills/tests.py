@@ -53,3 +53,16 @@ def test_telephone_bill_attributes_when_requesting_a_bill(client):
 
     assert response.status_code == status.HTTP_200_OK
     assert attributes >= response.data
+
+
+def test_detail_request_return_subscriber_number_on_response(client):
+    """
+    Test for return of subscriber number when GETting a bill.
+    """
+
+    number = 11111111111
+    url = reverse('bills:bill-detail', kwargs={'subscriber': number})
+
+    response = client.get(url, content_type='application/json')
+
+    assert response.data.get('subscriber') == number
