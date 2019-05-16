@@ -8,6 +8,9 @@ def bill_view(request, subscriber=None):
     if not subscriber:
         return Response(status=403)
 
-    data = {'subscriber', 'period'}
+    data = {
+        'subscriber': subscriber,
+        'period': ''
+    }
 
     return Response(data=data, status=200)
