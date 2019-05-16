@@ -7,5 +7,6 @@ app_name = 'bills'
 
 urlpatterns = [
     path('bills',
-         bill_view)
+         bill_view,
+         name='bill-list')
 ]
