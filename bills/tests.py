@@ -139,3 +139,17 @@ def test_period_return_when_using_month_abbreviation_and_year_on_url(client):
     response = client.get(url)
 
     assert response.data.get('period') == f"{month_period}/{year_period}"
+
+
+def test_calls_attribute_when_request_a_bill(client):
+    """
+    Test for calls attribute in the response from Bills API Endpoint.
+    Expect it to be a list.
+    """
+
+    number = 11111111111
+    url = reverse('bills:bill-detail', kwargs={'subscriber': number})
+
+    response = client.get(url)
+
+    assert isinstance(response.data.get('calls'), list)
