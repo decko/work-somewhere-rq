@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_rq',
     'core',
     'calls',
+    'bills',
 ]
 
 MIDDLEWARE = [
@@ -154,6 +155,7 @@ if DEBUG:
     MIGRATION_MODULES = {
         'core': None,
         'calls': None,
+        'bills': None,
     }
 
 REST_FRAMEWORK = {
