@@ -1,4 +1,4 @@
-from django.urls import resolve
+from django.urls import resolve, reverse
 from rest_framework import status
 
 
@@ -27,3 +27,15 @@ def test_namespace_of_bills_api_list_endpoint():
 
     assert resolved.namespace == 'bills'\
         and resolved.url_name == 'bill-list'
+
+
+def test_reverse_namespace_for_bills_api_detail_endpoint():
+    """
+    Test for reverse a Bills API Detail endpoint using name and
+    namespace and using subscriber parameter as identifier.
+    """
+
+    view_name = 'bills:bill-detail'
+    reversed = reverse(view_name, kwargs={'subscriber': 11111111111})
+
+    assert reversed == '/api/v1/bills/11111111111'
