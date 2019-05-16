@@ -153,3 +153,23 @@ def test_calls_attribute_when_request_a_bill(client):
     response = client.get(url)
 
     assert isinstance(response.data.get('calls'), list)
+
+
+def test_call_instance_attribute_on_a_bill(client):
+    """
+    Test for a list of attributes for each call in the list of a bill.
+    Expect to find 'destination', 'call_start_date', 'call_start_time',
+    'call_duration', 'call_price'.
+    """
+
+    attributes = {'destination', 'call_start_date', 'call_start_time',
+                  'call_duration', 'call_price'}
+
+    number = 11111111111
+    url = reverse('bills:bill-detail', kwargs={'subscriber': number})
+
+    response = client.get(url)
+
+    call = response.data.get('calls')[0]
+
+    assert attributes <= call.keys()
