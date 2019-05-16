@@ -25,6 +25,7 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
     data = {
         'subscriber': subscriber,
         'period': period,
+        'calls': [],
     }
 
     return Response(data=data, status=200)
