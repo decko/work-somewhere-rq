@@ -3,6 +3,11 @@ from rest_framework.response import Response
 
 
 @api_view(['GET'])
-def bill_view(request):
+def bill_view(request, subscriber=None):
 
-    return Response(status=403)
+    if not subscriber:
+        return Response(status=403)
+
+    data = {'subscriber', 'period'}
+
+    return Response(data=data, status=200)
