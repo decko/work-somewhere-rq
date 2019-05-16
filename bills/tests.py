@@ -39,3 +39,17 @@ def test_reverse_namespace_for_bills_api_detail_endpoint():
     reversed = reverse(view_name, kwargs={'subscriber': 11111111111})
 
     assert reversed == '/api/v1/bills/11111111111'
+
+
+def test_telephone_bill_attributes_when_requesting_a_bill(client):
+    """
+    Test for subscriber and period attributes in the response from
+    Bills API detail endpoint.
+    """
+
+    attributes = {'subscriber', 'period'}
+    url = reverse('bills:bill-detail', kwargs={'subscriber': 11111111111})
+    response = client.get(url)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert attributes >= response.data
