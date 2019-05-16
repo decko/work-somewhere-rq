@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.urls import resolve, reverse
 from rest_framework import status
 
@@ -66,3 +68,23 @@ def test_detail_request_return_subscriber_number_on_response(client):
     response = client.get(url, content_type='application/json')
 
     assert response.data.get('subscriber') == number
+
+
+def test_detail_request_return_period_on_response(client):
+    """
+    Test for return of the latest period on the request to Bill API
+    detail endpoint.
+    """
+
+    number = 11111111111
+    url = reverse('bills:bill-detail', kwargs={'subscriber': number})
+
+    today = date.today()
+    latest_period = today.replace(
+        year=today.year if today.month > 1 else today.year - 1,
+        month=today.month - 1 if today.month > 1 else 12,
+        day=1).strftime('%h/%Y')
+
+    response = client.get(url, content_type='application/json')
+
+    assert response.data.get('period') == latest_period
