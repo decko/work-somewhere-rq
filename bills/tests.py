@@ -54,7 +54,7 @@ def test_telephone_bill_attributes_when_requesting_a_bill(client):
     response = client.get(url)
 
     assert response.status_code == status.HTTP_200_OK
-    assert attributes >= response.data.keys()
+    assert attributes <= response.data.keys()
 
 
 def test_detail_request_return_subscriber_number_on_response(client):
