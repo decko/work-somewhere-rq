@@ -88,3 +88,28 @@ def test_detail_request_return_period_on_response(client):
     response = client.get(url, content_type='application/json')
 
     assert response.data.get('period') == latest_period
+
+
+def test_period_return_when_using_month_abbreviation_on_url(client):
+    """
+    Test for the return of the period when requested on the url using
+    month 3 character abbreviation.
+    """
+
+    today = date.today()
+    latest_period = today.replace(
+        year=today.year if today.month > 2 else today.year - 1,
+        month=today.month - 2 if today.month > 2 else 12,
+        day=1)
+    month = latest_period.strftime('%h')
+    month_year = latest_period.strftime('%h/%Y')
+
+    number = 11111111111
+    url = reverse('bills:bill-detail', kwargs={
+        'subscriber': number,
+        'month_period': month
+    })
+
+    response = client.get(url)
+
+    assert response.data.get('period') == month_year
