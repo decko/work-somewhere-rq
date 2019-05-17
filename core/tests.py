@@ -78,3 +78,16 @@ def test_for_serviceabstractclass_as_abstract_class_instance():
     from abc import ABC
 
     assert issubclass(ServiceAbstractClass, ABC)
+
+
+def test_for_some_serviceabstractclass_attributes():
+    """
+    Test for a list of attributes that ServiceAbstractClass must implement.
+    """
+
+    attributes = {'trigger', 'queue', 'message'}
+
+    from .services import ServiceAbstractClass
+
+    for attribute in attributes:
+        assert hasattr(ServiceAbstractClass, attribute)
