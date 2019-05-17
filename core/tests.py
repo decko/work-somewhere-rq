@@ -67,3 +67,14 @@ def test_for_a_task_abstract_class():
     from .services import ServiceAbstractClass
 
     assert ServiceAbstractClass
+
+
+def test_for_serviceabstractclass_as_abstract_class_instance():
+    """
+    Test for ServiceAbstractClass is a abstract base class(ABC) instance
+    """
+
+    from .services import ServiceAbstractClass
+    from abc import ABC
+
+    assert issubclass(ServiceAbstractClass, ABC)
