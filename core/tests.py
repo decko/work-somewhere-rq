@@ -1,10 +1,13 @@
 import pytest
 
+from abc import ABC
 from uuid import uuid4
 
 from django.urls import resolve, reverse
 
 from rest_framework import status
+
+from .services import ServiceAbstractClass
 
 
 pytestmark = pytest.mark.django_db
@@ -64,8 +67,6 @@ def test_for_a_task_abstract_class():
     Test for the existence of a ServiceAbstractClass to import.
     """
 
-    from .services import ServiceAbstractClass
-
     assert ServiceAbstractClass
 
 
@@ -73,9 +74,6 @@ def test_for_serviceabstractclass_as_abstract_class_instance():
     """
     Test for ServiceAbstractClass is a abstract base class(ABC) instance
     """
-
-    from .services import ServiceAbstractClass
-    from abc import ABC
 
     assert issubclass(ServiceAbstractClass, ABC)
 
@@ -86,8 +84,6 @@ def test_for_some_serviceabstractclass_attributes():
     """
 
     attributes = {'trigger', 'queue', 'message'}
-
-    from .services import ServiceAbstractClass
 
     for attribute in attributes:
         assert hasattr(ServiceAbstractClass, attribute)
