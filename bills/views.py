@@ -3,6 +3,9 @@ from datetime import date
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from .serializers import BilledCallSerializer
+from .models import Bill
+
 
 @api_view(['GET'])
 def bill_view(request, subscriber=None, month_period=None, year_period=None):
@@ -22,18 +25,12 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
 
     period = f"{month_period}/{year_period}"
 
-    call = {
-        'destination': '',
-        'call_start_date': '',
-        'call_start_time': '',
-        'call_duration': '',
-        'call_price': '',
-    }
+    calls = [BilledCallSerializer(call).data for call in Bill.objects.all()]
 
     data = {
         'subscriber': subscriber,
         'period': period,
-        'calls': [call],
+        'calls': calls,
     }
 
     return Response(data=data, status=200)
