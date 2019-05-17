@@ -57,3 +57,13 @@ def test_return_404_when_a_Task_is_not_found(client):
     request = client.get(url)
 
     assert request.status_code == status.HTTP_404_NOT_FOUND
+
+
+def test_for_a_task_abstract_class():
+    """
+    Test for the existence of a ServiceAbstractClass to import.
+    """
+
+    from .services import ServiceAbstractClass
+
+    assert ServiceAbstractClass
