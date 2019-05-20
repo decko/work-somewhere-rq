@@ -104,39 +104,35 @@ def test_for_some_serviceabstractclass_attributes():
         assert hasattr(ServiceAbstractClass, attribute)
 
 
-def test_for_initial_validation_when_instantiate_serviceabstractclass(mocker):
+def test_for_initial_validation_when_instantiate_serviceabstractclass(sac_abstract_methods_mocker):
     """
     Test if a instance of ServiceAbstractClass raises an exception when
     instantiated without value for 'trigger' attribute.
     """
 
-    mocker.patch.multiple(ServiceAbstractClass, __abstractmethods__=set())
     class TestService(ServiceAbstractClass):
         pass
 
     with pytest.raises(Exception) as exception:
-        instance = TestService()
+        TestService()
 
     assert str(exception.value) == 'A trigger must be a string and it is needed to accept any task.'
-    mocker.resetall()
 
 
-def test_for_queue_parameter_initial_validation_when_instantiate_serviceabstractclass(mocker):
+def test_for_queue_parameter_initial_validation_when_instantiate_serviceabstractclass(sac_abstract_methods_mocker):
     """
     Test if a instance of ServiceAbstractClass raises an exception when
     instantiated without value for 'queue' attribute.
     """
 
-    mocker.patch.multiple(ServiceAbstractClass, __abstractmethods__=set())
     class TestService(ServiceAbstractClass):
         trigger = 'test'
         pass
 
     with pytest.raises(Exception) as exception:
-        instance = TestService()
+        TestService()
 
     assert str(exception.value) == 'A queue must be a string and it is needed to propagate the results.'
-    mocker.resetall()
 
 
 def test_for_serviceabstractclass_abstract_methods():
