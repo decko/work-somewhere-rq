@@ -102,3 +102,19 @@ def test_for_initial_validation_when_instantiate_serviceabstractclass():
         instance = TestService()
 
     assert str(exception.value) == 'A trigger must be a string and it is needed to accept any task.'
+
+
+def test_for_queue_parameter_initial_validation_when_instantiate_serviceabstractclass():
+    """
+    Test if a instance of ServiceAbstractClass raises an exception when
+    instantiated without value for 'queue' attribute.
+    """
+
+    class TestService(ServiceAbstractClass):
+        trigger = 'test'
+        pass
+
+    with pytest.raises(Exception) as exception:
+        instance = TestService()
+
+    assert str(exception.value) == 'A queue must be a string and it is needed to propagate the results.'
