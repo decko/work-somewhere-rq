@@ -87,3 +87,18 @@ def test_for_some_serviceabstractclass_attributes():
 
     for attribute in attributes:
         assert hasattr(ServiceAbstractClass, attribute)
+
+
+def test_for_initial_validation_when_instantiate_serviceabstractclass():
+    """
+    Test if a instance of ServiceAbstractClass raises an exception when
+    instantiated without value for 'trigger' attribute.
+    """
+
+    class TestService(ServiceAbstractClass):
+        pass
+
+    with pytest.raises(Exception) as exception:
+        instance = TestService()
+
+    assert str(exception.value) == 'A trigger must be a string and it is needed to accept any task.'
