@@ -5,6 +5,9 @@ class ServiceAbstractClass(ABC):
     """
     This Abstract Service Class defines a template to process messages
     on Telephone application.
+
+    message : dict
+        The message to be processed.
     """
 
     trigger = None
@@ -12,7 +15,9 @@ class ServiceAbstractClass(ABC):
     message = None
     validation_class = None
 
-    def __init__(self):
+    def __init__(self, message):
+
+        self.message = message
 
         if not self.trigger or not isinstance(self.trigger, str):
             raise Exception("A trigger must be a string and it is needed to accept any task.")
