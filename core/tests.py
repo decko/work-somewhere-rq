@@ -108,6 +108,8 @@ def test_for_initial_validation_when_instantiate_serviceabstractclass(sac_abstra
     """
     Test if a instance of ServiceAbstractClass raises an exception when
     instantiated without value for 'trigger' attribute.
+
+    Test use sac_abstract_methods_mocker fixture.
     """
 
     class TestService(ServiceAbstractClass):
@@ -123,6 +125,8 @@ def test_for_queue_parameter_initial_validation_when_instantiate_serviceabstract
     """
     Test if a instance of ServiceAbstractClass raises an exception when
     instantiated without value for 'queue' attribute.
+
+    Test use sac_abstract_methods_mocker fixture.
     """
 
     class TestService(ServiceAbstractClass):
@@ -158,7 +162,7 @@ def test_for_process_method_on_serviceabstractclass():
 
 def test_for_existence_of_a_dispatch_method():
     """
-    Test for the existence of a dispatch method witch will be used 
+    Test for the existence of a dispatch method witch will be used
     """
 
     from core.tasks import dispatch
@@ -169,6 +173,8 @@ def test_for_existence_of_a_dispatch_method():
 def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_methods_mocker):
     """
     Test for extract the subclasses from ServiceAbstractClass.
+
+    Test use sac_abstract_methods_mocker fixture.
     """
 
     class RegistryValidationService(ServiceAbstractClass):
@@ -182,3 +188,29 @@ def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_me
     services = ServiceAbstractClass.__subclasses__()
 
     assert len(services) == 2
+
+def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subclasses(sac_abstract_methods_mocker):
+    """
+    Test for build a dict with the trigger attribute from all
+    ServiceAbstractClass subclasses.
+
+    Test use sac_abstract_methods_mocker fixture.
+    """
+
+    class RegistryValidationService(ServiceAbstractClass):
+        trigger = 'registry-validation'
+        queue = 'registry-q'
+
+    class RegistryPersistenceService(ServiceAbstractClass):
+        trigger = 'registry-persistence'
+        queue = 'registry-q'
+
+    services = ServiceAbstractClass.__subclasses__()
+
+    triggers = {service.trigger: service for service in services}
+
+    assert len(triggers) == 2
+    assert 'registry-validation' in triggers.keys()
+    assert 'registry-persistence' in triggers.keys()
+    assert 'RegistryValidationService' in str(triggers.values())
+    assert 'RegistryPersistenceService' in str(triggers.values())
