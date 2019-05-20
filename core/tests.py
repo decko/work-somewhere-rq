@@ -131,3 +131,11 @@ def test_for_serviceabstractclass_abstract_methods():
                'persistData', 'propagateResult'}
 
     assert ServiceAbstractClass.__abstractmethods__ == methods
+
+
+def test_for_process_method_on_serviceabstractclass():
+    """
+    Test for the process method used to run all methods at once.
+    """
+
+    assert ServiceAbstractClass.process
