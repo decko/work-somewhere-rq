@@ -15,3 +15,6 @@ class ServiceAbstractClass(ABC):
 
         if not self.trigger or not isinstance(self.trigger, str):
             raise Exception("A trigger must be a string and it is needed to accept any task.")
+
+        if not self.queue or not isinstance(self.queue, str):
+            raise Exception("A queue must be a string and it is needed to propagate the results.")
