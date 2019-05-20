@@ -7,6 +7,8 @@ from django.urls import resolve, reverse
 
 from rest_framework import status
 
+from calls.tests import start_call_fx
+
 from .services import ServiceAbstractClass
 
 
@@ -219,6 +221,8 @@ def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subc
 def test_select_a_service_class_based_on_trigger_value(sac_abstract_methods_mocker):
     """
     Test for select a service class based on trigger value.
+
+    Test use sac_abstract_methods_mocker fixture.
     """
 
     class RegistryValidationService(ServiceAbstractClass):
@@ -238,3 +242,30 @@ def test_select_a_service_class_based_on_trigger_value(sac_abstract_methods_mock
     service = triggers.get(trigger)
 
     assert service == RegistryValidationService
+
+
+def test_instanciate_a_service_class_using_trigger_and_message(sac_abstract_methods_mocker, start_call_fx):
+    """
+    Test for create a instance of a ServiceClass using trigger and
+    message.
+
+    Test use sac_abstract_methods_mocker fixture.
+    """
+
+    class RegistryValidationService(ServiceAbstractClass):
+        trigger = 'registry-validation'
+        queue = 'registry-q'
+
+    class RegistryPersistenceService(ServiceAbstractClass):
+        trigger = 'registry-persistence'
+        queue = 'registry-q'
+
+    trigger = 'registry-validation'
+
+    services = ServiceAbstractClass.__subclasses__()
+
+    triggers = {service.trigger: service for service in services}
+
+    service = triggers.get(trigger)(start_call_fx)
+
+    assert isinstance(service, RegistryValidationService)
