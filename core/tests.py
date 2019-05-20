@@ -164,3 +164,21 @@ def test_for_existence_of_a_dispatch_method():
     from core.tasks import dispatch
 
     assert callable(dispatch)
+
+
+def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_methods_mocker):
+    """
+    Test for extract the subclasses from ServiceAbstractClass.
+    """
+
+    class RegistryValidationService(ServiceAbstractClass):
+        trigger = 'registry-validation'
+        queue = 'registry-q'
+
+    class RegistryPersistenceService(ServiceAbstractClass):
+        trigger = 'registry-persistence'
+        queue = 'registry-q'
+
+    services = ServiceAbstractClass.__subclasses__()
+
+    assert len(services) == 2
