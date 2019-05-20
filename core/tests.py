@@ -118,3 +118,16 @@ def test_for_queue_parameter_initial_validation_when_instantiate_serviceabstract
         instance = TestService()
 
     assert str(exception.value) == 'A queue must be a string and it is needed to propagate the results.'
+
+
+def test_for_serviceabstractclass_abstract_methods():
+    """
+    Test for abstract methods of ServiceAbstractClass. Expect to find the
+    following list 'obtainMessage', 'validateMessage', 'transformMessage',
+    'persistData', 'propagateResult'.
+    """
+
+    methods = {'obtainMessage', 'validateMessage', 'transformMessage',
+               'persistData', 'propagateResult'}
+
+    assert ServiceAbstractClass.__abstractmethods__ == methods
