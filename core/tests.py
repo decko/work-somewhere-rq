@@ -13,6 +13,21 @@ from .services import ServiceAbstractClass
 pytestmark = pytest.mark.django_db
 
 
+@pytest.fixture(scope='function')
+def sac_abstract_methods_mocker(mocker):
+    """
+    Fixture to mock the abstract methods of ServiceAbstractClass making
+    it testable without asking for implementing all abstract methods on
+    an instance.
+    """
+
+    mocker.patch.multiple(ServiceAbstractClass, __abstractmethods__=set())
+
+    yield
+
+    mocker.resetall()
+
+
 def test_if_theres_a_schema_url_for_metadata_and_documentation(client):
     """
     Test if there is a schema URL for metadata and documentation.
