@@ -214,3 +214,27 @@ def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subc
     assert 'registry-persistence' in triggers.keys()
     assert 'RegistryValidationService' in str(triggers.values())
     assert 'RegistryPersistenceService' in str(triggers.values())
+
+
+def test_select_a_service_class_based_on_trigger_value(sac_abstract_methods_mocker):
+    """
+    Test for select a service class based on trigger value.
+    """
+
+    class RegistryValidationService(ServiceAbstractClass):
+        trigger = 'registry-validation'
+        queue = 'registry-q'
+
+    class RegistryPersistenceService(ServiceAbstractClass):
+        trigger = 'registry-persistence'
+        queue = 'registry-q'
+
+    trigger = 'registry-validation'
+
+    services = ServiceAbstractClass.__subclasses__()
+
+    triggers = {service.trigger: service for service in services}
+
+    service = triggers.get(trigger)
+
+    assert service == RegistryValidationService
