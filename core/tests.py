@@ -100,7 +100,7 @@ def test_for_some_serviceabstractclass_attributes():
     Test for a list of attributes that ServiceAbstractClass must implement.
     """
 
-    attributes = {'trigger', 'queue', 'message'}
+    attributes = {'trigger', 'queue', 'validation_class'}
 
     for attribute in attributes:
         assert hasattr(ServiceAbstractClass, attribute)
