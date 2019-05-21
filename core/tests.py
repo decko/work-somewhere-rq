@@ -122,6 +122,8 @@ def test_for_initial_validation_when_instantiate_serviceabstractclass(sac_abstra
 
     assert str(exception.value) == 'A trigger must be a string and it is needed to accept any task.'
 
+    del(TestService)
+
 
 def test_for_queue_parameter_initial_validation_when_instantiate_serviceabstractclass(sac_abstract_methods_mocker):
     """
@@ -139,6 +141,8 @@ def test_for_queue_parameter_initial_validation_when_instantiate_serviceabstract
         TestService()
 
     assert str(exception.value) == 'A queue must be a string and it is needed to propagate the results.'
+
+    del(TestService)
 
 
 def test_for_serviceabstractclass_abstract_methods():
@@ -191,6 +195,11 @@ def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_me
 
     assert len(services) == 2
 
+
+    del(RegistryValidationService)
+    del(RegistryPersistenceService)
+
+
 def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subclasses(sac_abstract_methods_mocker):
     """
     Test for build a dict with the trigger attribute from all
@@ -216,6 +225,9 @@ def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subc
     assert 'registry-persistence' in triggers.keys()
     assert 'RegistryValidationService' in str(triggers.values())
     assert 'RegistryPersistenceService' in str(triggers.values())
+
+    del(RegistryValidationService)
+    del(RegistryPersistenceService)
 
 
 def test_select_a_service_class_based_on_trigger_value(sac_abstract_methods_mocker):
@@ -243,6 +255,9 @@ def test_select_a_service_class_based_on_trigger_value(sac_abstract_methods_mock
 
     assert service == RegistryValidationService
 
+    del(RegistryValidationService)
+    del(RegistryPersistenceService)
+
 
 def test_instanciate_a_service_class_using_trigger_and_message(sac_abstract_methods_mocker, start_call_fx):
     """
@@ -269,6 +284,9 @@ def test_instanciate_a_service_class_using_trigger_and_message(sac_abstract_meth
     service = triggers.get(trigger)(start_call_fx)
 
     assert isinstance(service, RegistryValidationService)
+
+    del(RegistryValidationService)
+    del(RegistryPersistenceService)
 
 
 def test_dispatch_a_message_without_any_ServiceAbstractClass_subclasses(start_call_fx):
@@ -310,3 +328,5 @@ def test_dispatch_a_message_without_matching_any_available_trigger(start_call_fx
                                     'request. Verify if there is any '
                                     'ServiceAbstractClass subclass with '
                                     'this trigger.')
+
+    del(RegistryValidationService)
