@@ -145,11 +145,11 @@ def test_for_serviceabstractclass_abstract_methods():
     """
     Test for abstract methods of ServiceAbstractClass. Expect to find the
     following list 'obtainMessage', 'validateMessage', 'transformMessage',
-    'persistData', 'propagateResult'.
+    'persistData', 'propagateResult', 'startTask', 'finishTask'.
     """
 
     methods = {'obtainMessage', 'validateMessage', 'transformMessage',
-               'persistData', 'propagateResult'}
+               'persistData', 'propagateResult', 'startTask', 'finishTask'}
 
     assert ServiceAbstractClass.__abstractmethods__ == methods
 
