@@ -329,3 +329,11 @@ def test_for_RegistryService_as_a_ServiceAbstractClass_subclass():
     """
 
     assert issubclass(RegistryService, ServiceAbstractClass)
+
+
+def test_for_RegistryService_documentation():
+    """
+    Test for RegistryService documentation on class docstring.
+    """
+
+    assert RegistryService.__doc__
