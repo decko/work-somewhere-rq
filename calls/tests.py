@@ -1,5 +1,6 @@
-from copy import copy
 import pytest
+from uuid import uuid4
+from copy import copy
 from datetime import datetime
 
 from django.urls import resolve, reverse_lazy
@@ -356,3 +357,20 @@ def test_for_RegistryService_instance():
     instance = RegistryService()
 
     assert isinstance(instance, RegistryService)
+
+
+def test_for_RegistryService_startTask_method():
+    """
+    Test for RegistryService startTask method.
+    Expect to find a new Task instance with 'status' value as 'STARTED'.
+    """
+
+    message = {'a': 'b'}
+
+    instance = RegistryService(message=message, job_id=uuid4())
+    task = instance.startTask()
+
+    task.refresh_from_db()
+
+    assert task
+    assert task.status == 'STARTED'
