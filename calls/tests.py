@@ -337,3 +337,12 @@ def test_for_RegistryService_documentation():
     """
 
     assert RegistryService.__doc__
+
+
+def test_for_RegistryService_trigger_and_queue_attributes():
+    """
+    Test for the values of trigger and queue attribute.
+    """
+
+    assert RegistryService.trigger == 'registry-service'
+    assert RegistryService.queue == 'registry-service-done'
