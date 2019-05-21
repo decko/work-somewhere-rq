@@ -310,3 +310,13 @@ def test_call_api_return_only_consolidated_calls(client, start_call_fx, stop_cal
     response = client.get(get_url)
 
     assert len(response.data) == 1
+
+
+def test_for_a_registry_service_abstract_class():
+    """
+    Test for a RegistryService existence.
+    """
+
+    from .services import RegistryService
+
+    assert RegistryService
