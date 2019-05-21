@@ -1,4 +1,7 @@
+from rq import get_current_job
+
 from core.services import ServiceAbstractClass
+from core.models import Task
 
 
 class RegistryService(ServiceAbstractClass):
@@ -10,7 +13,31 @@ class RegistryService(ServiceAbstractClass):
     queue = 'registry-service-done'
 
     def startTask(self):
-        pass
+        """
+        Start the job process.
+
+        Start the job process persisting a Task instance. If there is
+        a job instance, find the correspondent Task instance or create a
+        new one if it wasn't found.
+        """
+        job_id = self.job_id
+        if not job_id:
+            job_id = get_current_job().id
+
+        task, created = Task.objects.get_or_create(
+            job_id=job_id,
+            defaults={
+                'status': 'QUEUED',
+                'job_id': job_id,
+                'data': self.message,
+            }
+        )
+
+        task.status = 'STARTED'
+        task.save()
+
+        self.task = task
+        return task
 
     def obtainMessage(self):
         pass
