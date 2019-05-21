@@ -55,4 +55,19 @@ class RegistryService(ServiceAbstractClass):
         pass
 
     def finishTask(self):
-        pass
+        """
+        Finish the job process.
+
+        Set the Task result attribute to self.result, set the status to 'DONE'
+        and save Task instance.
+        """
+        result = self.result
+        task = self.task
+
+        if result:
+            task.result = result
+
+        task.status = 'DONE'
+        task.save()
+
+        return task

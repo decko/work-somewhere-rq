@@ -16,6 +16,8 @@ class ServiceAbstractClass(ABC):
 
     def __init__(self, *args, **kwargs):
         self.message = kwargs.get('message', None)
+        self.job_id = kwargs.get('job_id', None)
+        self.result = None
 
         if not self.trigger or not isinstance(self.trigger, str):
             raise Exception("A trigger must be a string and it is needed to accept any task.")
