@@ -287,3 +287,26 @@ def test_dispatch_a_message_without_any_ServiceAbstractClass_subclasses(start_ca
     assert str(exception.value) == ('No ServiceAbstractClass subclass has been'
                                     ' found. You need to create a new class '
                                     'inherit it to make dispatch works.')
+
+
+def test_dispatch_a_message_without_matching_any_available_trigger(start_call_fx):
+    """
+    Test for dispatching a message with a trigger that don't match to
+    any ServiceAbstractClass subclass available.
+
+    Test use start_call_fx fixture.
+    """
+
+    class RegistryValidationService(ServiceAbstractClass):
+        trigger = 'registry-validation'
+        queue = 'registry-q'
+
+    from core.tasks import dispatch
+
+    with pytest.raises(Exception) as exception:
+        dispatch(start_call_fx, 'anything')
+
+    assert str(exception.value) == ('No trigger available to match your '
+                                    'request. Verify if there is any '
+                                    'ServiceAbstractClass subclass with '
+                                    'this trigger.')
