@@ -374,3 +374,20 @@ def test_for_RegistryService_startTask_method():
 
     assert task
     assert task.status == 'STARTED'
+
+def test_for_RegistryService_finishTask_method():
+    """
+    Test for RegistryService finishTask method.
+    Expect to find a Task instance with 'status' value as 'DONE'.
+    """
+
+    message = {'a': 'b'}
+
+    instance = RegistryService(message=message, job_id=uuid4())
+    instance.startTask()
+    task = instance.finishTask()
+
+    task.refresh_from_db()
+
+    assert task
+    assert task.status == 'DONE'
