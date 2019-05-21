@@ -145,7 +145,12 @@ RQ_QUEUES = {
     'call-q': {
         'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 500,
+    },
+    'default': {
+        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
     }
+
 }
 
 if DEBUG:
