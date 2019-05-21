@@ -24,6 +24,13 @@ class ServiceAbstractClass(ABC):
             raise Exception("A queue must be a string and it is needed to propagate the results.")
 
     @abstractmethod
+    def startTask(self):
+        """
+        Get the job_id and persist it on Task model.
+        """
+        pass
+
+    @abstractmethod
     def obtainMessage(self):
         """
         Obtains the data needed to be processed.
@@ -69,6 +76,11 @@ class ServiceAbstractClass(ABC):
         Propagate the result into a defined queue to be processed by other
         Services.
         """
+        pass
+
+
+    @abstractmethod
+    def finishTask(self):
         pass
 
     def process(self):
