@@ -6,6 +6,8 @@ from django.urls import resolve, reverse_lazy
 
 from rest_framework import status
 
+from core.services import ServiceAbstractClass
+
 
 pytestmark = pytest.mark.django_db
 
@@ -320,3 +322,13 @@ def test_for_a_registry_service_abstract_class():
     from .services import RegistryService
 
     assert RegistryService
+
+
+def test_for_RegistryService_as_a_ServiceAbstractClass_subclass():
+    """
+    Test for RegistryService as a ServiceAbstractClass subclass.
+    """
+
+    from .services import RegistryService
+
+    assert issubclass(RegistryService, ServiceAbstractClass)
