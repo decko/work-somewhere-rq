@@ -346,3 +346,13 @@ def test_for_RegistryService_trigger_and_queue_attributes():
 
     assert RegistryService.trigger == 'registry-service'
     assert RegistryService.queue == 'registry-service-done'
+
+
+def test_for_RegistryService_instance():
+    """
+    Test for a RegistryService instance.
+    """
+
+    instance = RegistryService()
+
+    assert isinstance(instance, RegistryService)
