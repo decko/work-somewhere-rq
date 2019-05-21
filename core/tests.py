@@ -294,7 +294,7 @@ def test_instanciate_a_service_class_using_trigger_and_message(sac_abstract_meth
     del(RegistryPersistenceService)
 
 
-def test_dispatch_a_message_without_any_ServiceAbstractClass_subclasses(start_call_fx):
+def test_dispatch_a_message_without_any_ServiceAbstractClass_subclasses(start_call_fx, mocker):
     """
     Test for dispatching a message without any ServiceAbstractClass.
     Expect for a raised Exception.
@@ -304,12 +304,16 @@ def test_dispatch_a_message_without_any_ServiceAbstractClass_subclasses(start_ca
 
     from core.tasks import dispatch
 
+    mocker.patch.multiple(ServiceAbstractClass, __subclasses__=list)
+
     with pytest.raises(Exception) as exception:
         dispatch(start_call_fx, 'anything')
 
     assert str(exception.value) == ('No ServiceAbstractClass subclass has been'
                                     ' found. You need to create a new class '
                                     'inherit it to make dispatch works.')
+
+    mocker.resetall()
 
 
 def test_dispatch_a_message_without_matching_any_available_trigger(start_call_fx):
