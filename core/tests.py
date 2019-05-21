@@ -176,7 +176,7 @@ def test_for_existence_of_a_dispatch_method():
     assert callable(dispatch)
 
 
-def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_methods_mocker):
+def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_methods_mocker, mocker):
     """
     Test for extract the subclasses from ServiceAbstractClass.
 
@@ -191,10 +191,15 @@ def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_me
         trigger = 'registry-persistence'
         queue = 'registry-q'
 
+    mocker.patch.object(ServiceAbstractClass, '__subclasses__')
+    subclasses = [RegistryValidationService, RegistryPersistenceService]
+    ServiceAbstractClass.__subclasses__.return_value = subclasses
+
     services = ServiceAbstractClass.__subclasses__()
 
     assert len(services) == 2
 
+    mocker.resetall()
 
     del(RegistryValidationService)
     del(RegistryPersistenceService)
