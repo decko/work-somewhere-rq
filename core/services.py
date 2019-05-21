@@ -12,12 +12,10 @@ class ServiceAbstractClass(ABC):
 
     trigger = None
     queue = None
-    message = None
     validation_class = None
 
-    def __init__(self, message):
-
-        self.message = message
+    def __init__(self, *args, **kwargs):
+        self.message = kwargs.get('message', None)
 
         if not self.trigger or not isinstance(self.trigger, str):
             raise Exception("A trigger must be a string and it is needed to accept any task.")
