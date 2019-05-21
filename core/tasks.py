@@ -4,7 +4,7 @@ from .services import ServiceAbstractClass
 
 
 @job
-def dispatch(message, trigger):
+def dispatch(message, trigger, *args, **kwargs):
     """
     Receives a message and a trigger witch will be used to determine
     what to do with the message in witch queue.
@@ -27,14 +27,14 @@ def dispatch(message, trigger):
 
     triggers = {service.trigger: service for service in services}
 
-    service = triggers.get(trigger)
+    service_cls = triggers.get(trigger)
 
-    if not service:
+    if not service_cls:
         raise Exception('No trigger available to match your '
                         'request. Verify if there is any '
                         'ServiceAbstractClass subclass with '
                         'this trigger.')
 
-    service(message)
+    service = service_cls(message=message, *args, **kwargs)
 
     service.process()
