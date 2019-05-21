@@ -5,4 +5,6 @@ class RegistryService(ServiceAbstractClass):
     """
     RegistryService is a service responsible for new registries processing.
     """
-    pass
+
+    trigger = 'registry-service'
+    queue = 'registry-service-done'
