@@ -471,3 +471,13 @@ def test_for_a_CallService_class():
     from .services import CallService
 
     assert CallService
+
+
+def test_for_CallService_as_a_ServiceAbstractClass_subclass():
+    """
+    Test for CallService as a ServiceAbstractClass subclass.
+    """
+
+    from .services import CallService
+
+    assert issubclass(CallService, ServiceAbstractClass)
