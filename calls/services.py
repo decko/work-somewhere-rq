@@ -83,4 +83,8 @@ class RegistryService(ServiceAbstractClass):
 
 
 class CallService(ServiceAbstractClass):
+    """
+    CallService is responsible for getting a pair of registries and
+    consolidate into a complete call.
+    """
     pass
