@@ -478,3 +478,11 @@ def test_for_CallService_as_a_ServiceAbstractClass_subclass():
     """
 
     assert issubclass(CallService, ServiceAbstractClass)
+
+
+def test_for_a_CallService_documentation():
+    """
+    Test for RegistryService documentation on class docstring.
+    """
+
+    assert CallService.__doc__
