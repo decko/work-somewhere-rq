@@ -51,18 +51,3 @@ class CallRetrieveAPIView(RetrieveAPIView):
     queryset = Call.consolidated.all()
     serializer_class = CallSerializer
     lookup_field = 'call_id'
-
-
-@api_view(['GET', 'POST'])
-def registry_view(request, registry_id=None):
-
-    if request.method == 'GET':
-        return Response(status=200)
-
-
-    response = {
-        'job_id': task_url,
-        'data': request.data
-    }
-
-    return Response(data=response, status=201)
