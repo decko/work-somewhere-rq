@@ -90,3 +90,24 @@ class CallService(ServiceAbstractClass):
 
     trigger = 'registry-service-done'
     queue = 'call-service-done'
+
+    def startTask(self):
+        pass
+
+    def obtainMessage(self):
+        pass
+
+    def validateMessage(self):
+        pass
+
+    def transformMessage(self):
+        pass
+
+    def persistData(self):
+        pass
+
+    def propagateResult(self):
+        pass
+
+    def finishTask(self):
+        pass
