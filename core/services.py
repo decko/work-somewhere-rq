@@ -1,5 +1,11 @@
 from abc import ABC, abstractmethod
 
+from rq import get_current_job
+
+from django_rq import enqueue
+
+from .models import Task
+
 
 class ServiceAbstractClass(ABC):
     """
@@ -28,9 +34,30 @@ class ServiceAbstractClass(ABC):
     @abstractmethod
     def startTask(self):
         """
-        Get the job_id and persist it on Task model.
+        Start the job process.
+
+        Start the job process persisting a Task instance. If there is
+        a job instance, find the correspondent Task instance or create a
+        new one if it wasn't found.
         """
-        pass
+        job_id = self.job_id
+        if not job_id:
+            job_id = get_current_job().id
+
+        task, created = Task.objects.get_or_create(
+            job_id=job_id,
+            defaults={
+                'status': 'QUEUED',
+                'job_id': job_id,
+                'data': self.message,
+            }
+        )
+
+        task.status = 'STARTED'
+        task.save()
+
+        self.task = task
+        return task
 
     @abstractmethod
     def obtainMessage(self):
@@ -78,20 +105,37 @@ class ServiceAbstractClass(ABC):
         Propagate the result into a defined queue to be processed by other
         Services.
         """
-        pass
 
+        enqueue('core.tasks.dispatch', self.result, self.queue)
 
     @abstractmethod
     def finishTask(self):
-        pass
+        """
+        Finish the job process.
+
+        Set the Task result attribute to self.result, set the status to 'DONE'
+        and save Task instance.
+        """
+        result = self.result
+        task = self.task
+
+        if result:
+            task.result = result
+
+        task.status = 'DONE'
+        task.save()
+
+        return task
 
     def process(self):
         """
         Run all the methods to process a message and propagate the result.
         """
 
+        self.startTask()
         self.obtainMessage()
         self.validateMessage()
         self.transformMessage()
         self.persistData()
+        self.finishTask()
         self.propagateResult()
