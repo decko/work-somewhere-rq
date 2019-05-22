@@ -82,5 +82,5 @@ class RegistryService(ServiceAbstractClass):
         super().finishTask()
 
 
-class CallService():
+class CallService(ServiceAbstractClass):
     pass
