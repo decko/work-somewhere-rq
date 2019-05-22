@@ -486,3 +486,12 @@ def test_for_a_CallService_documentation():
     """
 
     assert CallService.__doc__
+
+
+def test_for_CallService_trigger_and_queue_attributes():
+    """
+    Test for the values of trigger and queue attribute.
+    """
+
+    assert CallService.trigger == 'registry-service-done'
+    assert CallService.queue == 'call-service-done'
