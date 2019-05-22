@@ -80,3 +80,7 @@ class RegistryService(ServiceAbstractClass):
 
     def finishTask(self):
         super().finishTask()
+
+
+class CallService():
+    pass
