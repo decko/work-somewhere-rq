@@ -10,6 +10,7 @@ from rest_framework import status
 from core.services import ServiceAbstractClass
 
 from .services import RegistryService
+from .models import Registry
 
 pytestmark = pytest.mark.django_db
 
@@ -427,3 +428,19 @@ def test_for_RegistryService_validateMessage_method_return(start_call_fx):
     instance.validateMessage()
 
     assert instance.is_valid is True
+
+
+def test_for_RegistryService_persistData_to_return_a_Registry_instance(start_call_fx):
+    """
+    Test for RegistryService persistData method return a Registry instance.
+
+    Test uses start_call_fx fixture.
+    """
+
+    instance = RegistryService(message=start_call_fx, job_id=uuid4())
+    instance.validateMessage()
+
+    registry = instance.persistData()
+
+    assert registry
+    assert isinstance(registry, Registry)
