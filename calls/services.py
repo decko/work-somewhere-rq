@@ -36,6 +36,18 @@ class RegistryService(ServiceAbstractClass):
                                                    ' must include a validation'
                                                    '_attribute or override '
                                                    'validateMessage method.')
+
+        validation_class = self.validation_class
+        registry = validation_class(data=self.message)
+
+        if registry.is_valid():
+            self.is_valid = True
+            self.registry = registry
+        else:
+            self.result = registry.errors
+
+        return self.is_valid
+
     def transformMessage(self):
         pass
 
