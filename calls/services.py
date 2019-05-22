@@ -61,9 +61,9 @@ class RegistryService(ServiceAbstractClass):
             Returns a Registry instance
         """
 
-        assert self.is_valid is not None, ('You must override the ',
-                                           'persistData method if you want ',
-                                           'persist the data without ',
+        assert self.is_valid is not None, ('You must override the '
+                                           'persistData method if you want '
+                                           'to persist the data without '
                                            'validating it first.')
 
         registry = self.registry

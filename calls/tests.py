@@ -444,3 +444,20 @@ def test_for_RegistryService_persistData_to_return_a_Registry_instance(start_cal
 
     assert registry
     assert isinstance(registry, Registry)
+
+
+def test_for_RegistryService_persistData_raise_AssertionError_if_not_is_valid(mocker):
+    """
+    Test for RegistryService persistData method to raise a AssertionError if 
+    is_valid is not set or if it is False.
+    """
+
+    instance = RegistryService(message={'a', 'b'}, job_id=uuid4())
+    instance.validateMessage()
+
+    with pytest.raises(AssertionError) as exception:
+        instance.persistData()
+
+    assert str(exception.value) == ('You must override the persistData method'
+                                    ' if you want to persist the data without'
+                                    ' validating it first.')
