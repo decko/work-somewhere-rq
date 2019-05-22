@@ -368,12 +368,13 @@ def test_for_RegistryService_startTask_method():
     message = {'a': 'b'}
 
     instance = RegistryService(message=message, job_id=uuid4())
-    task = instance.startTask()
+    instance.startTask()
 
-    task.refresh_from_db()
+    instance.task.refresh_from_db()
 
-    assert task
-    assert task.status == 'STARTED'
+    assert instance.task
+    assert instance.task.status == 'STARTED'
+
 
 def test_for_RegistryService_finishTask_method():
     """
@@ -385,9 +386,9 @@ def test_for_RegistryService_finishTask_method():
 
     instance = RegistryService(message=message, job_id=uuid4())
     instance.startTask()
-    task = instance.finishTask()
+    instance.finishTask()
 
-    task.refresh_from_db()
+    instance.task.refresh_from_db()
 
-    assert task
-    assert task.status == 'DONE'
+    assert instance.task
+    assert instance.task.status == 'DONE'
