@@ -495,3 +495,13 @@ def test_for_CallService_trigger_and_queue_attributes():
 
     assert CallService.trigger == 'registry-service-done'
     assert CallService.queue == 'call-service-done'
+
+
+def test_for_CallService_instance():
+    """
+    Test for a CallService instance.
+    """
+
+    instance = CallService()
+
+    assert isinstance(instance, CallService)
