@@ -1,3 +1,5 @@
+from django.urls import reverse_lazy
+
 from core.services import ServiceAbstractClass
 
 from .serializers import RegistrySerializer
@@ -43,6 +45,7 @@ class RegistryService(ServiceAbstractClass):
         if registry.is_valid():
             self.is_valid = True
             self.registry = registry
+            self.result = registry.validated_data
         else:
             self.result = registry.errors
 
@@ -69,6 +72,7 @@ class RegistryService(ServiceAbstractClass):
         registry = self.registry
         registry.save()
 
+        self.result = registry.instance.get_absolute_url()
         return registry.instance
 
     def propagateResult(self):
