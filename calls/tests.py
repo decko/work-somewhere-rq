@@ -461,3 +461,13 @@ def test_for_RegistryService_persistData_raise_AssertionError_if_not_is_valid(mo
     assert str(exception.value) == ('You must override the persistData method'
                                     ' if you want to persist the data without'
                                     ' validating it first.')
+
+
+def test_for_a_CallService_class():
+    """
+    Test for a CallService existence.
+    """
+
+    from .services import CallService
+
+    assert CallService
