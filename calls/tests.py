@@ -392,3 +392,22 @@ def test_for_RegistryService_finishTask_method():
 
     assert instance.task
     assert instance.task.status == 'DONE'
+
+
+def test_assertion_about_validation_class_attribute_on_RegistryService(mocker):
+    """
+    Test for assertion about validation_class attribute on RegistryService
+    validateMessage method.
+    """
+
+    mocker.patch.object(RegistryService, 'validation_class', None)
+    instance = RegistryService(message=start_call_fx, job_id=uuid4())
+
+    with pytest.raises(AssertionError) as exception:
+        instance.validateMessage()
+
+    mocker.resetall()
+
+    assert str(exception.value) == ('RegistryService must include a validation_'
+                                    'attribute or override validateMessage '
+                                    'method.')
