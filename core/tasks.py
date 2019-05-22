@@ -2,6 +2,8 @@ from django_rq import job
 
 from .services import ServiceAbstractClass
 
+from calls.services import RegistryService
+
 
 @job
 def dispatch(message, trigger, *args, **kwargs):

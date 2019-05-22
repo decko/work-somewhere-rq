@@ -1,8 +1,6 @@
-from uuid import uuid4
-
 from django.urls import reverse_lazy
 
-from django_rq import get_queue
+from django_rq import enqueue
 
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, ListCreateAPIView
@@ -20,10 +18,12 @@ class RegistryListCreateAPIView(ListCreateAPIView):
     serializer_class = RegistrySerializer
 
     def post(self, request):
-        queue = get_queue('registry-q')
-        job = queue.enqueue('calls.tasks.registry_validation', data=request.data)
+        service = enqueue('core.tasks.dispatch',
+                          message=request.data,
+                          trigger='registry-service')
 
-        task_url = reverse_lazy('core:task-detail', kwargs={'job_id': job.id})
+        task_url = reverse_lazy('core:task-detail',
+                                kwargs={'job_id': service.id})
 
         data = {
             'job_id': task_url,
