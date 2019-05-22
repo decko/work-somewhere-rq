@@ -52,7 +52,24 @@ class RegistryService(ServiceAbstractClass):
         pass
 
     def persistData(self):
-        pass
+        """
+        Persist the data into a storage.
+
+        Persist the data into Registry model instance.
+
+        :returns: Registry
+            Returns a Registry instance
+        """
+
+        assert self.is_valid is not None, ('You must override the ',
+                                           'persistData method if you want ',
+                                           'persist the data without ',
+                                           'validating it first.')
+
+        registry = self.registry
+        registry.save()
+
+        return registry.instance
 
     def propagateResult(self):
         pass
