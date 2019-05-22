@@ -411,3 +411,19 @@ def test_assertion_about_validation_class_attribute_on_RegistryService(mocker):
     assert str(exception.value) == ('RegistryService must include a validation_'
                                     'attribute or override validateMessage '
                                     'method.')
+
+
+def test_for_RegistryService_validateMessage_method_return(start_call_fx):
+    """
+    Test for RegistryService validateMessage method return given a valid
+    message.
+
+    Expect method to return True.
+
+    Test uses start_call_fx fixture.
+    """
+
+    instance = RegistryService(message=start_call_fx, job_id=uuid4())
+    instance.validateMessage()
+
+    assert instance.is_valid is True
