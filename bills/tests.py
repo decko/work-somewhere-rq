@@ -268,3 +268,25 @@ def test_for_BillService_instance():
     instance = BillService()
 
     assert isinstance(instance, BillService)
+
+
+def test_for_BillService_transformMessage_method(call):
+    """
+    Test for BillService transformMessage method to translate a message
+    from CallService to a dict witch will be used to populate a Bill
+    instance.
+
+    Test uses call fixture.
+    """
+
+    message = json.dumps(call)
+
+    instance = BillService(message=message)
+    bill = instance.transformMessage()
+
+    keys = {'subscriber', 'destination', 'start_timestamp', 'stop_timestamp',
+            'call_duration', 'call_price'}
+
+    assert keys == bill.keys()
+    assert bill.get('subscriber') == call.get('source')
+    assert bill.get('destination') == call.get('destination')
