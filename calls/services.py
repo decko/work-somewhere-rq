@@ -97,7 +97,7 @@ class CallService(ServiceAbstractClass):
     queue = 'call-service-done'
 
     def startTask(self):
-        pass
+        super().startTask()
 
     def obtainMessage(self):
         pass
@@ -149,4 +149,4 @@ class CallService(ServiceAbstractClass):
         pass
 
     def finishTask(self):
-        pass
+        super().finishTask()
