@@ -319,7 +319,7 @@ def test_for_transformMessage_dict_call_duration_value(call):
 @pytest.mark.parametrize('std_charge_value', [None, 123])
 def test_for_standing_charge_attribute(std_charge_value, mocker):
     """
-    Test for standing_charge attribute be a Decimal type and setted 
+    Test for standing_charge attribute be a Decimal type and setted
     at instanciation time.
     """
 
@@ -338,7 +338,7 @@ def test_for_standing_charge_attribute(std_charge_value, mocker):
 @pytest.mark.parametrize('call_charge_value', [None, 123])
 def test_for_call_charge_attribute(call_charge_value, mocker):
     """
-    Test for call_charge attribute be a Decimal type and setted 
+    Test for call_charge attribute be a Decimal type and setted
     at instanciation time.
     """
 
