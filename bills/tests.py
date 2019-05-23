@@ -381,6 +381,13 @@ def test_for_transformMessage_dict_call_price(call):
 
 @pytest.mark.parametrize('start_call, stop_call, call_price', [
     ((2019, 4, 26, 21, 57, 13), (2019, 4, 26, 22, 17, 13), Decimal('0.54')),
+    ((2017, 12, 11, 15, 7, 13), (2017, 12, 12, 22, 50, 56), Decimal('123.75')),
+    ((2017, 12, 12, 22, 47, 56), (2017, 12, 12, 22, 50, 56), Decimal('125.64')),
+    ((2017, 12, 12, 21, 57, 13), (2017, 12, 12, 22, 10, 56), Decimal('0.54')),
+    ((2017, 12, 12, 4, 57, 13), (2017, 12, 12, 6, 10, 56), Decimal('1.17')),
+    ((2017, 12, 13, 21, 57, 13), (2017, 12, 14, 22, 10, 56), Decimal('86.85')),
+    ((2017, 12, 12, 15, 7, 58), (2017, 12, 12, 15, 12, 56), Decimal('0.72')),
+    ((2018, 2, 28, 21, 57, 13), (2018, 3, 1, 22, 10, 56), Decimal('86.85')),
 ])
 def test_for_transformMessage_dict_call_price_at_reduced_tariff_time(call,
                                                                      start_call,
@@ -393,7 +400,6 @@ def test_for_transformMessage_dict_call_price_at_reduced_tariff_time(call,
 
     Test uses call fixture.
     """
-
     start_timestamp = datetime(*start_call)
     stop_timestamp = datetime(*stop_call)
 
