@@ -377,3 +377,32 @@ def test_for_transformMessage_dict_call_price(call):
     call_price = std_charge + (minutes_call_duration * call_charge)
 
     assert bill.get('call_price') == call_price
+
+
+@pytest.mark.parametrize('start_call, stop_call, call_price', [
+    ((2019, 4, 26, 21, 57, 13), (2019, 4, 26, 22, 17, 13), Decimal('0.54')),
+])
+def test_for_transformMessage_dict_call_price_at_reduced_tariff_time(call,
+                                                                     start_call,
+                                                                     stop_call,
+                                                                     call_price):
+    """
+    Test for BillService transformMessage method to translate a message
+    from CallService to dict and expect call_price value to be
+    calculated at reduced tariff time and appended to dict.
+
+    Test uses call fixture.
+    """
+
+    start_timestamp = datetime(*start_call)
+    stop_timestamp = datetime(*stop_call)
+
+    call['start_timestamp'] = start_timestamp.isoformat()
+    call['stop_timestamp'] = stop_timestamp.isoformat()
+
+    message = json.dumps(call)
+
+    instance = BillService(message=message)
+    bill = instance.transformMessage()
+
+    assert bill.get('call_price') == call_price
