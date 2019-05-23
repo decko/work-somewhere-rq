@@ -333,3 +333,22 @@ def test_for_standing_charge_attribute(std_charge_value, mocker):
                                     ' service work as expected.')
 
     mocker.resetall()
+
+
+@pytest.mark.parametrize('call_charge_value', [None, 123])
+def test_for_call_charge_attribute(call_charge_value, mocker):
+    """
+    Test for call_charge attribute be a Decimal type and setted 
+    at instanciation time.
+    """
+
+    mocker.patch.multiple(BillService, call_charge=None)
+
+    with pytest.raises(AssertionError) as exception:
+        instance = BillService()
+
+    assert str(exception.value) == ('A call_charge value must be a Decimal'
+                                    ' type and set to make this'
+                                    ' service work as expected.')
+
+    mocker.resetall()
