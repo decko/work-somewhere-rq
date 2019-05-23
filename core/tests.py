@@ -205,7 +205,7 @@ def test_extract_subsclass_information_from_ServiceAbstractClass(sac_abstract_me
     del(RegistryPersistenceService)
 
 
-def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subclasses(sac_abstract_methods_mocker):
+def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subclasses(sac_abstract_methods_mocker, mocker):
     """
     Test for build a dict with the trigger attribute from all
     ServiceAbstractClass subclasses.
@@ -221,6 +221,10 @@ def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subc
         trigger = 'registry-persistence'
         queue = 'registry-q'
 
+    subclasses = [RegistryValidationService, RegistryPersistenceService]
+    mocker.patch.object(ServiceAbstractClass, '__subclasses__')
+    ServiceAbstractClass.__subclasses__.return_value = subclasses
+
     services = ServiceAbstractClass.__subclasses__()
 
     triggers = {service.trigger: service for service in services}
@@ -230,6 +234,8 @@ def test_build_a_dict_using_trigger_attribute_from_all_ServiceAbstractClass_subc
     assert 'registry-persistence' in triggers.keys()
     assert 'RegistryValidationService' in str(triggers.values())
     assert 'RegistryPersistenceService' in str(triggers.values())
+
+    mocker.resetall()
 
     del(RegistryValidationService)
     del(RegistryPersistenceService)
