@@ -2,6 +2,7 @@ from django_rq import job
 
 from .services import ServiceAbstractClass
 
+from calls.services import CallService
 from calls.services import RegistryService
 
 
