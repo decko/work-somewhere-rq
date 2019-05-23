@@ -205,3 +205,13 @@ def test_attribute_values_given_a_consolidated_call(client, start_call_fx, stop_
     call = response.data.get('calls')[0]
 
     assert call.get('destination') == start_call_fx.get('destination')
+
+
+def test_for_a_BillService_class():
+    """
+    Test for a BillService existence.
+    """
+
+    from .services import BillService
+
+    assert BillService
