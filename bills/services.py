@@ -9,4 +9,23 @@ class BillService(ServiceAbstractClass):
     trigger = 'call-service-done'
     queue = 'bill-service-done'
 
-    pass
+    def startTask(self):
+        super().startTask()
+
+    def obtainMessage(self):
+        pass
+
+    def validateMessage(self):
+        pass
+
+    def transformMessage(self):
+        pass
+
+    def persistData(self):
+        pass
+
+    def propagateResult(self):
+        pass
+
+    def finishTask(self):
+        super().finishTask()
