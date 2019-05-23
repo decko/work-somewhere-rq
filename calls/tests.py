@@ -12,6 +12,7 @@ from core.services import ServiceAbstractClass
 
 from .services import RegistryService
 from .services import CallService
+from .models import Call
 from .models import Registry
 
 pytestmark = pytest.mark.django_db
@@ -536,3 +537,23 @@ def test_for_CallService_transformMessage_method(start_call_fx):
     del(start_call_fx['type'])
     for value in start_call_fx.values():
         assert value in call_data.values()
+
+
+def test_for_CallService_persistData_method(start_call_fx):
+    """
+    Test for CallService persistData method to create or update a
+    Call model instance given a translated message.
+    Expect it to return a Call instance.
+
+    Test uses start_call_fx fixture.
+    """
+
+    message = json.dumps(start_call_fx)
+
+    instance = CallService(message=message)
+    instance.transformMessage()
+
+    call = instance.persistData()
+
+    assert isinstance(call, Call)
+    assert call.start_timestamp == start_call_fx.get('timestamp')
