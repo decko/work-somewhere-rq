@@ -116,12 +116,12 @@ class CallService(ServiceAbstractClass):
             'call_id': message.get('call_id')
         }
 
-        call_data['stop_timestamp'] = message.get('timestamp', None)
-
         if message.get('type') == 'start':
             call_data['start_timestamp'] = message.get('timestamp')
             call_data['source'] = message.get('source')
             call_data['destination'] = message.get('destination')
+        else:
+            call_data['stop_timestamp'] = message.get('timestamp')
 
         self.data = call_data
         return self.data

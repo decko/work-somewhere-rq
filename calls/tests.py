@@ -529,8 +529,7 @@ def test_for_CallService_transformMessage_method(start_call_fx):
     instance = CallService(message=message)
     call_data = instance.transformMessage()
 
-    keys = {'start_timestamp', 'source', 'destination', 'call_id',
-            'stop_timestamp'}
+    keys = {'start_timestamp', 'source', 'destination', 'call_id'}
 
     assert keys == call_data.keys()
 
