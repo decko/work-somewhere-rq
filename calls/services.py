@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 
 from core.services import ServiceAbstractClass
 
+from .serializers import CallSerializer
 from .serializers import RegistrySerializer
 
 from .models import Call
@@ -80,7 +81,7 @@ class RegistryService(ServiceAbstractClass):
         return registry.instance
 
     def propagateResult(self):
-        pass
+        super().propagateResult()
 
     def finishTask(self):
         super().finishTask()
@@ -141,11 +142,28 @@ class CallService(ServiceAbstractClass):
             defaults=call_data
         )
 
+        if not created:
+            call.refresh_from_db()
         self.call = call
         return call
 
     def propagateResult(self):
-        pass
+        """
+        Propagate a serialized message of consolidated Call instance.
+
+        :returns: bool
+            Returns True if there is a consolidated Call instance, set
+            self.result with the serialized data and send it to queue.
+        """
+
+        call = self.call
+        self.result = CallSerializer(call).data
+
+        if call.start_timestamp and call.stop_timestamp:
+            super().propagateResult()
+            return True
+
+        return False
 
     def finishTask(self):
         super().finishTask()
