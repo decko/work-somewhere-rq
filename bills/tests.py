@@ -1,5 +1,7 @@
+import json
 import pytest
 from datetime import date
+from datetime import datetime
 
 from django.urls import resolve, reverse
 from rest_framework import status
@@ -290,3 +292,24 @@ def test_for_BillService_transformMessage_method(call):
     assert keys == bill.keys()
     assert bill.get('subscriber') == call.get('source')
     assert bill.get('destination') == call.get('destination')
+
+
+def test_for_transformMessage_dict_call_duration_value(call):
+    """
+    Test for BillService transformMessage method to translate a message
+    from CallService to dict and expect call_duration value to be
+    calculated and appended to dict.
+
+    Test uses call fixture.
+    """
+
+    message = json.dumps(call)
+
+    instance = BillService(message=message)
+    bill = instance.transformMessage()
+
+    start_timestamp = datetime.fromisoformat(call.get('start_timestamp'))
+    stop_timestamp = datetime.fromisoformat(call.get('stop_timestamp'))
+    call_duration = stop_timestamp - start_timestamp
+
+    assert bill.get('call_duration') == call_duration
