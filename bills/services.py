@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from datetime import timedelta
 from decimal import Decimal
 
 from core.services import ServiceAbstractClass
@@ -52,13 +53,28 @@ class BillService(ServiceAbstractClass):
             'call_duration': stop_timestamp - start_timestamp
         }
 
-        special_night_time = stop_timestamp.replace(hour=22, minute=0,
-                                                    second=0)
+        day = timedelta(days=1)
 
-        if stop_timestamp > special_night_time:
-            stop_timestamp = special_night_time
+        special_day_time = start_timestamp.replace(hour=6, minute=1, second=0)
+        special_night_time = start_timestamp.replace(hour=22, minute=0, second=0)
 
-        minutes_call_duration = (stop_timestamp - start_timestamp).seconds // 60
+        delta_seconds = timedelta()
+        
+        stop = stop_timestamp
+
+        while(stop > special_day_time):
+            if start_timestamp < special_day_time:
+                start_timestamp = special_day_time
+
+            if stop_timestamp > special_night_time:
+                stop_timestamp = special_night_time
+
+            delta_seconds = delta_seconds + (stop_timestamp - start_timestamp)
+
+            special_day_time = special_day_time + day
+            special_night_time = special_night_time + day
+
+        minutes_call_duration = delta_seconds.seconds // 60
 
         bill['call_price'] = standing_charge + (minutes_call_duration * call_charge)
 
