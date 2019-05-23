@@ -41,15 +41,25 @@ class BillService(ServiceAbstractClass):
         standing_charge = self.standing_charge
         call_charge = self.call_charge
 
+        start_timestamp = datetime.fromisoformat(message.get('start_timestamp'))
+        stop_timestamp = datetime.fromisoformat(message.get('stop_timestamp'))
+
         bill = {
             'subscriber': message.get('source'),
             'destination': message.get('destination'),
-            'start_timestamp': datetime.fromisoformat(message.get('start_timestamp')),
-            'stop_timestamp': datetime.fromisoformat(message.get('stop_timestamp')),
+            'start_timestamp': start_timestamp,
+            'stop_timestamp': stop_timestamp,
+            'call_duration': stop_timestamp - start_timestamp
         }
-        bill['call_duration'] = bill['stop_timestamp'] - bill['start_timestamp']
 
-        minutes_call_duration = bill.get('call_duration').seconds // 60
+        special_night_time = stop_timestamp.replace(hour=22, minute=0,
+                                                    second=0)
+
+        if stop_timestamp > special_night_time:
+            stop_timestamp = special_night_time
+
+        minutes_call_duration = (stop_timestamp - start_timestamp).seconds // 60
+
         bill['call_price'] = standing_charge + (minutes_call_duration * call_charge)
 
         self.data = bill
