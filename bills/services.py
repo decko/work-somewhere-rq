@@ -1,3 +1,7 @@
+import json
+from datetime import datetime
+from decimal import Decimal
+
 from core.services import ServiceAbstractClass
 
 
@@ -19,7 +23,19 @@ class BillService(ServiceAbstractClass):
         pass
 
     def transformMessage(self):
-        pass
+        message = json.loads(self.message)
+
+        bill = {
+            'subscriber': message.get('source'),
+            'destination': message.get('destination'),
+            'start_timestamp': datetime.fromisoformat(message.get('start_timestamp')),
+            'stop_timestamp': datetime.fromisoformat(message.get('stop_timestamp')),
+        }
+        bill['call_duration'] = bill['stop_timestamp'] - bill['start_timestamp']
+        bill['call_price'] = Decimal(0.30)
+
+        self.data = bill
+        return self.data
 
     def persistData(self):
         pass
