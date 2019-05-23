@@ -232,3 +232,12 @@ def test_for_a_BillService_documentation():
     """
 
     assert BillService.__doc__
+
+
+def test_for_BillService_trigger_and_queue_attributes():
+    """
+    Test for the values of trigger and queue attribute.
+    """
+
+    assert BillService.trigger == 'call-service-done'
+    assert BillService.queue == 'bill-service-done'
