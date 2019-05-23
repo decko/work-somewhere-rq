@@ -6,6 +6,9 @@ from core.services import ServiceAbstractClass
 
 from .serializers import RegistrySerializer
 
+from .models import Call
+
+
 class RegistryService(ServiceAbstractClass):
     """
     RegistryService is a service responsible for new registries processing.
@@ -125,7 +128,22 @@ class CallService(ServiceAbstractClass):
         return self.data
 
     def persistData(self):
-        pass
+        """
+        Create or update a Call model instance.
+
+        :returns: Call
+            Returns a Call instance.
+        """
+
+        call_data = self.data
+
+        call, created = Call.objects.update_or_create(
+            call_id=call_data.get('call_id'),
+            defaults=call_data
+        )
+
+        self.call = call
+        return call
 
     def propagateResult(self):
         pass
