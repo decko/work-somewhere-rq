@@ -9,7 +9,24 @@ from calls.tests import start_call_fx, stop_call_fx
 from core.services import ServiceAbstractClass
 
 from .services import BillService
+
 pytestmark = pytest.mark.django_db
+
+
+@pytest.fixture
+def call():
+    """
+    Fixture containing a dict with the result of a successful CallService
+    processing.
+    """
+
+    call = {'call_id': 1,
+            'start_timestamp': '2019-04-26T12:32:10',
+            'stop_timestamp': '2019-04-26T12:40:10',
+            'source': '11111111111',
+            'destination': '22222222222'}
+
+    return call
 
 
 def test_list_bills_api_endpoint_return_403(client):
