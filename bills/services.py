@@ -12,6 +12,15 @@ class BillService(ServiceAbstractClass):
 
     trigger = 'call-service-done'
     queue = 'bill-service-done'
+    standing_charge = Decimal('0.36')
+
+    def __init__(self):
+        assert self.standing_charge is not None\
+                and isinstance(self.standing_charge, Decimal), \
+                ('A standing_charge value must be a Decimal type and set '
+                 'to make this service work as expected.')
+
+        super().__init__()
 
     def startTask(self):
         super().startTask()
