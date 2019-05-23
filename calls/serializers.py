@@ -43,6 +43,9 @@ class RegistrySerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CallSerializer(serializers.ModelSerializer):
+    """
+    Serializer to validate and serialize Call instances
+    """
 
     class Meta:
         model = Call
