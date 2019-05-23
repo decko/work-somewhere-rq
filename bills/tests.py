@@ -6,6 +6,9 @@ from rest_framework import status
 
 from calls.tests import start_call_fx, stop_call_fx
 
+from core.services import ServiceAbstractClass
+
+from .services import BillService
 pytestmark = pytest.mark.django_db
 
 
@@ -212,8 +215,6 @@ def test_for_a_BillService_class():
     Test for a BillService existence.
     """
 
-    from .services import BillService
-
     assert BillService
 
 
@@ -221,7 +222,5 @@ def test_for_a_BillService_as_a_ServiceAbstractClass_subclass():
     """
     Test for BillService as a ServiceAbstractClass subclass.
     """
-
-    from .services import BillService
 
     assert issubclass(BillService, ServiceAbstractClass)
