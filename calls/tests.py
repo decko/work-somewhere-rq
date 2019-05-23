@@ -454,9 +454,9 @@ def test_for_RegistryService_persistData_to_return_a_Registry_instance(start_cal
     assert isinstance(registry, Registry)
 
 
-def test_for_RegistryService_persistData_raise_AssertionError_if_not_is_valid(mocker):
+def test_for_RegistryService_persistData_raise_AssertionError_if_not_is_valid():
     """
-    Test for RegistryService persistData method to raise a AssertionError if 
+    Test for RegistryService persistData method to raise a AssertionError if
     is_valid is not set or if it is False.
     """
 
