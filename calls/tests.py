@@ -512,3 +512,27 @@ def test_for_CallService_instance():
     instance = CallService()
 
     assert isinstance(instance, CallService)
+
+
+def test_for_CallService_transformMessage_method(start_call_fx):
+    """
+    Test for CallService transformMessage method to translate a
+    message com RegistryService to a dict witch will be consumed
+    by Call model.
+
+    Test uses start_call_fx fixture.
+    """
+
+    message = json.dumps(start_call_fx)
+
+    instance = CallService(message=message)
+    call_data = instance.transformMessage()
+
+    keys = {'start_timestamp', 'source', 'destination', 'call_id',
+            'stop_timestamp'}
+
+    assert keys == call_data.keys()
+
+    del(start_call_fx['type'])
+    for value in start_call_fx.values():
+        assert value in call_data.values()
