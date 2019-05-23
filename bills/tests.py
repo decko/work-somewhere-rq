@@ -224,3 +224,11 @@ def test_for_a_BillService_as_a_ServiceAbstractClass_subclass():
     """
 
     assert issubclass(BillService, ServiceAbstractClass)
+
+
+def test_for_a_BillService_documentation():
+    """
+    Test for BillService documentation on class docstring.
+    """
+
+    assert BillService.__doc__
