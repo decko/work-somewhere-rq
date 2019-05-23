@@ -2,6 +2,7 @@ import json
 import pytest
 from datetime import date
 from datetime import datetime
+from decimal import Decimal
 
 from django.urls import resolve, reverse
 from rest_framework import status
@@ -313,3 +314,22 @@ def test_for_transformMessage_dict_call_duration_value(call):
     call_duration = stop_timestamp - start_timestamp
 
     assert bill.get('call_duration') == call_duration
+
+
+@pytest.mark.parametrize('std_charge_value', [None, 123])
+def test_for_standing_charge_attribute(std_charge_value, mocker):
+    """
+    Test for standing_charge attribute be a Decimal type and setted 
+    at instanciation time.
+    """
+
+    mocker.patch.multiple(BillService, standing_charge=std_charge_value)
+
+    with pytest.raises(AssertionError) as exception:
+        instance = BillService()
+
+    assert str(exception.value) == ('A standing_charge value must be a Decimal'
+                                    ' type and set to make this'
+                                    ' service work as expected.')
+
+    mocker.resetall()
