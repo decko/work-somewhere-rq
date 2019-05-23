@@ -12,6 +12,7 @@ from core.services import ServiceAbstractClass
 
 from .services import RegistryService
 from .services import CallService
+from .serializers import CallSerializer
 from .models import Call
 from .models import Registry
 
@@ -556,3 +557,49 @@ def test_for_CallService_persistData_method(start_call_fx):
 
     assert isinstance(call, Call)
     assert call.start_timestamp == start_call_fx.get('timestamp')
+
+
+def test_for_CallService_propagateResult_method(start_call_fx, stop_call_fx,
+                                                mocker):
+    """
+    Test for CallService propagateResult method. Given a consolidated
+    call instance, propagate a serialized message to queue attribute.
+
+    Test uses start_call_fx fixture.
+    Test uses stop_call_fx fixture.
+    Test uses mocker.
+    """
+
+    class TestService(ServiceAbstractClass):
+        """
+        Just a TestService to mock a ServiceClass
+        """
+        trigger = 'call-service-done'
+        queue = 'test'
+
+        def propagateResult(self):
+            pass
+
+    mocker.patch.multiple(TestService, __abstractmethods__=set())
+
+    start_message = json.dumps(start_call_fx)
+
+    start_instance = CallService(message=start_message)
+    start_instance.transformMessage()
+    start_instance.persistData()
+
+    start_call = start_instance.propagateResult()
+
+    assert not start_call
+
+    stop_message = json.dumps(stop_call_fx)
+
+    stop_instance = CallService(message=stop_message)
+    stop_instance.transformMessage()
+    stop_instance.persistData()
+
+    stop_call = stop_instance.propagateResult()
+
+    assert stop_call
+
+    mocker.resetall()
