@@ -215,3 +215,13 @@ def test_for_a_BillService_class():
     from .services import BillService
 
     assert BillService
+
+
+def test_for_a_BillService_as_a_ServiceAbstractClass_subclass():
+    """
+    Test for BillService as a ServiceAbstractClass subclass.
+    """
+
+    from .services import BillService
+
+    assert issubclass(BillService, ServiceAbstractClass)
