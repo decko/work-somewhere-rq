@@ -21,7 +21,11 @@ def validate_number(value):
     return value
 
 
-class RegistrySerializer(serializers.ModelSerializer):
+class RegistrySerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer to validate registry data. source and destination
+    are validated against a phone number validator.
+    """
 
     source = serializers.CharField(
         required=False, validators=(validate_number,))
@@ -31,8 +35,11 @@ class RegistrySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Registry
-        fields = ('id', 'type', 'timestamp', 'call_id', 'source',
+        fields = ('url', 'id', 'type', 'timestamp', 'call_id', 'source',
                   'destination')
+        extra_kwargs = {
+            'url': {'view_name': 'calls:registry-detail'}
+        }
 
 
 class CallSerializer(serializers.ModelSerializer):

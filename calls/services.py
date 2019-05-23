@@ -45,12 +45,11 @@ class RegistryService(ServiceAbstractClass):
                                                    'validateMessage method.')
 
         validation_class = self.validation_class
-        registry = validation_class(data=self.message)
+        registry = validation_class(data=self.message, context={'request': None})
 
         if registry.is_valid():
             self.is_valid = True
             self.registry = registry
-            self.result = registry.validated_data
         else:
             self.result = registry.errors
 
@@ -77,7 +76,7 @@ class RegistryService(ServiceAbstractClass):
         registry = self.registry
         registry.save()
 
-        self.result = registry.instance.get_absolute_url()
+        self.result = json.dumps(registry.data)
         return registry.instance
 
     def propagateResult(self):
