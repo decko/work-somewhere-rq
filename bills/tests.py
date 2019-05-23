@@ -241,3 +241,13 @@ def test_for_BillService_trigger_and_queue_attributes():
 
     assert BillService.trigger == 'call-service-done'
     assert BillService.queue == 'bill-service-done'
+
+
+def test_for_BillService_instance():
+    """
+    Test for a BillService instance.
+    """
+
+    instance = BillService()
+
+    assert isinstance(instance, BillService)
