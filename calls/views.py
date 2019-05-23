@@ -2,7 +2,6 @@ from django.urls import reverse_lazy
 
 from django_rq import enqueue
 
-from rest_framework.decorators import api_view
 from rest_framework.generics import ListAPIView, ListCreateAPIView
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
