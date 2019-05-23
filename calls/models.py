@@ -34,11 +34,9 @@ class Registry(models.Model):
 
     def __str__(self):
         if type == 'start':
-            return f'call type: {self.type}, \
-                    when: {self.timestamp}, \
-                    call id: {self.call_id},\
-                    source: {self.source},\
-                    destination: {self.destination}'
+            return (f'call type: {self.type}, when: {self.timestamp}, '
+                    'call id: {self.call_id}, source: {self.source}, '
+                    'destination: {self.destination}')
 
         return f'call type: {self.type},\
                 when: {self.timestamp},\
