@@ -1,3 +1,5 @@
+import json
+
 from django.urls import reverse_lazy
 
 from core.services import ServiceAbstractClass
@@ -101,7 +103,26 @@ class CallService(ServiceAbstractClass):
         pass
 
     def transformMessage(self):
-        pass
+        """
+        Transform the registry message into a dict to be used to create or
+        update a Call instance.
+        """
+
+        message = json.loads(self.message)
+
+        call_data = {
+            'call_id': message.get('call_id')
+        }
+
+        call_data['stop_timestamp'] = message.get('timestamp', None)
+
+        if message.get('type') == 'start':
+            call_data['start_timestamp'] = message.get('timestamp')
+            call_data['source'] = message.get('source')
+            call_data['destination'] = message.get('destination')
+
+        self.data = call_data
+        return self.data
 
     def persistData(self):
         pass
