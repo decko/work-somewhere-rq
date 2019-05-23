@@ -1,3 +1,4 @@
+import json
 import pytest
 from uuid import uuid4
 from copy import copy
@@ -149,9 +150,13 @@ def test_expect_data_posted_return_encapsulated_on_message_property_on_response(
 
     job = client.get(job_id)
 
-    assert job.data.get('result')
+    result = job.json()
 
-    assert client.get(job.data.get('result')).status_code == status.HTTP_200_OK
+    assert result.get('result')
+
+    registry_url = json.loads(result.get('result'))
+
+    assert client.get(registry_url.get('url')).status_code == status.HTTP_200_OK
 
 
 
@@ -175,7 +180,9 @@ def test_post_a_start_call_and_recover_it_using_a_GET_request(client, start_call
 
     job_request = client.get(job_url)
 
-    get_request = client.get(job_request.data.get('result'))
+    result = json.loads(job_request.data.get('result'))
+
+    get_request = client.get(result.get('url'))
 
     response = get_request.json()
 
