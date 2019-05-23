@@ -18,7 +18,7 @@ class BillService(ServiceAbstractClass):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         assert self.standing_charge is not None\
-         and isinstance(self.standing_charge, Decimal),\
+                and isinstance(self.standing_charge, Decimal),\
                 ('A standing_charge value must be a Decimal type and set '
                  'to make this service work as expected.')
 
@@ -38,6 +38,8 @@ class BillService(ServiceAbstractClass):
 
     def transformMessage(self):
         message = json.loads(self.message)
+        standing_charge = self.standing_charge
+        call_charge = self.call_charge
 
         bill = {
             'subscriber': message.get('source'),
@@ -46,7 +48,9 @@ class BillService(ServiceAbstractClass):
             'stop_timestamp': datetime.fromisoformat(message.get('stop_timestamp')),
         }
         bill['call_duration'] = bill['stop_timestamp'] - bill['start_timestamp']
-        bill['call_price'] = Decimal(0.30)
+
+        minutes_call_duration = bill.get('call_duration').seconds // 60
+        bill['call_price'] = standing_charge + (minutes_call_duration * call_charge)
 
         self.data = bill
         return self.data
