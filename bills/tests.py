@@ -352,3 +352,28 @@ def test_for_call_charge_attribute(call_charge_value, mocker):
                                     ' service work as expected.')
 
     mocker.resetall()
+
+
+def test_for_transformMessage_dict_call_price(call):
+    """
+    Test for BillService transformMessage method to translate a message
+    from CallService to dict and expect call_price value to be
+    calculated and appended to dict.
+
+    Test uses call fixture.
+    """
+
+    message = json.dumps(call)
+
+    instance = BillService(message=message)
+    bill = instance.transformMessage()
+
+    call_duration = bill.get('call_duration')
+
+    std_charge = Decimal('0.36')
+    call_charge = Decimal('0.09')
+    minutes_call_duration = call_duration.seconds // 60
+
+    call_price = std_charge + (minutes_call_duration * call_charge)
+
+    assert bill.get('call_price') == call_price
