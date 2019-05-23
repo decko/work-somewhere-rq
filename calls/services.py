@@ -157,7 +157,7 @@ class CallService(ServiceAbstractClass):
         """
 
         call = self.call
-        self.result = CallSerializer(call).data
+        self.result = json.dumps(CallSerializer(call).data)
 
         if call.start_timestamp and call.stop_timestamp:
             super().propagateResult()
