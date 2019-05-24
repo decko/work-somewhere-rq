@@ -12,7 +12,6 @@ from core.services import ServiceAbstractClass
 
 from .services import RegistryService
 from .services import CallService
-from .serializers import CallSerializer
 from .models import Call
 from .models import Registry
 
