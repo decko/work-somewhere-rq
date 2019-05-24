@@ -5,6 +5,8 @@ from decimal import Decimal
 
 from core.services import ServiceAbstractClass
 
+from .models import Bill
+
 
 class BillService(ServiceAbstractClass):
     """
@@ -83,7 +85,20 @@ class BillService(ServiceAbstractClass):
         return self.data
 
     def persistData(self):
-        pass
+        """
+        Persist data to a storage.
+
+        Expects a dict on self.data and persist it to a Bill model instance.
+
+        :returns: Bill
+            Returns a Bill instance.
+        """
+
+        bill_data = self.data
+
+        bill = Bill.objects.create(**bill_data)
+
+        return bill
 
     def propagateResult(self):
         pass
