@@ -46,6 +46,7 @@ class BillService(ServiceAbstractClass):
         stop_timestamp = datetime.fromisoformat(message.get('stop_timestamp'))
 
         bill = {
+            'url': message.get('url'),
             'subscriber': message.get('source'),
             'destination': message.get('destination'),
             'start_timestamp': start_timestamp,
@@ -59,7 +60,7 @@ class BillService(ServiceAbstractClass):
         special_night_time = start_timestamp.replace(hour=22, minute=0, second=0)
 
         delta_seconds = timedelta()
-        
+
         stop = stop_timestamp
 
         while(stop > special_day_time):
