@@ -23,7 +23,8 @@ def call():
     processing.
     """
 
-    call = {'call_id': 1,
+    call = {'url': '/calls/1',
+            'call_id': 1,
             'start_timestamp': '2019-04-26T12:32:10',
             'stop_timestamp': '2019-04-26T12:40:10',
             'source': '11111111111',
