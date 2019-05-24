@@ -11,6 +11,7 @@ from calls.tests import start_call_fx, stop_call_fx
 
 from core.services import ServiceAbstractClass
 
+from .models import Bill
 from .services import BillService
 
 pytestmark = pytest.mark.django_db
@@ -413,3 +414,20 @@ def test_for_transformMessage_dict_call_price_at_reduced_tariff_time(call,
     bill = instance.transformMessage()
 
     assert bill.get('call_price') == call_price
+
+
+def test_for_BillService_persistData_return_a_Bill_instance(call):
+    """
+    Test for BillService persistData to return a Bill model instance.
+
+    Test uses call fixture.
+    """
+
+    message = json.dumps(call)
+
+    instance = BillService(message=message)
+    instance.transformMessage()
+
+    bill = instance.persistData()
+
+    assert isinstance(bill, Bill)
