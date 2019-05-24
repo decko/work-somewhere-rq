@@ -42,12 +42,15 @@ class RegistrySerializer(serializers.HyperlinkedModelSerializer):
         }
 
 
-class CallSerializer(serializers.ModelSerializer):
+class CallSerializer(serializers.HyperlinkedModelSerializer):
     """
     Serializer to validate and serialize Call instances
     """
 
     class Meta:
         model = Call
-        fields = ('call_id', 'start_timestamp', 'stop_timestamp', 'source',
-                  'destination')
+        fields = ('url', 'call_id', 'start_timestamp', 'stop_timestamp',
+                  'source', 'destination')
+        extra_kwargs = {
+            'url': {'view_name': 'calls:call-detail', 'lookup_field': 'call_id'}
+        }
