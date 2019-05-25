@@ -94,6 +94,10 @@ class BillService(ServiceAbstractClass):
             Returns a Bill instance.
         """
 
+        assert self.data is not None and isinstance(self.data, dict), (
+            'Make sure self.data is setted and it is a instance of dict.'
+        )
+
         bill_data = self.data
 
         bill = Bill.objects.create(**bill_data)
