@@ -450,7 +450,7 @@ def test_for_BillService_persistData_return_a_Bill_instance(call):
     assert isinstance(instance.persisted_data, Bill)
 
 
-def test_for_persistData_raise_an_AssertionError(mocker):
+def test_for_persistData_raise_an_AssertionError():
     """
     Test for persistData raise an AssertionError if self.data is None
     or not an instance of dict.
