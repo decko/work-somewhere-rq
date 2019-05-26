@@ -1,3 +1,5 @@
+import locale
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -29,3 +31,8 @@ class Bill(models.Model):
     @property
     def call_start_time(self):
         return self.start_timestamp.time()
+
+    @property
+    def call_price_rept(self):
+        locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
+        return locale.currency(self.call_price)
