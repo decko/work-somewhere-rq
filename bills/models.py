@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Bill(models.Model):
-    url = models.URLField(_('Data source url'))
+    source_call_url = models.URLField(_('Data source url'))
     subscriber = models.CharField(
         _('Call Source'),
         max_length=11,

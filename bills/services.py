@@ -48,7 +48,7 @@ class BillService(ServiceAbstractClass):
         stop_timestamp = datetime.fromisoformat(message.get('stop_timestamp'))
 
         bill = {
-            'url': message.get('url'),
+            'source_call_url': message.get('url'),
             'subscriber': message.get('source'),
             'destination': message.get('destination'),
             'start_timestamp': start_timestamp,
