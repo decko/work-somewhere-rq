@@ -21,3 +21,7 @@ class Bill(models.Model):
         _('Call Price'),
         decimal_places=2,
         max_digits=14)
+
+    @property
+    def call_start_date(self):
+        return self.start_timestamp.date()
