@@ -25,3 +25,7 @@ class Bill(models.Model):
     @property
     def call_start_date(self):
         return self.start_timestamp.date()
+
+    @property
+    def call_start_time(self):
+        return self.start_timestamp.time()
