@@ -445,9 +445,9 @@ def test_for_BillService_persistData_return_a_Bill_instance(call):
     instance = BillService(message=message)
     instance.transformMessage()
 
-    bill = instance.persistData()
+    instance.persistData()
 
-    assert isinstance(bill, Bill)
+    assert isinstance(instance.persisted_data, Bill)
 
 
 def test_for_persistData_raise_an_AssertionError(mocker):
