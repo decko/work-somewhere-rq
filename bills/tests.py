@@ -464,4 +464,12 @@ def test_for_persistData_raise_an_AssertionError(mocker):
 
     assert exception
 
-    mocker.resetall()
+
+def test_for_Bill_call_start_date_property(bill):
+    """
+    Test for call_start_date property on a Bill instance.
+
+    """
+
+    date = bill.start_timestamp.date()
+    assert bill.call_start_date == date
