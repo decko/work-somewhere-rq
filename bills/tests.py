@@ -34,6 +34,23 @@ def call():
     return call
 
 
+@pytest.fixture
+def bill(call):
+    """
+    Fixture that insert a Bill instance and delete it when test is done.
+    """
+
+    message = json.dumps(call)
+
+    instance = BillService(message=message)
+    instance.transformMessage()
+    instance.persistData()
+
+    yield instance.persisted_data
+
+    instance.persisted_data.delete()
+
+
 def test_list_bills_api_endpoint_return_403(client):
     """
     Test for GETting the Bills List API Endpoint and expect it
