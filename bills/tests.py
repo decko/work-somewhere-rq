@@ -468,8 +468,16 @@ def test_for_persistData_raise_an_AssertionError(mocker):
 def test_for_Bill_call_start_date_property(bill):
     """
     Test for call_start_date property on a Bill instance.
-
     """
 
     date = bill.start_timestamp.date()
     assert bill.call_start_date == date
+
+
+def test_for_Bill_call_start_time_property(bill):
+    """
+    Test for call_start_time property on a Bill instance.
+    """
+
+    time = bill.start_timestamp.time()
+    assert bill.call_start_time == time
