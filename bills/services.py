@@ -102,7 +102,7 @@ class BillService(ServiceAbstractClass):
 
         bill = Bill.objects.create(**bill_data)
 
-        return bill
+        self.persisted_data = bill
 
     def propagateResult(self):
         pass
