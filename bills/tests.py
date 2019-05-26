@@ -307,7 +307,7 @@ def test_for_BillService_transformMessage_method(call):
     bill = instance.transformMessage()
 
     keys = {'subscriber', 'destination', 'start_timestamp', 'stop_timestamp',
-            'call_duration', 'call_price', 'url'}
+            'call_duration', 'call_price', 'source_call_url'}
 
     assert keys == bill.keys()
     assert bill.get('subscriber') == call.get('source')
