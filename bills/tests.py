@@ -202,7 +202,7 @@ def test_calls_attribute_when_request_a_bill(client):
     assert isinstance(response.data.get('calls'), list)
 
 
-def test_call_instance_attribute_on_a_bill(client):
+def test_call_instance_attribute_on_a_bill(client, bill):
     """
     Test for a list of attributes for each call in the list of a bill.
     Expect to find 'destination', 'call_start_date', 'call_start_time',
