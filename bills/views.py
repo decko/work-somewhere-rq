@@ -25,7 +25,8 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
 
     period = f"{month_period}/{year_period}"
 
-    calls = [BilledCallSerializer(call).data for call in Bill.objects.all()]
+    calls = [BilledCallSerializer(call).data for call in
+             Bill.objects.filter(subscriber=subscriber)]
 
     data = {
         'subscriber': subscriber,
