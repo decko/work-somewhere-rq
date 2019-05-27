@@ -44,3 +44,8 @@ class Bill(models.Model):
                 f'call duration: {self.call_duration}, '
                 f'call price: {self.call_price_rept}, '
                 f'source call url: {self.source_call_url}')
+
+    class Meta:
+        indexes = [
+            models.Index(fields=('subscriber',)),
+        ]
