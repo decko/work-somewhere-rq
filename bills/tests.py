@@ -222,31 +222,22 @@ def test_call_instance_attribute_on_a_bill(client, bill):
     assert attributes <= call.keys()
 
 
-def test_attribute_values_given_a_consolidated_call(client, start_call_fx, stop_call_fx):
+@pytest.mark.parametrize('subscriber, calls', [
+    ('11111111111', 1), ('99988526423', 0)
+])
+def test_for_get_a_bill_from_a_subscriber_number_given_a_consolidated_call(client, bill,
+                                                                           subscriber,
+                                                                           calls):
     """
     Test for GETting a Bill from a subscriber number given a consolidated call.
-
-    Test uses start_call_fx fixture.
-    Test uses stop_call_fx fixture.
     """
 
-    registry_url = reverse('calls:registry-list')
-    data = [start_call_fx, stop_call_fx]
-
-    for registry in data:
-        response = client.post(registry_url, registry, content_type='application/json')
-        assert response.status_code == status.HTTP_201_CREATED
-
     bill_url = reverse('bills:bill-detail',
-                       kwargs={'subscriber': start_call_fx.get('source')})
+                       kwargs={'subscriber': subscriber})
 
     response = client.get(bill_url)
 
-    assert len(response.data.get('calls')) == 1
-
-    call = response.data.get('calls')[0]
-
-    assert call.get('destination') == start_call_fx.get('destination')
+    assert len(response.data.get('calls')) == calls
 
 
 def test_for_a_BillService_class():
