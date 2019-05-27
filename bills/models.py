@@ -36,3 +36,11 @@ class Bill(models.Model):
     def call_price_rept(self):
         locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
         return locale.currency(self.call_price)
+
+    def __repr__(self):
+        return (f'subscriber: {self.subscriber}, destination: {self.destination} '
+                f'call start date: {self.call_start_date}, '
+                f'call start time: {self.call_start_time}, '
+                f'call duration: {self.call_duration}, '
+                f'call price: {self.call_price_rept}, '
+                f'source call url: {self.source_call_url}')
