@@ -2,10 +2,10 @@ import calendar
 from datetime import date
 
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
 
-from .serializers import BilledCallSerializer
+from .serializers import BillSerializer
 from .models import Bill
 
 
@@ -30,8 +30,7 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
     month_as_int = {abbr: month for month, abbr in
                     enumerate(calendar.month_abbr)}.get(month_period)
 
-    calls = [BilledCallSerializer(call).data for call in
-             Bill.objects.filter(subscriber=subscriber)
+    calls = [call for call in Bill.objects.filter(subscriber=subscriber)
              .filter(stop_timestamp__iso_year=year_period)
              .filter(stop_timestamp__month=month_as_int)]
 
@@ -44,4 +43,6 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
         'calls': calls,
     }
 
-    return Response(data=data, status=200)
+    serializer = BillSerializer(data)
+
+    return Response(data=serializer.data, status=200)
