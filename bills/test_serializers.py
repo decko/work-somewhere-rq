@@ -51,5 +51,5 @@ def test_for_BillSerializer_to_inherit_from_ModelSerializer():
     """
 
     from .serializers import BillSerializer
-    
+
     assert issubclass(BillSerializer, ModelSerializer)

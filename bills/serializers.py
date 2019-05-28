@@ -17,3 +17,7 @@ class BilledCallSerializer(serializers.ModelSerializer):
         model = Bill
         fields = ('destination', 'call_start_date', 'call_start_time',
                   'call_duration', 'call_price')
+
+
+class BillSerializer(serializers.ModelSerializer):
+    pass
