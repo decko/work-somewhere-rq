@@ -32,7 +32,7 @@ def test_detail_request_return_subscriber_number_on_response(client, bill):
 
     response = client.get(url, content_type='application/json')
 
-    assert response.data.get('subscriber') == number
+    assert response.data.get('subscriber') == str(number)
 
 
 def test_detail_request_return_period_on_response(client, bill):
