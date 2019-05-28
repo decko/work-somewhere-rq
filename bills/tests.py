@@ -278,6 +278,20 @@ def test_for_get_a_bill_from_a_subscriber_number_given_a_consolidated_call(clien
     assert len(response.data.get('calls')) == calls
 
 
+@pytest.mark.parametrize('month_period, calls', (('Apr', 1), ('Dec', 0)))
+def test_for_return_only_bills_of_a_given_month(client, bills, month_period, calls):
+    """
+    Test for return only bills of a given month without using year parameter.
+    """
+
+    url = reverse('bills:bill-detail', kwargs={'subscriber': '99988526423',
+                                               'month_period': month_period})
+
+    response = client.get(url)
+
+    assert len(response.data.get('calls')) == calls
+
+
 def test_for_a_BillService_class():
     """
     Test for a BillService existence.
