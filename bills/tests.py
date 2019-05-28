@@ -292,6 +292,24 @@ def test_for_return_only_bills_of_a_given_month(client, bills, month_period, cal
     assert len(response.data.get('calls')) == calls
 
 
+@pytest.mark.parametrize('month_period, year_period, calls', (
+    ('Apr', 2019, 1), ('Dec', 2017, 6), ('Mar', 2018, 1)))
+def test_for_return_only_bills_of_a_given_month_and_year(client, bills,
+                                                         month_period,
+                                                         year_period, calls):
+    """
+    Test for return only bills of a given month and year.
+    """
+
+    url = reverse('bills:bill-detail', kwargs={'subscriber': '99988526423',
+                                               'month_period': month_period,
+                                               'year_period': year_period})
+
+    response = client.get(url)
+
+    assert len(response.data.get('calls')) == calls
+
+
 def test_for_a_BillService_class():
     """
     Test for a BillService existence.
