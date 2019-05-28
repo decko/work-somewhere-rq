@@ -20,4 +20,6 @@ class BilledCallSerializer(serializers.ModelSerializer):
 
 
 class BillSerializer(serializers.ModelSerializer):
-    pass
+
+    class Meta:
+        model = Bill
