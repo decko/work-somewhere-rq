@@ -3,6 +3,7 @@ from datetime import date
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.exceptions import NotFound
 
 from .serializers import BilledCallSerializer
 from .models import Bill
@@ -33,6 +34,9 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
              Bill.objects.filter(subscriber=subscriber)
              .filter(stop_timestamp__iso_year=year_period)
              .filter(stop_timestamp__month=month_as_int)]
+
+    if not calls:
+        raise NotFound(detail='No result was returned from your query.')
 
     data = {
         'subscriber': subscriber,
