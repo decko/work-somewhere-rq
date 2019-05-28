@@ -11,7 +11,7 @@ class BilledCallSerializer(serializers.ModelSerializer):
     call_start_date = serializers.DateField()
     call_start_time = serializers.TimeField()
     call_duration = serializers.CharField(source='call_duration_formated')
-    call_price = serializers.DecimalField(max_digits=14, decimal_places=2)
+    call_price = serializers.CharField(source='call_price_rept')
 
     class Meta:
         model = Bill
