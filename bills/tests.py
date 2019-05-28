@@ -310,6 +310,19 @@ def test_for_return_only_bills_of_a_given_month_and_year(client, bills,
     assert len(response.data.get('calls')) == calls
 
 
+def test_for_return_404_when_no_call_is_found(client):
+    """
+    Test for return a 404 status code when no call was found for a
+    given subscriber.
+    """
+
+    url = reverse('bills:bill-detail', kwargs={'subscriber': '33333333333'})
+
+    response = client.get(url)
+
+    assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
 def test_for_a_BillService_class():
     """
     Test for a BillService existence.
