@@ -37,6 +37,11 @@ class Bill(models.Model):
         locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
         return locale.currency(self.call_price)
 
+    @property
+    def call_duration_formated(self):
+        hours, minutes, seconds = str(self.call_duration).split(':')
+        return f'{hours}h{minutes}m{seconds}s'
+
     def __repr__(self):
         return (f'subscriber: {self.subscriber}, destination: {self.destination} '
                 f'call start date: {self.call_start_date}, '

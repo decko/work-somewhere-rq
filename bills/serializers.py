@@ -1,14 +1,16 @@
 from rest_framework import serializers
-from rest_framework.generics import ListAPIView
 
 from .models import Bill
 
 
 class BilledCallSerializer(serializers.ModelSerializer):
+    """
+    Serializes a billed call.
+    """
     destination = serializers.CharField()
     call_start_date = serializers.DateField()
     call_start_time = serializers.TimeField()
-    call_duration = serializers.DurationField()
+    call_duration = serializers.CharField(source='call_duration_formated')
     call_price = serializers.DecimalField(max_digits=14, decimal_places=2)
 
     class Meta:
