@@ -60,3 +60,11 @@ def test_for_Meta_property_with_model_attribute():
     """
 
     assert BillSerializer.Meta.model == Bill
+
+
+def test_for_BillSerializer_documentation():
+    """
+    Test for BillSerializer documentation on class docstring.
+    """
+
+    assert BillSerializer.__doc__
