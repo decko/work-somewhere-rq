@@ -20,6 +20,10 @@ class BilledCallSerializer(serializers.ModelSerializer):
 
 
 class BillSerializer(serializers.ModelSerializer):
+    """
+    Serializes a bill. It contains the subscriber number,
+    a period (month/year) and a list of calls.
+    """
 
     class Meta:
         model = Bill
