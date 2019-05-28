@@ -43,7 +43,8 @@ class Bill(models.Model):
         return f'{hours}h{minutes}m{seconds}s'
 
     def __repr__(self):
-        return (f'subscriber: {self.subscriber}, destination: {self.destination} '
+        return (f'subscriber: {self.subscriber} '
+                f'destination: {self.destination} '
                 f'call start date: {self.call_start_date}, '
                 f'call start time: {self.call_start_time}, '
                 f'call duration: {self.call_duration}, '
