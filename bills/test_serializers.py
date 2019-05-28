@@ -2,6 +2,7 @@ import pytest
 
 from rest_framework.serializers import ModelSerializer
 
+from .serializers import BillSerializer
 from .serializers import BilledCallSerializer
 
 pytestmark = pytest.mark.django_db
@@ -40,8 +41,6 @@ def test_for_a_BillSerializer():
     Test for a BillSerializer existence.
     """
 
-    from .serializers import BillSerializer
-
     assert BillSerializer
 
 
@@ -49,7 +48,5 @@ def test_for_BillSerializer_to_inherit_from_ModelSerializer():
     """
     Test for BillSerializer be a ModelSerializer subclass.
     """
-
-    from .serializers import BillSerializer
 
     assert issubclass(BillSerializer, ModelSerializer)
