@@ -1,3 +1,4 @@
+from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
 from .models import Bill
@@ -19,11 +20,12 @@ class BilledCallSerializer(serializers.ModelSerializer):
                   'call_duration', 'call_price')
 
 
-class BillSerializer(serializers.ModelSerializer):
+class BillSerializer(serializers.Serializer):
     """
     Serializes a bill. It contains the subscriber number,
     a period (month/year) and a list of calls.
     """
 
-    class Meta:
-        model = Bill
+    subscriber = serializers.CharField(label=_('Subscriber Telephone Number'))
+    period = serializers.CharField(label=_('Reference Period'))
+    calls = BilledCallSerializer(label=_('Call Records'), many=True)
