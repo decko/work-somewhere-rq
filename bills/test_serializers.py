@@ -1,6 +1,6 @@
 import pytest
 
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import Serializer
 
 from .models import Bill
 
@@ -51,15 +51,7 @@ def test_for_BillSerializer_to_inherit_from_ModelSerializer():
     Test for BillSerializer be a ModelSerializer subclass.
     """
 
-    assert issubclass(BillSerializer, ModelSerializer)
-
-
-def test_for_Meta_property_with_model_attribute():
-    """
-    Test for Meta property with model attribute setted to Bill model.
-    """
-
-    assert BillSerializer.Meta.model == Bill
+    assert issubclass(BillSerializer, Serializer)
 
 
 def test_for_BillSerializer_documentation():
