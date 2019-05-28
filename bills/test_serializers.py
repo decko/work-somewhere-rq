@@ -68,3 +68,15 @@ def test_for_BillSerializer_documentation():
     """
 
     assert BillSerializer.__doc__
+
+
+def test_for_BillSerializer_fields():
+    """
+    Test for subscriber, period attributes and a list of calls.
+    """
+
+    serializer = BillSerializer()
+
+    fields = {'subscriber', 'period', 'calls'}
+
+    assert fields <= serializer.get_fields().keys()
