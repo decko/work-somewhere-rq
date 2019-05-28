@@ -31,6 +31,7 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
 
     calls = [BilledCallSerializer(call).data for call in
              Bill.objects.filter(subscriber=subscriber)
+             .filter(stop_timestamp__iso_year=year_period)
              .filter(stop_timestamp__month=month_as_int)]
 
     data = {
