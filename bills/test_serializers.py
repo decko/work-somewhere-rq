@@ -1,5 +1,7 @@
 import pytest
 
+from rest_framework.serializers import ModelSerializer
+
 from .serializers import BilledCallSerializer
 
 pytestmark = pytest.mark.django_db
@@ -31,3 +33,23 @@ def test_for_call_price_value_format(bill):
     call_price_formated = 'R$ 1,08'
 
     assert call_price == call_price_formated
+
+
+def test_for_a_BillSerializer():
+    """
+    Test for a BillSerializer existence.
+    """
+
+    from .serializers import BillSerializer
+
+    assert BillSerializer
+
+
+def test_for_BillSerializer_to_inherit_from_ModelSerializer():
+    """
+    Test for BillSerializer be a ModelSerializer subclass.
+    """
+
+    from .serializers import BillSerializer
+    
+    assert issubclass(BillSerializer, ModelSerializer)
