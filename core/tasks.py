@@ -15,10 +15,10 @@ def dispatch(message, trigger, *args, **kwargs):
 
     Parameters
     ----------
-    message : dict
+    message: dict
         The message containing data or a locator to get it.
 
-    trigger : str
+    trigger: str
         A string containing a trigger to witch service to run
     """
 

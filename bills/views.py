@@ -15,14 +15,14 @@ def bill_view(request, subscriber=None, month_period=None, year_period=None):
     """
     Function Based View used to retrieve Bill data for a subscriber.
 
-    subscriber : int, str
+    subscriber: int, str
         The subscriber number required to retrieve a bill. Not optional.
 
-    month_period : str, optional
+    month_period: str, optional
         The name of the month abbreviated to 3 characters format,
         used to filter a bill from a subscriber. e.g. Jan, Feb, Mar...
 
-    year_period : int, optional
+    year_period: int, optional
         The year period in ISO format(4 digits), used to filter a bill
         from a subscriber. e.g. 2017, 2018, 2019...
     """
