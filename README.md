@@ -5,22 +5,22 @@ It receives telephone call registries with the state of a call, like, start or s
 Also, the application consolidate these registries into a call and charge them.
 
 ## Summary
-1. Requirements
-    1. Python Version and Environment
-    2. Database and Queue
-    3. O.S. and Hardware
+1. [Requirements](#requirements)
+    1. [Python Version and Environment](#python-version-and-environment)
+    2. [Database and Queue](#database-and-queue)
+    3. [O.S. and Hardware](#os-and-hardware)
 
-2. Installing and Running
-    1. Heroku
-    2. Docker
-    3. Running on bare metal
+2. [Installing and Running](#installing-and-running)
+    1. [Heroku](#heroku)
+    2. [Docker](#docker)
+    3. [Running on bare metal](#running-on-bare-metal)
 
-3. Documentation
-    1. API Documentation
-    2. Dev Environment
-    3. Tests
-    4. Internals
-    5. Tips
+3. [Documentation](#documentation)
+    1. [API Documentation](#api-documentation)
+    2. [Dev Environment](#dev-environment)
+    3. [Tests](#tests)
+    4. [Internals](#internals)
+    5. [Tips](#tips)
 
 
 ## Requirements
@@ -58,7 +58,7 @@ git clone https://github.com/decko/work-at-olist-rq
 cd work-at-olist-rq
 ```
 (If you need any help on configuring Heroku, read their documetation
-here[https://devcenter.heroku.com/articles/getting-started-with-python])
+[here](https://devcenter.heroku.com/articles/getting-started-with-python))
 
 Now, just login to your Heroku account and create a new instance:
 ```bash
@@ -98,7 +98,7 @@ heroku run python manage.py migrate
 And now access your instance using the URL that Heroku gave to you.
 You sould see the Telephone API documentation page.
 
-###Docker
+### Docker
 Docker is a great container solution that ease the work with running app and
 all the requirements. Consult Docker and docker-compose documentation to get it up and running.
 
@@ -111,7 +111,7 @@ docker-compose up -d
 ```
 and it shoud be available at `http://localhost:8000/`.
 
-###Bare Metal
+### Bare Metal
 To run it on bare metal you gonna need to configure:
 * Python, at least 3.6.8 version, preferably 3.7.3.
 * Postgres 10.
@@ -152,9 +152,9 @@ URL. ;)
 Also you can access `/docs` and `/redoc` which are diferent versions for the same documentation.
 
 ### Dev Environment
-I've developed Telephone using Neovim[https://neovim.io], on Kitty[https://sw.kovidgoyal.net/kitty/]
+I've developed Telephone using [Neovim](https://neovim.io), on [Kitty](https://sw.kovidgoyal.net/kitty/)
 terminal using tmux and zsh with prezto.
-You can find my configuration files here.[https://gitlab/decko/dotfiles]
+You can find my configuration files [here](https://gitlab/decko/dotfiles).
 I've used to develop on two machines, a Lenovo T470 Laptop and a Ryzen7 Desktop, both with 16GB of RAM.
 Used docker to run Postgres and Redis, and executed the code inside a pipenv virtual environment.
 
@@ -190,5 +190,5 @@ and Redis:
 docker run -d -p 6379:6379/tcp --name olist-redis redis:3-alpine
 ```
 
-And, you could use __podman__[https://podman.io] which runs Docker images
+And, you could use [__podman__](https://podman.io) which runs Docker images
 as normal users, without user scalation.
