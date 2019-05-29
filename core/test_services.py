@@ -2,7 +2,7 @@ import pytest
 
 from abc import ABC
 
-from calls.tests import start_call_fx
+from calls.conftest import start_call_fx
 
 from .services import ServiceAbstractClass
 
