@@ -13,10 +13,16 @@ from .models import Call
 
 
 class RegistryListCreateAPIView(ListCreateAPIView):
+    """
+    Retrieve all Registries.
+    """
     queryset = Registry.objects.all()
     serializer_class = RegistrySerializer
 
     def post(self, request):
+        """
+        Create a new Registry instance.
+        """
         service = enqueue('core.tasks.dispatch',
                           message=request.data,
                           trigger='registry-service')
@@ -33,6 +39,9 @@ class RegistryListCreateAPIView(ListCreateAPIView):
 
 
 class RegistryRetrieveAPIView(RetrieveAPIView):
+    """
+    Retrieve a specific register.
+    """
     queryset = Registry.objects.all()
     serializer_class = RegistrySerializer
 
@@ -41,14 +50,13 @@ class CallListAPIView(ListAPIView):
     """
     Retrieve all consolidated(with start and stop timestamps) calls.
     """
-
     queryset = Call.consolidated.all()
     serializer_class = CallSerializer
 
 
 class CallRetrieveAPIView(RetrieveAPIView):
     """
-    Retrieve a specific consolidated call using call_id.
+    Retrieve a specific consolidated call.
     """
     queryset = Call.consolidated.all()
     serializer_class = CallSerializer
