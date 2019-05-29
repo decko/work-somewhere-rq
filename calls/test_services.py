@@ -261,13 +261,13 @@ def test_for_CallService_propagateResult_method(start_call_fx, stop_call_fx,
         """
         Just a TestService to mock a ServiceClass
         """
-        trigger = 'call-service-done'
-        queue = 'test'
-
         def propagateResult(self):
             pass
 
-    mocker.patch.multiple(TestService, __abstractmethods__=set())
+    mocker.patch.multiple(TestService,
+                          __abstractmethods__=set(),
+                          trigger='call-service-done',
+                          queue='test')
 
     start_message = json.dumps(start_call_fx)
 
@@ -291,3 +291,4 @@ def test_for_CallService_propagateResult_method(start_call_fx, stop_call_fx,
 
     mocker.resetall()
 
+    del(TestService)
