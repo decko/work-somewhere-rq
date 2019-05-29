@@ -4,6 +4,7 @@ from .services import ServiceAbstractClass
 
 from calls.services import CallService
 from calls.services import RegistryService
+from bills.services import BillService
 
 
 @job
