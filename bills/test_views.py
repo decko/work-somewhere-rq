@@ -203,3 +203,18 @@ def test_for_return_404_when_no_call_is_found(client):
     response = client.get(url)
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+def test_for_using_current_month_as_url_parameter(client):
+    """
+    Test for using current month as URL parameter. Expect to raise
+    a 400 Bad Request error if used the current month and current year.
+    """
+
+    current_month = date.today().strftime('%b')
+    url = reverse('bills:bill-detail', kwargs={'subscriber': '99988526423',
+                                               'month_period': current_month})
+
+    response = client.get(url)
+
+    assert response.status_code == status.HTTP_400_BAD_REQUEST
