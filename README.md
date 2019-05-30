@@ -149,7 +149,7 @@ sudo dnf install postgresql-server redis
 
 Remember to configure __settings.py__ with the credentials for Postgres and Redis,
 or set the DATABASE_URL and REDISTOGO_URL and other environment variables.
-Now, your could run it with:
+Now, you could run it with:
 ```bash
 pipenv run honcho start web worker
 ```
@@ -159,20 +159,21 @@ and access it on `http://localhost:5000/`
 ### API Documentation
 You can find the documentation after turn up an instance and accessing the URL. It's on root
 URL. ;)
-Also you can access `/docs` and `/redoc` which are different versions for the same documentation.
+Also you can access `/redoc` which are different versions for the same documentation.
 
 ### Dev Environment
 I've developed Telephone using [Neovim](https://neovim.io), on [Kitty](https://sw.kovidgoyal.net/kitty/)
 terminal using tmux and zsh with prezto.
-You can find my configuration files [here](https://gitlab/decko/dotfiles).
-I've used to develop on two machines, a Lenovo T470 Laptop and a Ryzen7 Desktop, both with 16GB of RAM.
+You can find my configuration files [here](https://gitlab.com/decko/dotfiles).
+I've worked with two machines, a Lenovo T470 Laptop and a Ryzen7 Desktop, both with 16GB of RAM.
 Used docker to run Postgres and Redis, and executed the code inside a pipenv virtual environment.
 
 ### Tests
 To run the tests you must build up a virtualenv and install development dependencies.
+NOTE: Tests must run with DEBUG=True since we didn't run any worker along with the tests.
 ```bash
 pipenv install --dev
-pipenv run pytest --create-db
+DEBUG=True pipenv run pytest --create-db
 ```
 and it should run all the tests.
 
