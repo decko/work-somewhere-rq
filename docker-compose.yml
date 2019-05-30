@@ -1,0 +1,110 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:10
+    environment:
+        - POSTGRES_DB=telephonedb
+        - POSTGRES_USER=olist_telephone
+        - POSTGRES_PASSWORD=olist_telephone
+    restart: always
+
+  queue:
+    image: redis:3-alpine
+    restart: always
+
+  telephone-base-img:
+    build: .
+    image: telephone-base-img
+    restart: "no"
+
+  migrations:
+    image: telephone-base-img
+    depends_on:
+      - db
+    environment:
+      - DEBUG=False 
+      - DATABASE_URL=postgres://olist_telephone:olist_telephone@db/telephonedb
+    restart: "no"
+    entrypoint: sh -c 'while ! nc -z db 5432 2>/dev/null; do sleep 1; done; python3 ./manage.py migrate'
+
+  web:
+    image: telephone-base-img
+    depends_on:
+      - db
+      - queue
+    environment:
+      - DEBUG=False 
+      - DATABASE_URL=postgres://olist_telephone:olist_telephone@db/telephonedb
+      - REDISTOGO_URL=redis://queue:6379/0
+      - PYTHONUNBUFFERED=1
+      # - SECRET_KEY=A#$45#AF%4%$AF5fd45f4a5dv4dA%4d
+    restart: "always"
+    command: honcho start web
+    ports:
+      - "5000:5000"
+
+  worker-default:
+    image: telephone-base-img
+    depends_on:
+      - web
+    environment:
+      - DEBUG=False 
+      - DATABASE_URL=postgres://olist_telephone:olist_telephone@db/telephonedb
+      - REDISTOGO_URL=redis://queue:6379/0
+      - PYTHONUNBUFFERED=1
+      # - SECRET_KEY=A#$45#AF%4%$AF5fd45f4a5dv4dA%4d
+    restart: "always"
+    entrypoint: honcho start worker_default
+
+  worker-registry-service:
+    image: telephone-base-img
+    depends_on:
+      - web
+    environment:
+      - DEBUG=False 
+      - DATABASE_URL=postgres://olist_telephone:olist_telephone@db/telephonedb
+      - REDISTOGO_URL=redis://queue:6379/0
+      - PYTHONUNBUFFERED=1
+      # - SECRET_KEY=A#$45#AF%4%$AF5fd45f4a5dv4dA%4d
+    restart: "always"
+    entrypoint: honcho start worker_registry_service
+
+  worker-registry-service-done:
+    image: telephone-base-img
+    depends_on:
+      - web
+    environment:
+      - DEBUG=False 
+      - DATABASE_URL=postgres://olist_telephone:olist_telephone@db/telephonedb
+      - REDISTOGO_URL=redis://queue:6379/0
+      - PYTHONUNBUFFERED=1
+      # - SECRET_KEY=A#$45#AF%4%$AF5fd45f4a5dv4dA%4d
+    restart: "always"
+    entrypoint: honcho start worker_registry_service_done
+
+  worker-call-service-done:
+    image: telephone-base-img
+    depends_on:
+      - web
+    environment:
+      - DEBUG=False 
+      - DATABASE_URL=postgres://olist_telephone:olist_telephone@db/telephonedb
+      - REDISTOGO_URL=redis://queue:6379/0
+      - PYTHONUNBUFFERED=1
+      # - SECRET_KEY=A#$45#AF%4%$AF5fd45f4a5dv4dA%4d
+    restart: "always"
+    entrypoint: honcho start worker_call_service_done
+    
+  worker-bill-service-done:
+    image: telephone-base-img
+    depends_on:
+      - web
+    environment:
+      - DEBUG=False 
+      - DATABASE_URL=postgres://olist_telephone:olist_telephone@db/telephonedb
+      - REDISTOGO_URL=redis://queue:6379/0
+      - PYTHONUNBUFFERED=1
+      # - SECRET_KEY=A#$45#AF%4%$AF5fd45f4a5dv4dA%4d
+    restart: "always"
+    entrypoint: honcho start worker_bill_service_done
