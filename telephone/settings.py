@@ -166,12 +166,6 @@ if DEBUG:
     for queue, queueConfig in RQ_QUEUES.items():
         queueConfig['ASYNC'] = False
 
-    MIGRATION_MODULES = {
-        'core': None,
-        'calls': None,
-        'bills': None,
-    }
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',)
 }
