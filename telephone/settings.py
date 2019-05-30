@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_swagger',
+    'drf_yasg',
     'django_rq',
     'core',
     'calls',
@@ -168,6 +168,10 @@ if DEBUG:
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',)
+}
+
+SWAGGER_SETTINGS = {
+    'SPEC_URL': '/static/openapi.yaml'
 }
 
 # Activate Django-Heroku.

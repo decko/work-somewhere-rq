@@ -1,0 +1,468 @@
+openapi: 3.0.0
+info:
+  description: 'Telephone is an application that provides an API to manage telephone calls. It receives telephone call registries with the state of a call, like, start or stop, timestamps, and others. Also, the application consolidate these registries into a call and charge them.'
+  title: 'Telephone API'
+  version: 'v1'
+tags:
+- name: "Bills"
+  description: "About bills, charging and tariffs."
+- name: "Calls"
+  description: "Find all consolidated calls."
+- name: "Registry"
+  description: "Create and Find registries about call states."
+- name: "Tasks"
+  description: "Obtain information about the tasks executed on background."
+paths:
+  /api/v1/bills/{subscriber}:
+    get:
+      summary: Return a Bill using only subscriber number.
+      description: >
+        Return a Bill using only subscriber number.
+      operationId: bills_read
+      parameters:
+      - name: subscriber
+        in: path
+        required: True
+        description: 'The subscriber number required to retrieve a bill. Not optional.'
+        schema:
+          type: integer
+      tags:
+      - Bills
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bill"
+              example:
+                subscriber: '11111111111'
+                period: 'Apr/2019'
+                calls:
+                  - destination: '2222222222'
+                    call_start_date: '2019-04-30'
+                    call_start_time: '14:30:12'
+                    call_duration: '0h10m20s'
+                    call_price: 'R$ 4,23'
+        403:
+          description: "Forbidden access"
+        404:
+          description: "No result was returned from your query"
+  /api/v1/bills/{subscriber}/{month_period}:
+    get:
+      summary: Return a Bill using subscriber number and month.
+      description: >
+        Return a Bill using subscriber number and month.
+      operationId: bills_read_month
+      parameters:
+      - name: subscriber
+        in: path
+        required: True
+        description: 'The subscriber number required to retrieve a bill. Not optional.'
+        schema:
+          type: integer
+      - name: month_period
+        in: path
+        required: True
+        description: 'The month using three-letter abbreviation. Eg. Jan, Feb...'
+        schema:
+          type: string
+      tags:
+      - Bills
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bill"
+              example:
+                subscriber: '11111111111'
+                period: 'Apr/2019'
+                calls:
+                  - destination: '2222222222'
+                    call_start_date: '2019-04-30'
+                    call_start_time: '14:30:12'
+                    call_duration: '0h10m20s'
+                    call_price: 'R$ 4,23'
+        403:
+          description: "Forbidden access"
+        404:
+          description: "No result was returned from your query"
+  /api/v1/bills/{subscriber}/{month_period}/{year_period}:
+    get:
+      summary: Return a Bill using subscriber number, month and year period.
+      description: >
+        Return a Bill using subscriber number, month and year period.
+      operationId: bills_read_year
+      parameters:
+      - name: subscriber
+        in: path
+        required: True
+        description: 'The subscriber number required to retrieve a bill. Not optional.'
+        schema:
+          type: integer
+      - name: month_period
+        in: path
+        description: 'The month using three-letter abbreviation. Eg. Jan, Feb...'
+        required: True
+        schema:
+          type: string
+      - name: year_period
+        in: path
+        description: 'The year period in ISO Format(4 digits)'
+        required: True
+        schema:
+          type: integer
+      tags:
+      - Bills
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Bill"
+              example:
+                subscriber: '11111111111'
+                period: 'Apr/2019'
+                calls:
+                  - destination: '2222222222'
+                    call_start_date: '2019-04-30'
+                    call_start_time: '14:30:12'
+                    call_duration: '0h10m20s'
+                    call_price: 'R$ 4,23'
+        403:
+          description: "Forbidden access"
+        404:
+          description: "No result was returned from your query"
+  /api/v1/calls/:
+    get:
+      summary: Retrieve all consolidated(with start and stop timestamps) calls.
+      description: >
+        Retrieve a list containing each recorded consolidated call. A 
+        consolidated call contains both start and stop timestamps.
+      operationId: calls_list
+      responses:
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/Call"
+              example:
+                - url: "/api/v1/calls/1"
+                  call_id: 1
+                  start_timestamp: "2019-04-01T10:10:10"
+                  stop_timestamp: "2019-04-01T11:11:11"
+                  source: "11111111111"
+                  destination: "22222222222"
+                - url: "/api/v1/calls/2"
+                  call_id: 2
+                  start_timestamp: "2019-04-02T09:35:30"
+                  stop_timestamp: "2019-04-02T10:01:11"
+                  source: "11111111111"
+                  destination: "22222222222"
+      tags:
+      - Calls
+  /api/v1/calls/{call_id}:
+    get:
+      summary: Retrieve a specific consolidated call.
+      description: >
+        Retrieve a specific consolidated call using the unique identifier
+        to find the call.
+      operationId: calls_read
+      parameters:
+      - name: call_id
+        in: path
+        required: true
+        description: Unique call identifier
+        schema:
+          type: string
+      responses:
+        404:
+          description: "Call not found"
+        200:
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Call"
+              example:
+                url: "/api/v1/calls/1"
+                call_id: 1
+                start_timestamp: "2019-04-01T10:10:10"
+                stop_timestamp: "2019-04-01T11:11:11"
+                source: "11111111111"
+                destination: "22222222222"
+      tags:
+      - Calls
+  /api/v1/registry/:
+    get:
+      description: Retrieve all Registries.
+      operationId: registry_list
+      responses:
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Registry'
+              example:
+                - url: '/api/v1/registry/1'
+                  id: 1
+                  type: 'start'
+                  timestamp: '2019-05-30T14:30:12Z'
+                  call_id: 1
+                  source: '11111111111'
+                  destination: '2222222222'
+                - url: '/api/v1/registry/2'
+                  id: 2
+                  type: 'stop'
+                  timestamp: '2019-05-30T14:37:12Z'
+                  call_id: 1
+            
+      tags:
+      - Registry
+    post:
+      summary: Asynchronously create a new Registry instance.
+      description: >
+        Asynchronously create a new Registry instance. 
+        Receives a payload, and return a URL to a job. 
+        When the job, the result attribute will cointain
+        the registry payload with a URL to the data.
+      operationId: registry_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Registry'
+            example:
+              type: 'start'
+              timestamp: '2019-05-30T14:30:12Z'
+              call_id: 1
+              source: '11111111111'
+              destination: '2222222222'
+      responses:
+        201:
+          description: 'Object created'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                job_id: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+                status: 'DONE'
+                data:
+                  type: 'start'
+                  timestamp: '2019-05-30T14:30:12Z'
+                  call_id: 1
+                  source: '11111111111'
+                  destination: '2222222222'
+                result: 
+                  url: /api/v1/registry/1
+                  id: 1
+                  type: 'start'
+                  timestamp: '2019-05-30T14:30:12Z'
+                  call_id: 1
+                  source: '11111111111'
+                  destination: '2222222222'
+      tags:
+      - Registry
+  /api/v1/registry/{id}:
+    get:
+      description: Retrieve a specific registry.
+      operationId: registry_read
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this registry.
+        schema:
+          type: integer
+      responses:
+        404:
+          description: 'Registry not found'
+        200:
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Registry'
+              example:
+                url: '/api/v1/registry/1'
+                id: 1
+                type: 'start'
+                timestamp: '2019-05-30T14:30:12Z'
+                call_id: 1
+                source: '11111111111'
+                destination: '2222222222'
+      tags:
+      - Registry
+  /api/v1/task/:
+    get:
+      description: Endpoint to retrieve all tasks.
+      operationId: task_list
+      responses:
+        200: 
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'array'
+                items:
+                  $ref: '#/components/schemas/Task'
+              example:
+                - job_id: '1bae2f61-5717-4562-b3fc-2c963f66afa6'
+                  status: 'DONE'
+                  data:
+                    type: 'start'
+                    timestamp: '2019-05-30T14:30:12Z'
+                    call_id: 1
+                    source: '11111111111'
+                    destination: '2222222222'
+                  result: 
+                    url: /api/v1/registry/1
+                    id: 1
+                    type: 'start'
+                    timestamp: '2019-05-30T14:30:12Z'
+                    call_id: 1
+                    source: '11111111111'
+                    destination: '2222222222'
+                - job_id: '4gs13fg6-5717-4562-b3fc-2c963f66afa6'
+                  status: 'QUEUED'
+                  data:
+                    type: 'start'
+                    timestamp: '2019-05-01T11:10:02Z'
+                    call_id: 1
+                    source: '11111111111'
+                    destination: '2222222222'
+                  result: null
+      tags:
+      - Tasks
+  /api/v1/task/{job_id}:
+    get:
+      description: Retrieve a single Task instance.
+      operationId: task_read
+      parameters:
+      - in: path
+        name: job_id
+        required: true
+        schema:
+          description: ''
+          title: job id
+          type: string
+      responses:
+        404:
+          description: 'Task not found'
+        200: 
+          description: 'Successful operation'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              example:
+                job_id: '3fa85f64-5717-4562-b3fc-2c963f66afa6'
+                status: 'QUEUED'
+                data:
+                  type: 'start'
+                  timestamp: '2019-05-30T14:30:12Z'
+                  call_id: 1
+                  source: '11111111111'
+                  destination: '2222222222'
+                result: null
+      tags:
+      - Tasks
+      
+components:
+  schemas:
+    Bill:
+      properties:
+        subscriber:
+          type: string
+          format: number
+        period:
+          type: string
+        calls:
+          type: array
+          items:
+            $ref: "#/components/schemas/BilledCall"
+    BilledCall:
+      properties:
+        destination:
+          type: string
+        call_start_date:
+          type: string
+        call_start_time:
+          type: string
+        call_duration:
+          type: string
+        call_price:
+          type: string
+    Call:
+      properties:
+        url:
+          type: string
+          format: url
+        call_id:
+          type: integer
+          format: int32
+        start_timestamp:
+          type: string
+          format: date-time
+        stop_timestamp:
+          type: string
+          format: date-time
+        source:
+          type: string
+          format: int32
+          minimum: 8
+          maximum: 9
+        destination:
+          type: string
+          format: int32
+          minimum: 8
+          maximum: 9
+    Registry:
+      required: 
+        - type
+        - timestamp
+        - call_id
+      properties:
+        url:
+          type: string
+          format: url
+        id:
+          type: integer
+          format: int32
+        type:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        call_id:
+          type: integer
+          format: int32
+        source:
+          type: string
+          minimum: 8
+          maximum: 9
+        destination:
+          type: string
+          minimum: 8
+          maximum: 9
+    Task:
+      properties:
+        job_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+        data:
+          type: string
+        result:
+          type: string
