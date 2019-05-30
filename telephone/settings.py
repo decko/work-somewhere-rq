@@ -170,8 +170,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',)
 }
 
+openapi_spec_url = '/static/openapi.yaml'
 SWAGGER_SETTINGS = {
-    'SPEC_URL': '/static/openapi.yaml'
+    'SPEC_URL': openapi_spec_url
+}
+
+REDOC_SETTINGS = {
+    'SPEC_URL': openapi_spec_url
 }
 
 # Activate Django-Heroku.
