@@ -27,7 +27,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "q!sb&ef3zbuk*y63u%^u$rkil!ar06g3yu%nu5fx2rr#1+x@ib"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=config.boolean)
+DEBUG = config('DEBUG', default=False, cast=config.boolean)
 
 # Application definition
 
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'telephone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = { 
+DATABASES = {
     'default': dj_database_url.config(
         default='postgres://olist_telephone:olist_telephone@localhost/telephonedb',
         conn_max_age=500,
@@ -171,4 +171,12 @@ REST_FRAMEWORK = {
 }
 
 # Activate Django-Heroku.
-django_heroku.settings(locals(), databases=not DEBUG)
+# NOTE: django_heroku ALWAYS inject ssl_require, so, to
+# make it work without it on unsupported platforms we
+# did a little trick to detect a Heroku Environment and
+# avoid ssl_required injection on database config.
+for (env, url) in os.environ.items():
+    if env.startswith('HEROKU_POSTGRESQL'):
+        django_heroku.settings(locals())
+    else:
+        django_heroku.settings(locals(), databases=False)
