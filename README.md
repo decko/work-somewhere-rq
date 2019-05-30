@@ -1,7 +1,7 @@
 # Telephone API
 
 Telephone is an application that provides an API to manage telephone calls.
-It receives telephone call registries with the state of a call, like, start or stop, timestamp, and others.
+It receives telephone call registries with the state of a call, like, start or stop, timestamps, and others.
 Also, the application consolidate these registries into a call and charge them.
 
 ## Summary
@@ -36,7 +36,7 @@ Also, I've used a Django Starter Template from Heroku guys. It have some facilit
 on Heroku instances.
 
 ### Database and Queue
-Perhaps Telephone was developed thinking about vendors lock-in, Postgres was the best choice for
+Although Telephone was developed thinking about vendors lock-in, Postgres was the best choice for
 a database. It have special fields like JSONB which could make it work as Document Oriented Database
 or NoSQL as well. Also, most cloud vendors have a Postgres versions of his own  to be used as a
 Database-as-a-Service.
@@ -51,13 +51,13 @@ and 512MB for each additional queue worker.
 
 ## Installing and Running
 ### Heroku
-Since Telephone was developed with Heroku in mind, of course ir runs without much effort.
+Since Telephone was developed with Heroku in mind, of course it runs without much effort.
 Just clone the project to your machine and get into the directory:
 ```bash
 git clone https://github.com/decko/work-at-olist-rq
 cd work-at-olist-rq
 ```
-(If you need any help on configuring Heroku, read their documetation
+(If you need any help on configuring Heroku, read their documentation
 [here](https://devcenter.heroku.com/articles/getting-started-with-python))
 
 Now, just login to your Heroku account and create a new instance:
@@ -73,7 +73,17 @@ Add the RedisToGo Add-on:
 heroku addons:create redistogo
 ```
 
-Publish your application to Heroku:
+Add support to pt_BR locale:
+```bash
+heroku buildpacks:add https://github.com/heroku/heroku-buildpack-locale
+```
+
+Set DEBUG to False:
+```bash
+heroku config:set DEBUG=False
+```
+
+And finally publish your application to Heroku:
 ```bash
 git push heroku master
 ```
@@ -96,20 +106,20 @@ heroku run python manage.py migrate
 ```
 
 And now access your instance using the URL that Heroku gave to you.
-You sould see the Telephone API documentation page.
+You should see the Telephone API documentation page.
 
 ### Docker
 Docker is a great container solution that ease the work with running app and
 all the requirements. Consult Docker and docker-compose documentation to get it up and running.
 
 Telephone have one Dockerfile to build an image for the application and a
-docker-compose.yml to orquestrate all the containers needed to run the application.
+docker-compose.yml to orchestrate all the containers needed to run the application.
 
 After clone the application, run it with:
 ```bash
 docker-compose up -d
 ```
-and it shoud be available at `http://localhost:5000/`.
+and it should be available at `http://localhost:5000/`.
 
 ### Bare Metal
 To run it on bare metal you gonna need to configure:
@@ -149,7 +159,7 @@ and access it on `http://localhost:5000/`
 ### API Documentation
 You can find the documentation after turn up an instance and accessing the URL. It's on root
 URL. ;)
-Also you can access `/docs` and `/redoc` which are diferent versions for the same documentation.
+Also you can access `/docs` and `/redoc` which are different versions for the same documentation.
 
 ### Dev Environment
 I've developed Telephone using [Neovim](https://neovim.io), on [Kitty](https://sw.kovidgoyal.net/kitty/)
@@ -174,7 +184,7 @@ A message could be anything, since a complete json set, an id, or other.
 Then, a sequence of functions runs to obtain, validate, transform, persist and
 propagate information to a queue, where a new trigger is fired and the process goes on.
 
-So, if you want to build a service you need to subclass ServiceAbstractClass and explicity create
+So, if you want to build a service you need to subclass ServiceAbstractClass and explicitly create
 all methods needed to make it run. Set a trigger attribute and a queue one. The queue is where the
 result or anything you want goes after the process is done.
 
@@ -191,4 +201,4 @@ docker run -d -p 6379:6379/tcp --name olist-redis redis:3-alpine
 ```
 
 And, you could use [__podman__](https://podman.io) which runs Docker images
-as normal users, without user scalation.
+as normal users, without user escalation.
