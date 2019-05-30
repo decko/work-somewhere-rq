@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [requires]
-python_version = "3.7.2"
+python_version = "3.7.3"
 
 [packages]
 "psycopg2-binary" = "*"
@@ -19,6 +19,7 @@ pygments = "*"
 markdown = "*"
 django-rest-swagger = "*"
 prettyconf = "*"
+honcho = "*"
 
 [dev-packages]
 pytest = "*"
