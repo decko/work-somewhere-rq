@@ -138,11 +138,19 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Configure RQ Queues and Sync mode when DEBUG is True
 RQ_QUEUES = {
-    'registry-q': {
+    'registry-service': {
         'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 500,
     },
-    'call-q': {
+    'registry-service-done': {
+        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
+    },
+    'call-service-done': {
+        'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
+        'DEFAULT_TIMEOUT': 500,
+    },
+    'bill-service-done': {
         'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 500,
     },
@@ -150,7 +158,6 @@ RQ_QUEUES = {
         'URL': os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
         'DEFAULT_TIMEOUT': 500,
     }
-
 }
 
 if DEBUG:
@@ -168,4 +175,4 @@ REST_FRAMEWORK = {
 }
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+django_heroku.settings(locals(), databases=not DEBUG)
