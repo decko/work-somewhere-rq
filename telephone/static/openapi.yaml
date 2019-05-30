@@ -201,7 +201,9 @@ paths:
       - Calls
   /api/v1/registry/:
     get:
-      description: Retrieve all Registries.
+      summary: Retrieve all Registries.
+      description: >
+        Retrieve a list of all registries on the app.
       operationId: registry_list
       responses:
         200:
@@ -275,7 +277,8 @@ paths:
       - Registry
   /api/v1/registry/{id}:
     get:
-      description: Retrieve a specific registry.
+      summary: Retrieve a specific registry.
+      description: Retrieve a specific registry using id to find it.
       operationId: registry_read
       parameters:
       - name: id
@@ -305,7 +308,9 @@ paths:
       - Registry
   /api/v1/task/:
     get:
-      description: Endpoint to retrieve all tasks.
+      summary: Endpoint to retrieve all tasks.
+      description: > 
+        Retrieve a list of all tasks scheduled.
       operationId: task_list
       responses:
         200: 
@@ -346,7 +351,9 @@ paths:
       - Tasks
   /api/v1/task/{job_id}:
     get:
-      description: Retrieve a single Task instance.
+      summary: Retrieve a single Task instance.
+      description: >
+        Retrieve a single Task instance.
       operationId: task_read
       parameters:
       - in: path
