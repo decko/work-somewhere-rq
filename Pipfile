@@ -18,6 +18,7 @@ pyyaml = "*"
 pygments = "*"
 markdown = "*"
 django-rest-swagger = "*"
+prettyconf = "*"
 
 [dev-packages]
 pytest = "*"

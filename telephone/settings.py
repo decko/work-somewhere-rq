@@ -13,6 +13,8 @@ import os
 import dj_database_url
 import django_heroku
 
+from prettyconf import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +27,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = "q!sb&ef3zbuk*y63u%^u$rkil!ar06g3yu%nu5fx2rr#1+x@ib"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', default=True, cast=config.boolean)
 
 # Application definition
 
