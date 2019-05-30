@@ -13,7 +13,7 @@ Also, the application consolidate these registries into a call and charge them.
 2. [Installing and Running](#installing-and-running)
     1. [Heroku](#heroku)
     2. [Docker](#docker)
-    3. [Running on bare metal](#running-on-bare-metal)
+    3. [Running on bare metal](#bare-metal)
 
 3. [Documentation](#documentation)
     1. [API Documentation](#api-documentation)
@@ -109,7 +109,7 @@ After clone the application, run it with:
 ```bash
 docker-compose up -d
 ```
-and it shoud be available at `http://localhost:8000/`.
+and it shoud be available at `http://localhost:5000/`.
 
 ### Bare Metal
 To run it on bare metal you gonna need to configure:
@@ -141,9 +141,9 @@ Remember to configure __settings.py__ with the credentials for Postgres and Redi
 or set the DATABASE_URL and REDISTOGO_URL and other environment variables.
 Now, your could run it with:
 ```bash
-pipenv run ./manage.py runserver
+pipenv run honcho start web worker
 ```
-and access it on `http://localhost:8000`
+and access it on `http://localhost:5000/`
 
 ## Documentation
 ### API Documentation
