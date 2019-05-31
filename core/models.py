@@ -1,8 +1,6 @@
 from django.db import models
 from django.urls import reverse_lazy
 
-from django.contrib.postgres.fields import JSONField
-
 
 class Task(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
@@ -13,7 +11,7 @@ class Task(models.Model):
         default='queued',
         max_length=7
     )
-    data = JSONField()
+    data = models.TextField()
     job_id = models.UUIDField(null=True, blank=True)
     result = models.TextField(null=True, blank=True)
 
