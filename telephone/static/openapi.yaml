@@ -17,7 +17,9 @@ paths:
     get:
       summary: Return a Bill using only subscriber number.
       description: >
-        Return a Bill using only subscriber number.
+        Return a Bill using only subscriber number. When using only
+        subscriber number as parameter, the API will return only the last
+        closed period.
       operationId: bills_read
       parameters:
       - name: subscriber
@@ -52,7 +54,9 @@ paths:
     get:
       summary: Return a Bill using subscriber number and month.
       description: >
-        Return a Bill using subscriber number and month.
+        Return a Bill using subscriber number and month. Using subscriber number
+        and month as parameter will return closed month periods from the current
+        year.
       operationId: bills_read_month
       parameters:
       - name: subscriber
@@ -93,7 +97,9 @@ paths:
     get:
       summary: Return a Bill using subscriber number, month and year period.
       description: >
-        Return a Bill using subscriber number, month and year period.
+        Return a Bill using subscriber number, month and year period. Using
+        subscriber number, month, and year as parameters, the API will return
+        any closed period, if it exists.
       operationId: bills_read_year
       parameters:
       - name: subscriber
