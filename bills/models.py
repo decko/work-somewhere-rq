@@ -3,6 +3,8 @@ import locale
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from django.contrib.postgres.indexes import BrinIndex
+
 
 class Bill(models.Model):
     source_call_url = models.URLField(_('Data source url'))
@@ -54,4 +56,5 @@ class Bill(models.Model):
     class Meta:
         indexes = [
             models.Index(fields=('subscriber',)),
+            BrinIndex(fields=('stop_timestamp',)),
         ]
