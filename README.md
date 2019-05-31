@@ -63,13 +63,14 @@ cd work-at-olist-rq
 Now, just login to your Heroku account and create a new instance:
 ```bash
 heroku login
-heroku create
+heroku create --buildpack heroku/python
 ```
 Remember the URL Heroku is giving to you in this moment. We're gonna
 need it later.
 
-Add the RedisToGo Add-on:
+Add the Heroku Postgres and RedisToGo Add-ons:
 ```bash
+heroku addons:create heroku-postgresql
 heroku addons:create redistogo
 ```
 
@@ -78,26 +79,20 @@ Add support to pt_BR locale:
 heroku buildpacks:add https://github.com/heroku/heroku-buildpack-locale
 ```
 
-Set DEBUG to False:
-```bash
-heroku config:set DEBUG=False
-```
-
-And finally publish your application to Heroku:
-```bash
-git push heroku master
-```
-
 You still need to set some environment variables to make it work:
 ```bash
 heroku config:set DEBUG=False SECRET_KEY=<any randon sequence 64-letter long at least>
 ```
 You could find any Telephone environment variable on this documentation.
 
+And finally publish your application to Heroku:
+```bash
+git push heroku master
+```
+
 Make sure your instance is working with:
 ```bash
-heroku ps:scale web=1
-heroku ps:scale worker=1
+heroku ps:scale web=1 worker=1
 ```
 
 At least:
