@@ -1,4 +1,4 @@
-web: gunicorn telephone.wsgi
+web: gunicorn telephone.wsgi --log-file -
 worker: python -u ./manage.py rqworker default registry-service registry-service-done call-service-done bill-service-done
 
 worker_default: python -u ./manage.py rqworker default
