@@ -1,13 +1,10 @@
 import pytest
 
-from abc import ABC
 from uuid import uuid4
 
 from django.urls import resolve, reverse
 
 from rest_framework import status
-
-from .services import ServiceAbstractClass
 
 
 pytestmark = pytest.mark.django_db
@@ -18,7 +15,7 @@ def test_if_theres_a_schema_url_for_metadata_and_documentation(client):
     Test if there is a schema URL for metadata and documentation.
     """
 
-    url = reverse('docs')
+    url = reverse('schema')
 
     response = client.get(url)
 
