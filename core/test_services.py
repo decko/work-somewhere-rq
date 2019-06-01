@@ -1,6 +1,7 @@
 import pytest
 
 from abc import ABC
+from uuid import uuid4
 
 from calls.conftest import start_call_fx
 
@@ -265,3 +266,25 @@ def test_dispatch_a_message_without_matching_any_available_trigger(start_call_fx
                                     'this trigger.')
 
     del(RegistryValidationService)
+
+
+@pytest.mark.django_db
+def test_for_startTask_use_class_name_as_Task_service_property(mocker):
+    """
+    Test for startTask use class name as Task service property.
+    """
+
+    mocker.patch.multiple(ServiceAbstractClass, __abstractmethods__=set())
+
+    class TestService(ServiceAbstractClass):
+        trigger = 'test'
+        queue = 'test'
+
+    instance = TestService(message={'a': 'b'}, job_id=uuid4())
+    instance.startTask()
+
+    assert instance.task.service == 'TestService'
+
+    mocker.resetall()
+    
+
