@@ -51,6 +51,7 @@ class ServiceAbstractClass(ABC):
                 'status': 'QUEUED',
                 'job_id': job_id,
                 'data': self.message,
+                'service': self.__class__.__name__
             }
         )
 

@@ -14,6 +14,7 @@ class Task(models.Model):
     )
     data = models.TextField()
     job_id = models.UUIDField(null=True, blank=True)
+    service = models.CharField(max_length=200, null=True, blank=True)
     result = models.TextField(null=True, blank=True)
 
     def get_absolute_url(self):
