@@ -53,6 +53,7 @@ class RegistryService(ServiceAbstractClass):
             self.registry = registry
         else:
             self.result = registry.errors
+            super().finishTask(failed=True)
 
         return self.is_valid
 

@@ -110,7 +110,7 @@ class ServiceAbstractClass(ABC):
         enqueue('core.tasks.dispatch', self.result, self.queue)
 
     @abstractmethod
-    def finishTask(self):
+    def finishTask(self, failed=None):
         """
         Finish the job process.
 
@@ -124,6 +124,10 @@ class ServiceAbstractClass(ABC):
             task.result = result
 
         task.status = 'DONE'
+
+        if failed:
+            task.status = 'FAILED'
+
         task.save()
 
         return task

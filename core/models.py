@@ -6,7 +6,8 @@ class Task(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.CharField(
         choices=(
-            ('queued', 'QUEUED'), ('started', 'STARTED'), ('done', 'DONE')
+            ('queued', 'QUEUED'), ('started', 'STARTED'), ('done', 'DONE'),
+            ('failed', 'FAILED')
         ),
         default='queued',
         max_length=7
