@@ -292,3 +292,23 @@ def test_for_CallService_propagateResult_method(start_call_fx, stop_call_fx,
     mocker.resetall()
 
     del(TestService)
+
+
+def test_for_failed_task_on_RegistryService_validateMessage(start_call_fx):
+    """
+    Test for when validateMessage get a non valid message, finishTask must
+    set status to 'FAILED' and result must contains the error message.
+    """
+
+    start_call_fx['source'] = '0000000000'
+
+    instance = RegistryService(message=start_call_fx)
+    instance.job_id = uuid4()
+
+    instance.startTask()
+    instance.validateMessage()
+
+    instance.task.refresh_from_db()
+    assert instance.task.status == 'FAILED'
+    assert 'The number is not a valid phone number'\
+        in str(instance.result.get('source'))
