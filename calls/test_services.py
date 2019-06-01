@@ -150,6 +150,8 @@ def test_for_RegistryService_persistData_raise_AssertionError_if_not_is_valid():
     """
 
     instance = RegistryService(message={'a', 'b'}, job_id=uuid4())
+
+    instance.startTask()
     instance.validateMessage()
 
     with pytest.raises(AssertionError) as exception:
