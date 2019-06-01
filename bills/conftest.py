@@ -16,14 +16,24 @@ def bills(django_db_setup, django_db_blocker):
     destination = '9933468278'
 
     calls = (
-        (70, datetime(2019, 4, 26, 21, 57, 13), datetime(2019, 4, 26, 22, 17, 13), Decimal('0.54')),
-        (71, datetime(2017, 12, 11, 15, 7, 13), datetime(2017, 12, 12, 22, 50, 56), Decimal('123.75')),
-        (72, datetime(2017, 12, 12, 22, 47, 56), datetime(2017, 12, 12, 22, 50, 56), Decimal('125.64')),
-        (73, datetime(2017, 12, 12, 21, 57, 13), datetime(2017, 12, 12, 22, 10, 56), Decimal('0.54')),
-        (74, datetime(2017, 12, 12, 4, 57, 13), datetime(2017, 12, 12, 6, 10, 56), Decimal('1.17')),
-        (75, datetime(2017, 12, 13, 21, 57, 13), datetime(2017, 12, 14, 22, 10, 56), Decimal('86.85')),
-        (76, datetime(2017, 12, 12, 15, 7, 58), datetime(2017, 12, 12, 15, 12, 56), Decimal('0.72')),
-        (77, datetime(2018, 2, 28, 21, 57, 13), datetime(2018, 3, 1, 22, 10, 56), Decimal('86.85')),
+        (69, datetime(2019, 4, 26, 21, 57, 13),
+         datetime(2019, 4, 26, 22, 17, 13), Decimal('0.54')),
+        (70, datetime(2016, 2, 29, 12, 0, 0),
+         datetime(2016, 2, 29, 14, 0, 0), Decimal('11.16')),
+        (71, datetime(2017, 12, 11, 15, 7, 13),
+         datetime(2017, 12, 11, 15, 14, 56), Decimal('0.99')),
+        (72, datetime(2017, 12, 12, 22, 47, 56),
+         datetime(2017, 12, 12, 22, 50, 56), Decimal('0.36')),
+        (73, datetime(2017, 12, 12, 21, 57, 13),
+         datetime(2017, 12, 12, 22, 10, 56), Decimal('0.54')),
+        (74, datetime(2017, 12, 12, 4, 57, 13),
+         datetime(2017, 12, 12, 6, 10, 56), Decimal('1.17')),
+        (75, datetime(2017, 12, 13, 21, 57, 13),
+         datetime(2017, 12, 14, 22, 10, 56), Decimal('86.85')),
+        (76, datetime(2017, 12, 12, 15, 7, 58),
+         datetime(2017, 12, 12, 15, 12, 56), Decimal('0.72')),
+        (77, datetime(2018, 2, 28, 21, 57, 13),
+         datetime(2018, 3, 1, 22, 10, 56), Decimal('86.85')),
     )
 
     with django_db_blocker.unblock():
