@@ -69,6 +69,12 @@ class BillService(ServiceAbstractClass):
             if start_timestamp < special_day_time:
                 start_timestamp = special_day_time
 
+            if start_timestamp > special_night_time\
+               and stop_timestamp < special_day_time + day:
+                # condition for calls happened entirely between special time
+                delta_seconds = timedelta(seconds=0)
+                break
+
             if stop_timestamp > special_night_time:
                 stop_timestamp = special_night_time
 
