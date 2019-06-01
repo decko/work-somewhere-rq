@@ -61,14 +61,14 @@ def test_period_return_when_using_month_abbreviation_on_url(client, bill):
     month 3 character abbreviation.
     """
 
-    today = date(2019, 5, 26)
+    today = date.today()
     latest_period = today.replace(
         year=today.year if today.month > 2 else today.year - 1,
         month=today.month - 1 if today.month > 2 else 12,
         day=1)
     month = latest_period.strftime('%h')
     month_year = latest_period.strftime('%h/%Y')
-
+    
     number = 11111111111
     url = reverse('bills:bill-detail', kwargs={
         'subscriber': number,
@@ -86,7 +86,7 @@ def test_period_return_when_using_month_abbreviation_and_year_on_url(client, bil
     month 3 character abbreviation and the year.
     """
 
-    today = date(2019, 5, 26)
+    today = date.today()
     latest_period = today.replace(
         year=today.year if today.month > 2 else today.year - 1,
         month=today.month - 1 if today.month > 2 else 12,
