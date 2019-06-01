@@ -36,8 +36,14 @@ class Bill(models.Model):
 
     @property
     def call_price_rept(self):
-        locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
-        return locale.currency(self.call_price)
+        try:
+            locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
+            value = locale.currency(self.call_price)
+        except ValueError:
+            call_price = str(self.call_price)
+            value = f"R$ {call_price.replace('.', ',')}"
+            
+        return value
 
     @property
     def call_duration_formated(self):
