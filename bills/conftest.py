@@ -1,6 +1,7 @@
 import json
 import pytest
 from datetime import datetime
+from datetime import timedelta
 from decimal import Decimal
 
 from model_mommy import mommy
@@ -45,25 +46,36 @@ def bills(django_db_setup, django_db_blocker):
             bill.delete()
 
 
-@pytest.fixture
+@pytest.fixture(scope='session')
 def call():
     """
     Fixture containing a dict with the result of a successful CallService
     processing.
     """
 
+    today = datetime.today()
+
+    start_timestamp = today.replace(
+        year=today.year if today.month > 1 else today.year - 1,
+        month=today.month - 1 if today.month > 1 else 12,
+        day=1)
+
+    delta_timestamp = timedelta(minutes=10)
+
+    stop_timestamp = start_timestamp + delta_timestamp
+
     call = {'url': '/calls/1',
             'call_id': 1,
-            'start_timestamp': '2019-04-26T12:32:10',
-            'stop_timestamp': '2019-04-26T12:40:10',
+            'start_timestamp': start_timestamp.isoformat(),
+            'stop_timestamp': stop_timestamp.isoformat(),
             'source': '11111111111',
             'destination': '22222222222'}
 
     return call
 
 
-@pytest.fixture
-def bill(call):
+@pytest.fixture(scope='session')
+def bill(call, django_db_setup, django_db_blocker):
     """
     Fixture that insert a Bill instance and delete it when test is done.
     """
@@ -72,9 +84,10 @@ def bill(call):
 
     instance = BillService(message=message)
     instance.transformMessage()
-    instance.persistData()
+    with django_db_blocker.unblock():
+        instance.persistData()
 
     yield instance.persisted_data
 
-    instance.persisted_data.delete()
-
+    with django_db_blocker.unblock():
+        instance.persisted_data.delete()
