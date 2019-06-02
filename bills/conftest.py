@@ -64,6 +64,7 @@ def call():
     """
 
     today = datetime.today()
+    today = today.replace(hour=9, minute=10)
 
     start_timestamp = today.replace(
         year=today.year if today.month > 1 else today.year - 1,
