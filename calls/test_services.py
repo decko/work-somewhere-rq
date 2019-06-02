@@ -314,3 +314,44 @@ def test_for_failed_task_on_RegistryService_validateMessage(start_call_fx):
     assert instance.task.status == 'FAILED'
     assert 'The number is not a valid phone number'\
         in str(instance.result.get('source'))
+
+
+def test_for_result_property_on_CallService_finishTask(start_call_fx, stop_call_fx):
+    """
+    Test for the result property on finishTask method, and his contents
+    on the Task instance.
+    """
+
+    start_message = json.dumps(start_call_fx)
+
+    instance = CallService(message=start_message)
+    
+    instance.job_id = uuid4()
+    instance.startTask()
+    instance.transformMessage()
+    instance.persistData()
+    instance.propagateResult()
+
+    assert instance.result
+
+    instance.finishTask()
+    instance.task.refresh_from_db()
+
+    assert instance.task.result == instance.result
+
+    stop_message = json.dumps(stop_call_fx)
+
+    instance = CallService(message=stop_message)
+
+    instance.job_id = uuid4()
+    instance.startTask()
+    instance.transformMessage()
+    instance.persistData()
+    instance.propagateResult()
+
+    assert instance.result
+
+    instance.finishTask()
+    instance.task.refresh_from_db()
+
+    assert instance.task.result == instance.result
