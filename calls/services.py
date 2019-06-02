@@ -145,19 +145,15 @@ class CallService(ServiceAbstractClass):
 
         if not created:
             call.refresh_from_db()
-        self.call = call
-        return call
+        self.persisted_data = call
+        return self.persisted_data
 
     def propagateResult(self):
         """
         Propagate a serialized message of consolidated Call instance.
-
-        :returns: bool
-            Returns True if there is a consolidated Call instance, set
-            self.result with the serialized data and send it to queue.
         """
 
-        call = self.call
+        call = self.persisted_data
         self.result = json.dumps(CallSerializer(call, context={'request': None}).data)
 
         if call.start_timestamp and call.stop_timestamp:
