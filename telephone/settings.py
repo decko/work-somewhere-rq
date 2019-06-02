@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'drf_yasg',
     'django_rq',
     'core',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -178,6 +180,8 @@ SWAGGER_SETTINGS = {
 REDOC_SETTINGS = {
     'SPEC_URL': openapi_spec_url
 }
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Activate Django-Heroku.
 # NOTE: django_heroku ALWAYS inject ssl_require, so, to

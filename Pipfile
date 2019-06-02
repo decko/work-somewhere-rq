@@ -20,6 +20,7 @@ markdown = "*"
 prettyconf = "*"
 honcho = "*"
 drf-yasg = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 pytest = "*"
