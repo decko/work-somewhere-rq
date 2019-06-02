@@ -6,6 +6,7 @@ from decimal import Decimal
 from core.services import ServiceAbstractClass
 
 from .models import Bill
+from .serializers import BilledCallSerializer
 
 
 class BillService(ServiceAbstractClass):
@@ -114,4 +115,6 @@ class BillService(ServiceAbstractClass):
         pass
 
     def finishTask(self):
+        self.result = json.dumps(BilledCallSerializer(self.persisted_data, context={'request': None}).data)
+
         super().finishTask()
